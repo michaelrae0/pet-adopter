@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import TestAxios from './Components/TestAxios/index'
+import Results from './Components/Results/index'
 import Layout from './Components/Layout/index'
 
 import './index.scss';
@@ -14,7 +14,7 @@ class App extends Component {
           {/* <p>
             <a href='https://www.petfinder.com/developers/'>Pet finder API</a>
           </p> */}
-          <TestAxios />
+          <Results />
         </Layout>
       </div>
     );
