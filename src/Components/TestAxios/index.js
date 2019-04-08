@@ -15,12 +15,16 @@ class TestAxios extends React.Component {
 
     this.state = {
       isLoading: true,
+      ellipses: '.',
       pets: [],
     }
   }
 
   componentDidMount() {
-    console.log(petfinder)
+    // loading animation starts
+    let ellipsesId = setInterval(this.timer, 400);
+
+    // api call
     petfinder.pet
       .find({
         animal: 'dog'
@@ -29,15 +33,25 @@ class TestAxios extends React.Component {
         console.log(data)
         this.setState({
           isLoading: false,
-          pets: data.petfinder.pets.pet
+          pets: data.petfinder.pets.pet,
         })
+        clearInterval(ellipsesId)
       })
   }
+
+  timer = () => {
+      if (this.state.ellipses !== '...') this.setState({ ellipses: this.state.ellipses + '.' })
+      else this.setState({ ellipses: '.' })
+  }
+
   render() {
-    console.log(this.state.pets)
-    const pets = this.state.pets;
+    const { pets, ellipses} = this.state;
+    console.log(pets)
+    console.log(this.state.ellipses)
+
     return (
       <div>
+        {this.state.isLoading && 'Loading' + ellipses}
         {!this.state.isLoading && pets.map( (pet, i) => {
           return (
             <div key={pet.name}>
