@@ -11,9 +11,9 @@ class App extends Component {
     return (
       <div className="App">
         <Layout>
-          <p>
+          {/* <p>
             <a href='https://www.petfinder.com/developers/'>Pet finder API</a>
-          </p>
+          </p> */}
           <TestAxios />
         </Layout>
       </div>
