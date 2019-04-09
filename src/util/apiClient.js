@@ -1,12 +1,18 @@
 import axios from 'axios'
 
+let config;
+
 const api = {
   animals(params) {  // many animals
+    const url = generateUrl(`https://api.petfinder.com/v2/animals`, params);
+
+    if (config) {
+      return axios.get(url, {headers: config});
+    }
+
     return authToken() // promise -> then -> return promise
       .then( ({data}) => {
-        const url = generateUrl(`https://api.petfinder.com/v2/animals`, params);
-        const config = { Authorization: `Bearer ${data.access_token}` };
-
+        config = { Authorization: `Bearer ${data.access_token}` };
         return axios.get(url, {headers: config});
       });
   },
@@ -18,27 +24,35 @@ const api = {
 
 
   types(params, breedsOnly = false) {  // many types
+    const url = generateUrl(`https://api.petfinder.com/v2/types`, params, breedsOnly);
+    
+    if (config) {
+      return axios.get(url, {headers: config});
+    }
+
     return authToken()
       .then( ({data}) => {
-        const url = generateUrl(`https://api.petfinder.com/v2/types`, params, breedsOnly);
-        const config = { Authorization: `Bearer ${data.access_token}` };
-
+        config = { Authorization: `Bearer ${data.access_token}` };
         return axios.get(url, {headers: config});
       });
   },
 
-  breeds(params) {
+  breeds(params) { // types -> type -> breeds
     if (!params.type) throw "Enter a type!!";
     return this.types(params, true);
   },
 
 
   orgs(params) {  // many shelters
+    const url = generateUrl(`https://api.petfinder.com/v2/organizations`, params);
+
+    if (config) {
+      return axios.get(url, {headers: config});
+    }
+    
     return authToken()
       .then( ({data}) => {
-        const url = generateUrl(`https://api.petfinder.com/v2/organizations`, params);
-        const config = { Authorization: `Bearer ${data.access_token}` };
-
+        config = { Authorization: `Bearer ${data.access_token}` };
         return axios.get(url, {headers: config});
       });
   },
