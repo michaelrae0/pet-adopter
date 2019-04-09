@@ -5,18 +5,8 @@ let config;
 const api = {
   animals(params) {  // many animals
     const url = generateUrl(`https://api.petfinder.com/v2/animals`, params);
-
-    if (config) {
-      return axios.get(url, {headers: config});
-    }
-
-    return authToken() // promise -> then -> return promise
-      .then( ({data}) => {
-        config = { Authorization: `Bearer ${data.access_token}` };
-        return axios.get(url, {headers: config});
-      });
+    return get(url, config)
   },
-
   animal(params) {  // single animal
     if (!params.id) throw "Enter an id!! Or use animals..";
     return this.animals(params);
@@ -25,18 +15,8 @@ const api = {
 
   types(params, breedsOnly = false) {  // many types
     const url = generateUrl(`https://api.petfinder.com/v2/types`, params, breedsOnly);
-    
-    if (config) {
-      return axios.get(url, {headers: config});
-    }
-
-    return authToken()
-      .then( ({data}) => {
-        config = { Authorization: `Bearer ${data.access_token}` };
-        return axios.get(url, {headers: config});
-      });
+    return get(url, config)
   },
-
   breeds(params) { // types -> type -> breeds
     if (!params.type) throw "Enter a type!!";
     return this.types(params, true);
@@ -45,18 +25,8 @@ const api = {
 
   orgs(params) {  // many shelters
     const url = generateUrl(`https://api.petfinder.com/v2/organizations`, params);
-
-    if (config) {
-      return axios.get(url, {headers: config});
-    }
-    
-    return authToken()
-      .then( ({data}) => {
-        config = { Authorization: `Bearer ${data.access_token}` };
-        return axios.get(url, {headers: config});
-      });
+    return get(url, config)
   },
-
   org(params) {  // single shelter
     if (!params.id) throw "Enter an id!! Or use orgs..";
     return this.orgs(params);
@@ -91,6 +61,17 @@ function generateUrl(base, params, breedsOnly = false) {
   return url;
 }
 
+function get(url, config) {
+  if (config) {
+    return axios.get(url, {headers: config});
+  }
+
+  return authToken() // promise -> then -> return promise
+    .then( ({data}) => {
+      config = { Authorization: `Bearer ${data.access_token}` };
+      return axios.get(url, {headers: config});
+    });
+}
 
 function authToken() {
   // Returns a promise with bearer token. data.access_token
