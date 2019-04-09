@@ -32,13 +32,13 @@ class Results extends React.Component {
       })
       .catch( e => console.log(e) )
 
-    const testParams = {
-      type: 'cat'
-    }
-    api.breeds(testParams)
-      .then( ({ data }) => {
-        console.log(data)
-      })
+    // const testParams = {
+    //   type: 'cat'
+    // }
+    // api.breeds(testParams)
+    //   .then( ({ data }) => {
+    //     console.log(data)
+    //   })
   }
 
   render() {

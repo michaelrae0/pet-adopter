@@ -75,7 +75,16 @@ class Search extends React.Component {
             placeholder='Atlanta, GA' type='text' name='location' id='location'
             className={classnames(search.form_info, search.location)}
             value={this.state.location}
-            onChange={ e => this.setState({ location: e.target.value }) }
+            onChange={ e => {
+              let places = e.target.value.split(',');
+              if (!places[1]) places[1] = '';
+
+              this.setState({
+                location: e.target.value,
+                city: places[0].trim,
+                state: places[1].trim,
+              }) 
+            }}
           />
           <input type='submit' />
         </form>
