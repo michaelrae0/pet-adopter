@@ -1,0 +1,11 @@
+.container {
+  margin-top: 40px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly
+}
+.thumbnail {
+  height: 250px;
+  width: 250px;
+}
