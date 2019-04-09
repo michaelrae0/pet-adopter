@@ -5,7 +5,27 @@
   flex-wrap: wrap;
   justify-content: space-evenly
 }
-.thumbnail {
+.preview {
+  border: 2px lightgrey solid;
+  border-radius: 10px;
+  margin-bottom: 40px;
+
+}
+.pre_thumb_cont {
+
+}
+.pre_thumb {
   height: 250px;
   width: 250px;
+  border-radius: 8px 8px 0 0;
+}
+
+.pre_text_cont {
+  padding: 10px 18px;
+  p {
+    margin: 0 0 10px;
+  }
+}
+.pre_title {
+  font-weight: bold;
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
@@ -19,11 +18,6 @@ class Header extends React.Component {
   }
   
   render() {
-
-    // if (this.state.redirect) {
-    //   return <Redirect push to='/' />;
-    // }
-
     return (
       <div className={classnames(header.navbar)}>
         <Link to='/'>
