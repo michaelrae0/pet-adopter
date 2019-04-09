@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from './Components/Header/index'
 import Search from './Components/Search/index'
 import Results from './Components/Results/index'
+import Details from './Components/Details/index'
 
 import './index.scss';
 
@@ -16,6 +17,7 @@ class App extends Component {
           <Header />
             <Route exact path='/' component={Search} />
             <Route path='/results' component={Results} />
+            <Route path='/details/:id' component={Details} />
         </div>
       </Router>
     );

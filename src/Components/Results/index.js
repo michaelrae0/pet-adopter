@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
 import Loading from '../Loading/index'
@@ -68,25 +69,26 @@ class Results extends React.Component {
       }
       
       return (
-        <div
-          key={animal.id}
-          className={classnames(results.preview)}
-        >
-          <div className={classnames(results.pre_thumb_cont)}>
-            <img 
-              src={photo(animal)}
-              alt={animal.name}
-              className={classnames(results.pre_thumb)}
-            />
+        <Link to={`/details/${animal.id}`} key={animal.id}>
+          <div
+            className={classnames(results.preview)}
+          >
+            <div className={classnames(results.pre_thumb_cont)}>
+              <img 
+                src={photo(animal)}
+                alt={animal.name}
+                className={classnames(results.pre_thumb)}
+              />
+            </div>
+            <div className={classnames(results.pre_text_cont)}>
+              <p className={classnames(results.pre_title)}>{animal.name}</p>
+              <p>{breed}</p>
+              <p className={classnames(results.pre_location)}>
+                {`${animal.contact.address.city}, ${animal.contact.address.state}`}
+              </p>
+            </div>
           </div>
-          <div className={classnames(results.pre_text_cont)}>
-            <p className={classnames(results.pre_title)}>{animal.name}</p>
-            <p>{breed}</p>
-            <p className={classnames(results.pre_location)}>
-              {`${animal.contact.address.city}, ${animal.contact.address.state}`}
-            </p>
-          </div>
-        </div>
+        </Link>
       )
     })
 

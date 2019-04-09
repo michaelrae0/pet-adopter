@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0 0 50px;
+}
+
+.img_cont {
+  width: 100vw;
+  height: 600px;
+  background-color: rgb(49, 48, 48);
+  text-align: center;
+  img {
+    height: 100%;
+    width: auto;
+  }
+}
+
+.text_cont {
+  width: 800px;
+}
