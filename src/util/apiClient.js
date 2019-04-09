@@ -1,10 +1,10 @@
 import axios from 'axios'
 
 const api = {
-  animals(params, special = '') {  // many animals
+  animals(params) {  // many animals
     return authToken() // promise -> then -> return promise
       .then( ({data}) => {
-        const url = generateUrl(`https://api.petfinder.com/v2/animals`, params, special);
+        const url = generateUrl(`https://api.petfinder.com/v2/animals`, params);
         const config = { Authorization: `Bearer ${data.access_token}` };
 
         return axios.get(url, {headers: config});
@@ -13,25 +13,30 @@ const api = {
 
   animal(params) {  // single animal
     if (!params.id) throw "Enter an id!! Or use animals..";
-    return this.animals(params, params.id);
+    return this.animals(params);
   },
 
 
-  types(params) {  // many types
+  types(params, breedsOnly = false) {  // many types
     return authToken()
       .then( ({data}) => {
-        const url = generateUrl(`https://api.petfinder.com/v2/types`, params);
+        const url = generateUrl(`https://api.petfinder.com/v2/types`, params, breedsOnly);
         const config = { Authorization: `Bearer ${data.access_token}` };
 
         return axios.get(url, {headers: config});
       });
   },
 
+  breeds(params) {
+    if (!params.type) throw "Enter a type!!";
+    return this.types(params, true);
+  },
 
-  orgs(params, special = '') {  // many shelters
+
+  orgs(params) {  // many shelters
     return authToken()
       .then( ({data}) => {
-        const url = generateUrl(`https://api.petfinder.com/v2/organizations`, params, special);
+        const url = generateUrl(`https://api.petfinder.com/v2/organizations`, params);
         const config = { Authorization: `Bearer ${data.access_token}` };
 
         return axios.get(url, {headers: config});
@@ -40,17 +45,22 @@ const api = {
 
   org(params) {  // single shelter
     if (!params.id) throw "Enter an id!! Or use orgs..";
-    return this.orgs(params, params.id);
+    return this.orgs(params);
   },
 };
 
 
-function generateUrl(base, params, special = '') {
+function generateUrl(base, params, breedsOnly = false) {
   let url = base;
 
   // id
   if (params.id) {
     return url += `/${params.id}`;
+  }
+
+  // breeds
+  if (breedsOnly) {
+    return url += `/${params.type}/breeds`
   }
 
   // add params

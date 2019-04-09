@@ -2,24 +2,40 @@ import React from 'react'
 import classnames from 'classnames'
 
 import * as search from './search.module.scss'
+import api from '../../util/apiClient'
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      type: '',
+      type: 'dog',
       breed: '',
+      breeds:[],
       location: '',
     }
   }
   
   componentDidMount() {
-    
+    this.fetchBreeds(this.state.type);
+  }
+
+  fetchBreeds = type => {
+    this.setState({ breeds: ['Loading...'] })
+
+    api.breeds( {type} )
+      .then( ({data}) => {
+        const breeds = data.breeds.map( breed => breed.name);
+        this.setState({ breeds })
+      })
   }
 
   render() {
     console.log(this.state)
+    const breedOptions = this.state.breeds.map( breed => (
+      <option value={breed} key={breed} >{breed}</option> 
+    ));
+
     return (
       <div className={classnames(search.container)}>
         <form
@@ -29,9 +45,12 @@ class Search extends React.Component {
         >
           <label htmlFor='type' >Type</label>
           <select 
-            placeholder='Dog' type='select' name='type' id='type'
+            type='select' name='type' id='type'
             className={classnames(search.form_info, search.type)}
-            onChange={ e => this.setState({ type: e.target.value }) }
+            onChange={ e => {
+              this.retrieveBreeds(e.target.value);
+              this.setState({ type: e.target.value });
+            }}
           >
             <option value='dog'>Dog</option>
             <option value='cat'>Cat</option>
@@ -46,10 +65,10 @@ class Search extends React.Component {
           <select 
             placeholder='Boxer' type='select' name='breed' id='breed'
             className={classnames(search.form_info, search.breed)}
-            value={this.state.breed}
             onChange={ e => this.setState({ breed: e.target.value }) }
           >
-            <option value='Boxer' >Boxer</option>
+            <option value='' ></option>
+            {breedOptions}
           </select>
           <label htmlFor='location' >Location</label>
           <input
