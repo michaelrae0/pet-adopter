@@ -1,4 +1,6 @@
 import React from 'react'
+
+import { Link } from "react-router-dom";
 import classnames from 'classnames'
 
 import * as search from './search.module.scss'
@@ -13,6 +15,8 @@ class Search extends React.Component {
       breed: '',
       breeds: ['Loading...'],
       location: '',
+      city: '',
+      state: '',
     }
   }
   
@@ -31,8 +35,9 @@ class Search extends React.Component {
   }
 
   render() {
-    // console.log(this.state)
-    const breedOptions = this.state.breeds.map( breed => (
+    const { type, breed, breeds, location, city, state } = this.state
+
+    const breedOptions = breeds.map( breed => (
       <option value={breed} key={breed} >{breed}</option> 
     ));
 
@@ -55,10 +60,10 @@ class Search extends React.Component {
             <option value='dog'>Dog</option>
             <option value='cat'>Cat</option>
             <option value='bird'>Bird</option>
-            <option value='scales, fins, & other'>Fish & Reptiles</option>
             <option value='rabbit'>Rabbit</option>
-            <option value='horse'>Horse</option>
             <option value='small & furry'>Small & Furry</option>
+            <option value='scales, fins & other'>Fish & Reptiles</option>
+            <option value='horse'>Horse</option>
             <option value='barnyard'>Barnyard</option>
           </select>
           <label htmlFor='breed' >Breed</label>
@@ -74,7 +79,7 @@ class Search extends React.Component {
           <input
             placeholder='Atlanta, GA' type='text' name='location' id='location'
             className={classnames(search.form_info, search.location)}
-            value={this.state.location}
+            value={location}
             onChange={ e => {
               let places = e.target.value.split(',');
               if (!places[1]) places[1] = '';
@@ -86,7 +91,16 @@ class Search extends React.Component {
               }) 
             }}
           />
-          <input type='submit' />
+          <div className={classnames(search.btn)} >
+            <Link 
+              to={{
+                pathname: "/results",
+                state: { type, breed, city, state }
+              }}
+            >
+              Submit
+            </Link>
+          </div>
         </form>
       </div>
     )

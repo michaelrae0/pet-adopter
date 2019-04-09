@@ -19,12 +19,13 @@ class Results extends React.Component {
   componentDidMount() { 
     const params = {
       type: 'dog',
-      page: '2'
+      page: '5'
     };
 
     // Calls api for animal info
     api.animals(params)
       .then( ({ data }) => {
+        console.log(data)
         this.setState({
           isLoading: false,
           animals: data.animals
@@ -32,13 +33,13 @@ class Results extends React.Component {
       })
       .catch( e => console.log(e) )
 
-    // const testParams = {
-    //   type: 'cat'
-    // }
-    // api.breeds(testParams)
-    //   .then( ({ data }) => {
-    //     console.log(data)
-    //   })
+    const testParams = {
+      // type: 'cat'
+    }
+    api.types(testParams)
+      .then( ({ data }) => {
+        console.log(data)
+      })
   }
 
   render() {

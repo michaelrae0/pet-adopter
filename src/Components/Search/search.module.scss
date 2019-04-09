@@ -20,3 +20,21 @@ form {
   font-size: 18px;
   padding: 0 10px 0px;
 }
+.btn {
+  float: right;
+
+  margin: 15px 0;
+  padding: 6px 15px 8px;
+
+  border: black 2px solid;
+  font-size: 18px;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  &:hover {
+    background-color: lightgrey;
+  }
+}
