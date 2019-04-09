@@ -25,7 +25,6 @@ class Results extends React.Component {
     // Calls api for animal info
     api.animals(params)
       .then( ({ data }) => {
-
         this.setState({
           isLoading: false,
           animals: data.animals
@@ -33,18 +32,23 @@ class Results extends React.Component {
       })
       .catch( e => console.log(e) )
 
-    const testParams = {
-      id: "AL319"
-    }
-    api.org(testParams)
-      .then( ({ data }) => {
-        console.log(data)
-      })
-      .catch( e => console.log(e) )
+    // const testParams = {
+    //   type: 'cat'
+    // }
+    // api.breeds(testParams)
+    //   .then( ({ data }) => {
+    //     console.log(data)
+    //   })
   }
 
   render() {
     const { animals } = this.state;
+    // console.log(animals)
+
+    const photo = animal => {
+      if (animal.photos[0]) return animal.photos[0].medium;
+      return 'http://placekitten.com/250/350'
+    }
 
     return (
       <div className={classnames(results.container)}>
@@ -57,7 +61,7 @@ class Results extends React.Component {
               className={classnames(results.preview)}
             >
               <img 
-                src={animal.photos[0].medium || 'https://placekitten.com/250/250'}
+                src={photo(animal)}
                 alt={animal.name}
                 className={classnames(results.thumbnail)}
               />
