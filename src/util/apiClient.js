@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 const api = {
-  // many animals
-  animals(params, special = '') {
+  animals(params, special = '') {  // many animals
     return authToken() // promise -> then -> return promise
       .then( ({data}) => {
         const url = generateUrl(`https://api.petfinder.com/v2/animals`, params, special);
@@ -11,16 +10,14 @@ const api = {
         return axios.get(url, {headers: config});
       });
   },
-  // single animal
-  animal(params) {
+
+  animal(params) {  // single animal
     if (!params.id) throw "Enter an id!! Or use animals..";
     return this.animals(params, params.id);
   },
 
 
-
-  // many types
-  types(params) {
+  types(params) {  // many types
     return authToken()
       .then( ({data}) => {
         const url = generateUrl(`https://api.petfinder.com/v2/types`, params);
@@ -31,10 +28,8 @@ const api = {
   },
 
 
-
-  // many shelters
-  orgs(params, special = '') {
-    return authToken() // promise -> then -> return promise
+  orgs(params, special = '') {  // many shelters
+    return authToken()
       .then( ({data}) => {
         const url = generateUrl(`https://api.petfinder.com/v2/organizations`, params, special);
         const config = { Authorization: `Bearer ${data.access_token}` };
@@ -42,8 +37,8 @@ const api = {
         return axios.get(url, {headers: config});
       });
   },
-  // single shelter
-  org(params) {
+
+  org(params) {  // single shelter
     if (!params.id) throw "Enter an id!! Or use orgs..";
     return this.orgs(params, params.id);
   },

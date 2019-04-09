@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import Search from './Components/Search/index'
 import Results from './Components/Results/index'
 import Layout from './Components/Layout/index'
 
@@ -14,6 +15,7 @@ class App extends Component {
           {/* <p>
             <a href='https://www.petfinder.com/developers/'>Pet finder API</a>
           </p> */}
+          <Search />
           <Results />
         </Layout>
       </div>
