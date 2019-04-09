@@ -23,14 +23,24 @@ class Results extends React.Component {
     };
 
     // Calls api for animal info
-    api.getAnimals(params)
+    api.animals(params)
       .then( ({ data }) => {
 
         this.setState({
           isLoading: false,
           animals: data.animals
         })
-      });
+      })
+      .catch( e => console.log(e) )
+
+    const testParams = {
+      id: "AL319"
+    }
+    api.org(testParams)
+      .then( ({ data }) => {
+        console.log(data)
+      })
+      .catch( e => console.log(e) )
   }
 
   render() {
