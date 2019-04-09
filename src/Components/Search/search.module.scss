@@ -29,7 +29,9 @@ form {
   border: black 2px solid;
   font-size: 18px;
 
-  a {
+  cursor: pointer;
+
+  span {
     text-decoration: none;
     color: black;
   }

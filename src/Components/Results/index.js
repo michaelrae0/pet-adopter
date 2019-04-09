@@ -17,15 +17,22 @@ class Results extends React.Component {
   }
 
   componentDidMount() { 
-    const params = {
-      type: 'dog',
-      page: '5'
-    };
+    const { type, breed, city, location } = this.props.location.state;
+    let params = {};
+
+    console.log('state: ');
+    console.log(this.props.location.state)
+
+    params['type'] = type ? type : ''
+    params['breed'] = breed ? breed : ''
+    if (location) params['location'] = location
+    
+    console.log('params: ')
+    console.log(params)
 
     // Calls api for animal info
     api.animals(params)
       .then( ({ data }) => {
-        console.log(data)
         this.setState({
           isLoading: false,
           animals: data.animals
@@ -33,13 +40,13 @@ class Results extends React.Component {
       })
       .catch( e => console.log(e) )
 
-    const testParams = {
-      // type: 'cat'
-    }
-    api.types(testParams)
-      .then( ({ data }) => {
-        console.log(data)
-      })
+    // const testParams = {
+    //   // type: 'cat'
+    // }
+    // api.types(testParams)
+    //   .then( ({ data }) => {
+    //     console.log(data)
+    //   })
   }
 
   render() {

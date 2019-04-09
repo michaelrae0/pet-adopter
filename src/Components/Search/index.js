@@ -15,8 +15,8 @@ class Search extends React.Component {
       breed: '',
       breeds: ['Loading...'],
       location: '',
-      city: '',
-      state: '',
+
+      redirect: false,
     }
   }
   
@@ -35,7 +35,7 @@ class Search extends React.Component {
   }
 
   render() {
-    const { type, breed, breeds, location, city, state } = this.state
+    const { type, breed, breeds, location } = this.state
 
     const breedOptions = breeds.map( breed => (
       <option value={breed} key={breed} >{breed}</option> 
@@ -80,27 +80,20 @@ class Search extends React.Component {
             placeholder='Atlanta, GA' type='text' name='location' id='location'
             className={classnames(search.form_info, search.location)}
             value={location}
-            onChange={ e => {
-              let places = e.target.value.split(',');
-              if (!places[1]) places[1] = '';
-
-              this.setState({
-                location: e.target.value,
-                city: places[0].trim,
-                state: places[1].trim,
-              }) 
-            }}
+            onChange={ e => this.setState({ location: e.target.value }) }
           />
-          <div className={classnames(search.btn)} >
-            <Link 
-              to={{
-                pathname: "/results",
-                state: { type, breed, city, state }
-              }}
+          <Link
+            to={{
+              pathname: "/results",
+              state: { type, breed, location }
+            }} 
+          >
+            <div
+              className={classnames(search.btn)}
             >
-              Submit
-            </Link>
-          </div>
+              <span>Submit</span>
+            </div>
+          </Link>
         </form>
       </div>
     )
