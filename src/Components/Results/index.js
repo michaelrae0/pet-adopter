@@ -17,22 +17,23 @@ class Results extends React.Component {
   }
 
   componentDidMount() { 
-    const { type, breed, city, location } = this.props.location.state;
+    const { type, breed, location } = this.props.location.state;
     let params = {};
 
-    console.log('state: ');
-    console.log(this.props.location.state)
+    // console.log('state: ');
+    // console.log(this.props.location.state)
 
     params['type'] = type ? type : ''
     params['breed'] = breed ? breed : ''
     if (location) params['location'] = location
     
-    console.log('params: ')
-    console.log(params)
+    // console.log('params: ')
+    // console.log(params)
 
     // Calls api for animal info
     api.animals(params)
       .then( ({ data }) => {
+        console.log(data.animals)
         this.setState({
           isLoading: false,
           animals: data.animals
@@ -58,28 +59,42 @@ class Results extends React.Component {
       return 'http://placekitten.com/250/250'
     }
 
+    const animalThumbnails = animals.map( (animal, i) => {
+      let breed = '';
+      if (animal.breeds.primary.length > 27) {
+        breed = animal.breeds.primary.substring(0, 25) + '...';
+      } else {
+        breed = animal.breeds.primary;
+      }
+      
+      return (
+        <div
+          key={animal.id}
+          className={classnames(results.preview)}
+        >
+          <div className={classnames(results.pre_thumb_cont)}>
+            <img 
+              src={photo(animal)}
+              alt={animal.name}
+              className={classnames(results.pre_thumb)}
+            />
+          </div>
+          <div className={classnames(results.pre_text_cont)}>
+            <p className={classnames(results.pre_title)}>{animal.name}</p>
+            <p>{breed}</p>
+            <p className={classnames(results.pre_location)}>
+              {`${animal.contact.address.city}, ${animal.contact.address.state}`}
+            </p>
+          </div>
+        </div>
+      )
+    })
+
     return (
       <div className={classnames(results.container)}>
 
         {this.state.isLoading && <Loading />}
-        {!this.state.isLoading && animals.map( (animal, i) => {
-          return (
-            <div
-              key={animal.id}
-              className={classnames(results.preview)}
-            >
-              <img 
-                src={photo(animal)}
-                alt={animal.name}
-                className={classnames(results.thumbnail)}
-              />
-              <p>{i + 1}</p>
-              <p>{animal.name}</p>
-              <p>{`${animal.contact.address.city}, ${animal.contact.address.state}`}</p>
-
-            </div>
-          )
-        })}
+        {!this.state.isLoading && animalThumbnails}
 
       </div>
     )
