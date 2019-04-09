@@ -1,13 +1,10 @@
 import React from 'react'
 import classnames from 'classnames'
-import axios from 'axios'
 
 import Loading from '../Loading/index'
 
 import * as results from './results.module.scss'
-
-const key = process.env.REACT_APP_API_KEY;
-const secret = process.env.REACT_APP_API_SECRET;
+import api from '../../util/apiClient.js'
 
 class Results extends React.Component {
   constructor(props) {
@@ -20,30 +17,30 @@ class Results extends React.Component {
   }
 
   componentDidMount() { 
-    // Request with key and secret in header.
-    // Response gives a bearer token. 1 hr expiry.
-    const authToken = axios.post("https://api.petfinder.com/v2/oauth2/token", {
-      grant_type: "client_credentials",
-      client_id: key,
-      client_secret: secret
-    })
-    
-    
-    authToken.then( ({ data }) => {
-        const url = `https://api.petfinder.com/v2/animals?type=dog&page=2`
-        const config = { Authorization: `Bearer ${data.access_token}` };
+    const params = {
+      type: 'dog',
+      page: '2'
+    };
 
-        axios.get(url, {headers: config})
-          .then( ({ data }) => {
-            console.log(data)
+    // Calls api for animal info
+    api.animals(params)
+      .then( ({ data }) => {
 
-            this.setState({
-              animals: data.animals,
-              isLoading: false,
-            })
-          })
-        }
-    )
+        this.setState({
+          isLoading: false,
+          animals: data.animals
+        })
+      })
+      .catch( e => console.log(e) )
+
+    const testParams = {
+      id: "AL319"
+    }
+    api.org(testParams)
+      .then( ({ data }) => {
+        console.log(data)
+      })
+      .catch( e => console.log(e) )
   }
 
   render() {
