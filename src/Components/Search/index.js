@@ -11,16 +11,16 @@ class Search extends React.Component {
     this.state = {
       type: 'dog',
       breed: '',
-      breeds:[],
+      breeds: ['Loading...'],
       location: '',
     }
   }
   
   componentDidMount() {
-    this.fetchBreeds(this.state.type);
+    this.setBreeds(this.state.type);
   }
 
-  fetchBreeds = type => {
+  setBreeds = type => {
     this.setState({ breeds: ['Loading...'] })
 
     api.breeds( {type} )
@@ -31,7 +31,7 @@ class Search extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     const breedOptions = this.state.breeds.map( breed => (
       <option value={breed} key={breed} >{breed}</option> 
     ));
@@ -48,7 +48,7 @@ class Search extends React.Component {
             type='select' name='type' id='type'
             className={classnames(search.form_info, search.type)}
             onChange={ e => {
-              this.retrieveBreeds(e.target.value);
+              this.setBreeds(e.target.value);
               this.setState({ type: e.target.value });
             }}
           >

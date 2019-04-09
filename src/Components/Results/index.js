@@ -47,7 +47,7 @@ class Results extends React.Component {
 
     const photo = animal => {
       if (animal.photos[0]) return animal.photos[0].medium;
-      return 'http://placekitten.com/250/350'
+      return 'http://placekitten.com/250/250'
     }
 
     return (
