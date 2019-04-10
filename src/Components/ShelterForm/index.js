@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
-import * as forms from '../Search/forms.module.scss'
+import * as forms from '../../pages/Search/forms.module.scss'
 
 class ShelterForm extends React.Component {
   constructor(props) {

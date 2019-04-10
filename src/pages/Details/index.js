@@ -1,9 +1,9 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import Loading from '../Loading/index'
-import AnimalDetails from '../AnimalDetails/index'
-import ShelterDetails from '../ShelterDetails/index'
+import Loading from '../../Components/Loading/index'
+import AnimalDetails from '../../Components/AnimalDetails/index'
+import ShelterDetails from '../../Components/ShelterDetails/index'
 
 import api from '../../util/apiClient'
 import * as details from './details.module.scss'
@@ -60,8 +60,7 @@ class Details extends React.Component {
         <div className={classnames(details.img_cont)}>
           <img src={info.photos[0].full} alt={info.name} />
         </div>
-        {searchType === 'animal' && <AnimalDetails info={info} />}
-        {searchType === 'organization' && <ShelterDetails info={info} />}
+        { searchType === 'animal' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
       </div>
     )
   }

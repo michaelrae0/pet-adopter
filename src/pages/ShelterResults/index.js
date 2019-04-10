@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
-import Loading from '../Loading/index'
+import Loading from '../../Components/Loading/index'
 
 import * as shelterResults from './shelterResults.module.scss'
 import api from '../../util/apiClient.js'

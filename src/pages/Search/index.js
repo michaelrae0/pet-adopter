@@ -1,8 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import AnimalForm from '../AnimalForm/index'
-import ShelterForm from '../ShelterForm/index'
+import AnimalForm from '../../Components/AnimalForm/index'
+import ShelterForm from '../../Components/ShelterForm/index'
 
 import * as search from './search.module.scss'
 
