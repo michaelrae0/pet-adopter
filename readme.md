@@ -8,6 +8,8 @@ Work in progress. Plan to add way to flip through photos, photos on home page, p
 
 1) git clone https://github.com/michaelrae0/adopt-a-pet
 
-2) yarn add
+2) cd adopt-a-pet
 
-3) npm start
+3) yarn install
+
+4) npm start
