@@ -49,7 +49,7 @@ class ShelterResults extends React.Component {
     const orgThumbnails = orgs.map( (org, i) => {
       
       return (
-        <Link to={`/details/${org.id}`} key={org.id}>
+        <Link to={`/details/${'organization'}/${org.id}`} key={org.id}>
           <div
             className={classnames(shelterResults.thumbnail)}
           >

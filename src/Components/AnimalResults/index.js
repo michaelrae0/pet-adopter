@@ -55,7 +55,7 @@ class AnimalResults extends React.Component {
       }
       
       return (
-        <Link to={`/details/${animal.id}`} key={animal.id}>
+        <Link to={`/details/${'animal'}/${animal.id}`} key={animal.id}>
           <div
             className={classnames(animalResults.preview)}
           >
