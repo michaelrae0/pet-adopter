@@ -1,42 +1,46 @@
+// In search component
 .container {
-  width: 500px;
+  width: 700px;
   margin: 50px auto;
+  border: 2px solid lightgrey;
 }
-form {
+
+
+.selectors {
+  display: flex;
+  text-align: center;
+
   width: 100%;
-
-  label {
-    display:inline-block;
-    margin: 15px 0;
-  }
+  height: 80px;
+  border-bottom: 2px solid lightgrey;
+  font-size: 34px;
 }
-.form_label {
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-.form_info {
-  width: 100%;
-  height: 36px;
-  font-size: 18px;
-  padding: 0 10px 0px;
-}
-.btn {
-  float: right;
 
-  margin: 15px 0;
-  padding: 6px 15px 8px;
-
-  border: black 2px solid;
-  font-size: 18px;
-
-  cursor: pointer;
-
-  span {
-    text-decoration: none;
-    color: black;
-  }
+%form_selector {
+  width: 50%;
 
   &:hover {
-    background-color: lightgrey;
+    background-color: lavender;
   }
+  p {
+    margin: 14px 0 0;
+  }
+}
+.animal_selector {
+  @extend %form_selector;
+  border-right: 1px solid lightgrey;
+}
+.shelter_selector {
+  @extend %form_selector;
+  border-left: 1px solid lightgrey;
+}
+.selected {
+  background-color: lightgrey;
+}
+
+
+.form_cont {
+  padding: 10px 25px;
+  
+  box-sizing:border-box;
 }
