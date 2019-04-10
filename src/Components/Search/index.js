@@ -1,5 +1,5 @@
 import React from 'react'
-import _cn from 'classnames'
+import classnames from 'classnames'
 
 import AnimalForm from '../AnimalForm/index'
 import ShelterForm from '../ShelterForm/index'
@@ -15,6 +15,10 @@ class Search extends React.Component {
     }
   }
 
+  handleOnClick = (id) => {
+    this.setState({ form: id })
+  }
+
   render() {
     const { form } = this.state
 
@@ -22,32 +26,36 @@ class Search extends React.Component {
     let shelterStyles = {};
 
     if (form === 'animal') {
-      animalStyles = _cn(search.animal_selector, search.selected)
-      shelterStyles = _cn(search.shelter_selector)
+      animalStyles = classnames(search.animal_selector, search.selected)
+      shelterStyles = classnames(search.shelter_selector)
     } else {
-      shelterStyles = _cn(search.shelter_selector, search.selected)
-      animalStyles = _cn(search.animal_selector)
+      shelterStyles = classnames(search.shelter_selector, search.selected)
+      animalStyles = classnames(search.animal_selector)
     }
 
     return (
-      <div className={_cn(search.container)}>
+      <div className={classnames(search.container)}>
 
-        <div  className={_cn(search.selector_cont)}>
+        <div className={classnames(search.selectors)}>
           <div
-          className={animalStyles}
+            className={animalStyles}
+            onClick={ () => this.handleOnClick('animal') }
           >
             <p>Animals</p>
           </div>
-          <div className={shelterStyles}>
+          <div
+            className={shelterStyles}
+            onClick={ () => this.handleOnClick('shelter') }
+          >
             <p>Shelters</p>
           </div>
         </div>
 
-        <div className={_cn(search.form_cont)}>
+        <div className={classnames(search.form_cont)}>
           {(form === 'animal') && <AnimalForm />}
           {(form === 'shelter') && <ShelterForm />}
         </div>
-        
+
       </div>
     )
   }

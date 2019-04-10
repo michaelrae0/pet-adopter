@@ -82,7 +82,7 @@ class AnimalForm extends React.Component {
         <div className={classnames(forms.outer_div_btn)}>
           <Link
             to={{
-              pathname: "/results",
+              pathname: "/animals",
               state: { type, breed, location }
             }} 
             className={classnames(forms.btn)}
