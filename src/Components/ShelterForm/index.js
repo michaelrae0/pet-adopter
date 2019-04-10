@@ -29,7 +29,7 @@ class ShelterForm extends React.Component {
 
         <label htmlFor='distance' >Distance</label>
         <select 
-          placeholder='Boxer' type='select' name='distance' id='distance'
+          type='select' name='distance' id='distance'
           className={classnames(forms.form_info, forms.distance)}
           onChange={ e => this.setState({ distance: e.target.value }) }
         >
