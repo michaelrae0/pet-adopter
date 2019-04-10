@@ -2,12 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
-import Loading from '../Loading/index'
+import Loading from '../../Components/Loading/index'
 
-import * as results from './results.module.scss'
+import * as animalResults from './animalResults.module.scss'
 import api from '../../util/apiClient.js'
 
-class Results extends React.Component {
+class AnimalResults extends React.Component {
   constructor(props) {
     super(props);
 
@@ -21,15 +21,9 @@ class Results extends React.Component {
     const { type, breed, location } = this.props.location.state;
     let params = {};
 
-    // console.log('state: ');
-    // console.log(this.props.location.state)
-
     params['type'] = type ? type : ''
     params['breed'] = breed ? breed : ''
     if (location) params['location'] = location
-    
-    // console.log('params: ')
-    // console.log(params)
 
     // Calls api for animal info
     api.animals(params)
@@ -41,14 +35,6 @@ class Results extends React.Component {
         })
       })
       .catch( e => console.log(e) )
-
-    // const testParams = {
-    //   // type: 'cat'
-    // }
-    // api.types(testParams)
-    //   .then( ({ data }) => {
-    //     console.log(data)
-    //   })
   }
 
   render() {
@@ -69,21 +55,21 @@ class Results extends React.Component {
       }
       
       return (
-        <Link to={`/details/${animal.id}`} key={animal.id}>
+        <Link to={`/details/${'animal'}/${animal.id}`} key={animal.id}>
           <div
-            className={classnames(results.preview)}
+            className={classnames(animalResults.preview)}
           >
-            <div className={classnames(results.pre_thumb_cont)}>
+            <div className={classnames(animalResults.pre_thumb_cont)}>
               <img 
                 src={photo(animal)}
                 alt={animal.name}
-                className={classnames(results.pre_thumb)}
+                className={classnames(animalResults.pre_thumb)}
               />
             </div>
-            <div className={classnames(results.pre_text_cont)}>
-              <p className={classnames(results.pre_title)}>{animal.name}</p>
+            <div className={classnames(animalResults.pre_text_cont)}>
+              <p className={classnames(animalResults.pre_title)}>{animal.name}</p>
               <p>{breed}</p>
-              <p className={classnames(results.pre_location)}>
+              <p className={classnames(animalResults.pre_location)}>
                 {`${animal.contact.address.city}, ${animal.contact.address.state}`}
               </p>
             </div>
@@ -93,7 +79,7 @@ class Results extends React.Component {
     })
 
     return (
-      <div className={classnames(results.container)}>
+      <div className={classnames(animalResults.container)}>
 
         {this.state.isLoading && <Loading />}
         {!this.state.isLoading && animalThumbnails}
@@ -103,4 +89,4 @@ class Results extends React.Component {
   }
 }
 
-export default Results;
+export default AnimalResults;

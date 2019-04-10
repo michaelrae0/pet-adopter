@@ -11,12 +11,10 @@
   height: 600px;
   background-color: rgb(49, 48, 48);
   text-align: center;
+  
   img {
     height: 100%;
     width: auto;
+    max-width: 1000px;
   }
-}
-
-.text_cont {
-  width: 800px;
 }

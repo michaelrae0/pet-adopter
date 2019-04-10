@@ -1,0 +1,46 @@
+// In search component
+.container {
+  width: 700px;
+  margin: 50px auto;
+  border: 2px solid lightgrey;
+}
+
+
+.selectors {
+  display: flex;
+  text-align: center;
+
+  width: 100%;
+  height: 80px;
+  border-bottom: 2px solid lightgrey;
+  font-size: 34px;
+}
+
+%form_selector {
+  width: 50%;
+
+  &:hover {
+    background-color: lavender;
+  }
+  p {
+    margin: 14px 0 0;
+  }
+}
+.animal_selector {
+  @extend %form_selector;
+  border-right: 1px solid lightgrey;
+}
+.shelter_selector {
+  @extend %form_selector;
+  border-left: 1px solid lightgrey;
+}
+.selected {
+  background-color: lightgrey;
+}
+
+
+.form_cont {
+  padding: 10px 25px;
+  
+  box-sizing:border-box;
+}
