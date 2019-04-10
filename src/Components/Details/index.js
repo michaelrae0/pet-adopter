@@ -2,6 +2,8 @@ import React from 'react'
 import classnames from 'classnames'
 
 import Loading from '../Loading/index'
+import AnimalDetails from '../AnimalDetails/index'
+import ShelterDetails from '../ShelterDetails/index'
 
 import api from '../../util/apiClient'
 import * as details from './details.module.scss'
@@ -11,56 +13,55 @@ class Details extends React.Component {
     super(props);
 
     this.state = {
-      animal: {},
+      info: {},
 
       isLoading: true,
     }
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
-    console.log(id)
+    const { id, searchType } = this.props.match.params;
 
     const params = {
       id,
     }
 
-    api.animals(params)
-      .then( ({data}) => {
-        console.log(data.animal)
-        this.setState({
-          animal: data.animal,
-          isLoading: false
+    // Choose b/t animal and org details
+    if (searchType === 'animal') {
+      api.animal(params)
+        .then( ({data}) => {
+          console.log(data.animal)
+          this.setState({
+            info: data.animal,
+            isLoading: false
+          })
         })
-      })
+    }
+    if (searchType === 'organization') {
+      api.org(params)
+        .then( ({data}) => {
+          this.setState({
+            info: data.organization,
+            isLoading: false
+          })
+        })
+    }
   }
   
   render() {
-    const { animal, isLoading } = this.state 
+    const { info, isLoading } = this.state ;
+    const { searchType } = this.props.match.params;
 
     if (isLoading) return <Loading/>
 
-    const address = animal.contact.address;
+    // const address = animal.contact.address;
     return (
       <div className={classnames(details.container)}>
         <div className={classnames(details.img_cont)}>
-          <img src={animal.photos[0].full} alt={animal.name} />
+          <img src={info.photos[0].full} alt={info.name} />
         </div>
-        <div className={classnames(details.text_cont)}>
-          <h2>{animal.name}</h2>
-          <p>{animal.description}</p>
-          <p>Breed: {animal.breed}</p>
-          <p>Size: {animal.size}</p>
-          <p>Hair: {animal.coat}</p>
-          <p>Gender: {animal.gender}</p>
-          <p>Status: {animal.status}</p>
-          <div>
-            <h4>Contact Info</h4>
-            <p>Address: {address.address1}, {address.city}, {address.state}</p>
-            <p>Phone: {animal.contact.phone}</p>
-            <p>Email: {animal.contact.email}</p>
-          </div>
-        </div>
+        {searchType === 'animal' && <AnimalDetails info={info} />}
+        {searchType === 'organization' && <ShelterDetails info={info} />}
       </div>
     )
   }

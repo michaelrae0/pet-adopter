@@ -18,7 +18,7 @@ class App extends Component {
           <Header />
             <Route exact path='/' component={Search} />
             <Route path='/animals' component={AnimalResults} />
-            <Route path='/details/:id' component={Details} />
+            <Route path='/details/:searchType/:id' component={Details} />
             <Route path='/shelters' component={ShelterResults} />
         </div>
       </Router>
