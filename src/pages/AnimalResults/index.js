@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
 import Loading from '../../Components/Loading/index'
+import Thumbnail from '../../Components/Thumbnail/index'
 
 import * as animalResults from './animalResults.module.scss'
 import api from '../../util/apiClient.js'
@@ -39,51 +39,25 @@ class AnimalResults extends React.Component {
 
   render() {
     const { animals } = this.state;
-    // console.log(animals)
 
-    const photo = animal => {
-      if (animal.photos[0]) return animal.photos[0].medium;
-      return 'http://placekitten.com/250/250'
-    }
-
-    const animalThumbnails = animals.map( (animal, i) => {
-      let breed = '';
-      if (animal.breeds.primary.length > 27) {
-        breed = animal.breeds.primary.substring(0, 25) + '...';
-      } else {
-        breed = animal.breeds.primary;
-      }
-      
+    const animalThumbnails = animals.map( animal => {
+      const body = [animal.breeds.primary, `${animal.contact.address.city}, ${animal.contact.address.state}`];
       return (
-        <Link to={`/details/${'animal'}/${animal.id}`} key={animal.id}>
-          <div
-            className={classnames(animalResults.preview)}
-          >
-            <div className={classnames(animalResults.pre_thumb_cont)}>
-              <img 
-                src={photo(animal)}
-                alt={animal.name}
-                className={classnames(animalResults.pre_thumb)}
-              />
-            </div>
-            <div className={classnames(animalResults.pre_text_cont)}>
-              <p className={classnames(animalResults.pre_title)}>{animal.name}</p>
-              <p>{breed}</p>
-              <p className={classnames(animalResults.pre_location)}>
-                {`${animal.contact.address.city}, ${animal.contact.address.state}`}
-              </p>
-            </div>
-          </div>
-        </Link>
+        <Thumbnail
+          images={animal.photos[0]}
+          header={animal.name}
+          body={body}
+          id={animal.id}
+          key={animal.id}
+          category={'animal'}
+        />
       )
-    })
+    });
 
     return (
       <div className={classnames(animalResults.container)}>
-
         {this.state.isLoading && <Loading />}
         {!this.state.isLoading && animalThumbnails}
-
       </div>
     )
   }

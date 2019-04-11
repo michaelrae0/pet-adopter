@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
 import Loading from '../../Components/Loading/index'
+import Thumbnail from '../../Components/Thumbnail/index'
 
 import * as shelterResults from './shelterResults.module.scss'
 import api from '../../util/apiClient.js'
@@ -41,34 +41,17 @@ class ShelterResults extends React.Component {
   render() {
     const { orgs } = this.state;
 
-    const photo = org => {
-      if (org.photos[0]) return org.photos[0].medium;
-      return 'http://placekitten.com/250/250'
-    }
-
-    const orgThumbnails = orgs.map( (org, i) => {
-      
+    const orgThumbnails = orgs.map( org => {
+      const body = [`${org.address.city}, ${org.address.state}`]
       return (
-        <Link to={`/details/${'organization'}/${org.id}`} key={org.id}>
-          <div
-            className={classnames(shelterResults.thumbnail)}
-          >
-            <div className={classnames(shelterResults.thumb_image_cont)}>
-              <img 
-                src={photo(org)}
-                alt={org.name}
-                className={classnames(shelterResults.thumb_image)}
-              />
-            </div>
-            <div className={classnames(shelterResults.thumb_text_cont)}>
-              <p className={classnames(shelterResults.thumb_title)}>{org.name}</p>
-              <p className={classnames(shelterResults.thumb_location)}>
-                {`${org.address.city}, ${org.address.state}`}
-              </p>
-            </div>
-          </div>
-        </Link>
-        // <div></div>
+        <Thumbnail
+          images={org.photos[0]}
+          header={org.name}
+          body={body}
+          id={org.id}
+          key={org.id}
+          category={'organization'}
+        />
       )
     })
 

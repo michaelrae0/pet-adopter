@@ -5,7 +5,7 @@ let config;
 const api = {
   animals(params) {  // many animals
     const url = generateUrl(`https://api.petfinder.com/v2/animals`, params);
-    return get(url, config)
+    return get(url)
   },
   animal(params) {  // single animal
     if (!params.id) throw "Enter an id!! Or use animals..";
@@ -15,7 +15,7 @@ const api = {
 
   types(params, breedsOnly = false) {  // many types
     const url = generateUrl(`https://api.petfinder.com/v2/types`, params, breedsOnly);
-    return get(url, config)
+    return get(url)
   },
   breeds(params) { // types -> type -> breeds
     if (!params.type) throw "Enter a type!!";
@@ -25,7 +25,7 @@ const api = {
 
   orgs(params) {  // many shelters
     const url = generateUrl(`https://api.petfinder.com/v2/organizations`, params);
-    return get(url, config)
+    return get(url)
   },
   org(params) {  // single shelter
     if (!params.id) throw "Enter an id!! Or use orgs..";
@@ -61,8 +61,9 @@ function generateUrl(base, params, breedsOnly = false) {
   return url;
 }
 
-function get(url, config) {
+function get(url) {
   if (config) {
+    console.log('yo')
     return axios.get(url, {headers: config});
   }
 
@@ -75,6 +76,7 @@ function get(url, config) {
 
 function authToken() {
   // Returns a promise with bearer token. data.access_token
+  // Called once per session. Lasts one hour.
   return axios.post("https://api.petfinder.com/v2/oauth2/token", {
       grant_type: "client_credentials",
       client_id: process.env.REACT_APP_API_KEY,
