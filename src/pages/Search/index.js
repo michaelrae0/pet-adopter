@@ -5,55 +5,87 @@ import AnimalForm from '../../Components/AnimalForm/index'
 import ShelterForm from '../../Components/ShelterForm/index'
 
 import * as search from './search.module.scss'
+import api from '../../util/apiClient'
 
 class Search extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      form: 'animal'
+      animalForm: true,
+
+      type: '',
+      breed: '',
+      breeds: [],
+      animalLocation: '',
+
+      shelterLocation: '',
+      distance: 10,
     }
   }
 
-  handleOnClick = (id) => {
-    this.setState({ form: id })
+  fetchBreeds = type => {
+    this.setState({ breeds: ['Loading...'] });
+
+    api.breeds( {type} )
+      .then( ({data}) => {
+        this.setState({ breeds: data.breeds.map( breed => breed.name) });
+      });
+  }
+
+  handleOnClick = bool => {
+    this.setState({ animalForm: bool })
+  }
+
+  changeParentState = ( property, value ) => {
+    this.setState({
+      [property]: value,
+    })
   }
 
   render() {
-    const { form } = this.state
+    const { 
+      animalForm,
+      type,
+      breed,
+      breeds,
+      animalLocation,
+      shelterLocation,
+      distance,
+    } = this.state
 
-    let animalStyles = {};
-    let shelterStyles = {};
-
-    if (form === 'animal') {
-      animalStyles = classnames(search.animal_selector, search.selected)
-      shelterStyles = classnames(search.shelter_selector)
-    } else {
-      shelterStyles = classnames(search.shelter_selector, search.selected)
-      animalStyles = classnames(search.animal_selector)
-    }
+    console.log(this.state.shelterLocation)
 
     return (
       <div className={classnames(search.container)}>
 
         <div className={classnames(search.selectors)}>
           <div
-            className={animalStyles}
-            onClick={ () => this.handleOnClick('animal') }
+            className={classnames(search.selector, search.selector__animals, {[search.selected]: animalForm})}
+            onClick={ () => this.handleOnClick(true) }
           >
             <p>Animals</p>
           </div>
           <div
-            className={shelterStyles}
-            onClick={ () => this.handleOnClick('shelter') }
+            className={classnames(search.selector, search.selector__shelters, {[search.selected]: !animalForm})}
+            onClick={ () => this.handleOnClick(false) }
           >
             <p>Shelters</p>
           </div>
         </div>
 
         <div className={classnames(search.form_cont)}>
-          {(form === 'animal') && <AnimalForm />}
-          {(form === 'shelter') && <ShelterForm />}
+          {animalForm &&
+          <AnimalForm
+            filters={{type, breed, breeds, animalLocation}}
+            changeParentState={this.changeParentState}
+            fetchBreeds={this.fetchBreeds}
+          />}
+          {!animalForm &&
+          <ShelterForm
+            filters={{shelterLocation, distance}}
+            changeParentState={this.changeParentState}
+          />}
         </div>
 
       </div>

@@ -5,17 +5,9 @@ import classnames from 'classnames'
 import * as forms from '../../pages/Search/forms.module.scss'
 
 class ShelterForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      location: '',
-      distance: 10,
-    }
-  }
-
   render() {
-    const { location, distance } = this.state;
+    const { changeParentState, filters } = this.props;
+    const { shelterLocation, distance } = filters;
 
     return (
       <form>
@@ -24,14 +16,16 @@ class ShelterForm extends React.Component {
         <input 
           placeholder='<City, ST> or <zipcode>' type='text' name='location' id='location'
           className={classnames(forms.form_info, forms.location)}
-          onChange={ e => this.setState({ location: e.target.value }) }
+          value={shelterLocation}
+          onChange={ e => changeParentState('shelterLocation', e.target.value) }
         />
 
         <label htmlFor='distance' >Distance</label>
         <select 
           type='select' name='distance' id='distance'
           className={classnames(forms.form_info, forms.distance)}
-          onChange={ e => this.setState({ distance: e.target.value }) }
+          value={distance}
+          onChange={ e => changeParentState('distance', e.target.value) }
         >
           <option value='10' >10 miles</option>
           <option value='25' >25 miles</option>
@@ -43,7 +37,7 @@ class ShelterForm extends React.Component {
           <Link
             to={{
               pathname: "/shelters",
-              state: { location, distance }
+              state: { shelterLocation, distance }
             }} 
             className={classnames(forms.btn)}
           >
