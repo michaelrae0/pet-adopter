@@ -1,6 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import Container from '../../Components/Container'
+import Row from '../../Components/Row'
 import Loading from '../../Components/Loading/index'
 import Thumbnail from '../../Components/Thumbnail/index'
 
@@ -51,15 +53,19 @@ class AnimalResults extends React.Component {
           key={animal.id}
           category={'animal'}
         />
-      )
+      );
     });
 
+    if (this.state.isLoading) return <Loading />;
     return (
-      <div className={classnames(animalResults.container)}>
-        {this.state.isLoading && <Loading />}
-        {!this.state.isLoading && animalThumbnails}
-      </div>
-    )
+      <section className={animalResults.section}>
+        <Container>
+          <Row className={animalResults.row} wrap>
+            {!this.state.isLoading && animalThumbnails}
+          </Row>
+        </Container>
+      </section>
+    );
   }
 }
 

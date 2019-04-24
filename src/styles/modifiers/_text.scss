@@ -1,0 +1,116 @@
+@import "../definitions/colors";
+@import "../definitions/mixins";
+@import "../definitions/fonts";
+@import "../definitions/breakpoints";
+
+@each $color-name, $color-variable in $colors {
+  // Text Color
+  .text_#{"" + $color-name} {
+    color: $color-variable;
+  }
+}
+
+.text_shadow {
+  text-shadow: 0 0 30px $gray-dark;
+}
+
+.link_undecorated {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+h1, .h1, h2, .h2,
+h3, .h3, h4, .h4 {
+  transition: all 0.25s ease-in-out;
+}
+
+h1, .h1 {
+  @include font_loader($primary-family-bold, 9, 'n');
+  font-size: 2.25rem;
+  line-height: 3.75rem;
+  @media (#{$min_tablets}) {
+    font-size: 2.25rem;
+  }
+}
+
+h2, .h2 {
+  @include font_loader($primary-family-bold, 9, 'n');
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  @media (#{$min_tablets}) {
+    font-size: 1.5rem;
+  }
+}
+
+h3, .h3 {
+  @include font_loader($primary-family-bold, 9, 'n');
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  @media (#{$min_tablets}) {
+    font-size: 1.125rem;
+  }
+}
+
+h4, .h4 {
+  @include font_loader($primary-family, 4, 'n');
+  font-size: 1rem;
+  line-height: 1.75rem;
+  @media (#{$min_tablets}) {
+    font-size: 1rem;
+  }
+}
+
+h5, .h5 {
+  @include font_loader($primary-family, 6, 'n');
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+  letter-spacing: 0.1625rem;
+  @media (#{$min_tablets}) {
+    font-size: 0.8125rem;
+  }
+}
+
+h6, .h6 {
+  @include font_loader($primary-family-bold, 9, 'n');
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+  text-transform: uppercase;
+  @media (#{$min_tablets}) {
+    font-size: 0.8125rem;
+  }
+}
+
+.sectionBody {
+  @include font_loader($primary-family, 3, 'n');
+  line-height: 2.1rem;
+}
+
+.remark-content, .remark_content {
+  margin-bottom: 1.5rem;
+  line-height: 1.2rem;
+
+  p {
+    @include font_loader($primary-family, 4, 'n');
+    font-size: 1rem;
+    line-height: 1.75rem;
+    margin-bottom: 1.2rem;
+  }
+
+  li, .li {
+    @include font_loader($primary-family, 9, 'n');
+    font-size: 1rem;
+    line-height: 1.2rem;
+    margin-bottom: 1rem;
+
+    @media(#{$min_tablets}) {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.text-half-spaced {
+  line-height: 1.5rem;
+}

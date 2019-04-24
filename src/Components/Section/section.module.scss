@@ -1,0 +1,11 @@
+@import "../../styles/definitions/whitespace";
+@import "../../styles/definitions/breakpoints";
+@import "../../styles/modifiers/background";
+@import "../../styles/modifiers/text";
+
+.site_section {
+  padding: 3rem 0;
+  @media (#{$min_tablets}) {
+    padding: 6rem 0;
+  }
+}

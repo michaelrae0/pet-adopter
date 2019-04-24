@@ -1,0 +1,105 @@
+$site-width: 1262px;
+$gutter: 24px;
+$gutter_desktop: 32px;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-size: 16px;
+}
+
+body {
+  height: 100%;
+  color: $base-font-color;
+  line-height: 1.375;
+  font-size: $base-font-size;
+  @include font_loader($primary-family, 4, 'n');
+
+  &.state-fixed {
+    overflow: hidden;
+  }
+}
+
+a {
+  &, &:hover, &:focus {
+    color: inherit;
+  }
+}
+
+.site__main {
+  flex: 1;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow-x: hidden;
+  @media (#{$min_tablets}) {
+    flex: 3;
+  }
+  @media (#{$min_laptop}) {
+    max-width: 2500px;
+  }
+
+  &--inverse-nav {
+    top: -90px;
+    margin-bottom: -90px;
+    margin-top: 0;
+  }
+}
+
+.visible-only--desktop {
+  @media (#{$max_tablets}) {
+    display: none;
+  }
+}
+
+.visible-only--mobile {
+  @media (#{$min_tablets}) {
+    display: none;
+  }
+}
+
+.col {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding-right: $gutter;
+  padding-left: $gutter;
+
+  @media (#{$min_tablets}) {
+    flex-grow: 1;
+    flex-basis: 33%;
+    padding-right: $gutter-desktop;
+    padding-left: $gutter-desktop;
+  }
+}
+
+.col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding-right: $gutter;
+  padding-left: $gutter;
+
+  @media (#{$min_tablets}) {
+    padding-right: $gutter-desktop;
+    padding-left: $gutter-desktop;
+  }
+
+  &--flush {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.col-6 {
+  flex: 0 0 100%;
+  max-width: 50%;
+  padding-right: $gutter;
+  padding-left: $gutter;
+
+  @media (#{$min_tablets}) {
+    padding-right: $gutter-desktop;
+    padding-left: $gutter-desktop;
+  }
+}

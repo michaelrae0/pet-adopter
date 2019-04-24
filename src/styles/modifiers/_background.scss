@@ -1,0 +1,30 @@
+@import "../definitions/colors";
+
+@each $color-name, $color-variable in $colors {
+  // Background Color
+  .background_#{"" + $color-name} {
+    background-color: $color-variable;
+  }
+
+  // Background Color Darker
+  .background_#{"" + $color-name}_darker {
+    background-color: darken($color-variable, 5);
+  }
+
+  // Background Color on Hover
+  .background_#{"" + $color-name}_on_hover {
+    &:hover {
+      background-color: $color-variable;
+    }
+  }
+}
+
+.background_transparent {
+  background-color: transparent;
+}
+
+.background_image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
