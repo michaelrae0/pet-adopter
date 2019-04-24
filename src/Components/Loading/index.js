@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import * as loading from './loading.module.scss'
+import Row from '../Row'
 
 class Loading extends React.Component {
   constructor(props) {
@@ -27,9 +28,9 @@ class Loading extends React.Component {
   
   render() {
     return (
-      <div className={classnames(loading.container)}>
+      <Row className={loading.container} noMargin>
         <span>{'Loading' + this.state.ellipses}</span>
-      </div>
+      </Row>
     )
   }
 }

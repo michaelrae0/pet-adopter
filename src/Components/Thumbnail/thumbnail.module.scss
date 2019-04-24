@@ -1,14 +1,13 @@
-%shadow {
+@import '../../styles/definitions/breakpoints';
+
+$thumbnail-gutter: 24px;
+$gutter-desktop: 32px;
+
+.container {
   -moz-box-shadow: 0 0 7px #ccc;
   -webkit-box-shadow: 0 0 7px #ccc;
   box-shadow: 0 0 7px #aaa;
-}
-
-.container {
-  @extend %shadow;
-  // border: 2px lightgrey solid;
-  border-radius: 10px;
-  margin-bottom: 40px;
+  margin: 2rem $thumbnail-gutter ;
 
   &:hover {
     background-color: #eee;
@@ -16,11 +15,18 @@
   &:active {
     background-color: #ccc;
   }
+
+  @media (#{$min-tablets}) {
+    margin: 2rem $gutter-desktop ;
+  }
 }
-.image {
-  height: 250px;
-  width: 250px;
-  border-radius: 8px 8px 0 0;
+.image_cont {
+  padding-top: 100%;
+  width: 100%;
+
+  @media (#{$min-tablets}) {
+    // height: 250px;
+  }
 }
 
 .text_cont {
@@ -31,4 +37,16 @@
 }
 .header {
   font-weight: bold;
+}
+
+.col3 {
+  max-width: 500px;
+  width: calc(50% - (#{$thumbnail-gutter} * 2));
+
+  @media (#{$min-tablets}) {
+    width: calc((100%/3) - (#{$gutter-desktop} * 2))
+  }
+  @media (min-width: 1300px) {
+    width: calc(25% - (#{$gutter-desktop} * 2))
+  }
 }

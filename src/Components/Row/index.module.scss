@@ -1,0 +1,40 @@
+@import "../../styles/definitions/breakpoints";
+
+$site-width: 1262px;
+$gutter: 24px;
+$gutter_desktop: 32px;
+
+.row {
+  display: flex;
+  margin-left: -#{$gutter};
+  margin-right: -#{$gutter};
+
+  @media (#{$min_tablets}) {
+    margin-left: -#{$gutter_desktop};
+    margin-right: -#{$gutter_desktop};
+  }
+  
+  &__wrap {
+    flex-wrap: wrap;
+  }
+
+  &__no_margin {
+    margin-left: 0;
+    margin-right: 0;
+
+    @media (#{$min_tablets}) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  &__padded {
+    padding-left: $gutter;
+    padding-right: $gutter;
+
+    @media (#{$min_tablets}) {
+      padding-left: #{$gutter_desktop};
+      padding-right: #{$gutter_desktop};
+    }
+  }
+}

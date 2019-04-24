@@ -1,7 +1,10 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import Container from '../../Components/Container'
+import Row from '../../Components/Row'
 import Loading from '../../Components/Loading/index'
+import Carousel from '../../Components/Carousel/index'
 import AnimalDetails from '../../Components/AnimalDetails/index'
 import ShelterDetails from '../../Components/ShelterDetails/index'
 
@@ -14,7 +17,6 @@ class Details extends React.Component {
 
     this.state = {
       info: {},
-
       isLoading: true,
     }
   }
@@ -53,14 +55,16 @@ class Details extends React.Component {
     const { searchType } = this.props.match.params;
 
     if (isLoading) return <Loading/>
-
-    // const address = animal.contact.address;
     return (
-      <div className={classnames(details.container)}>
-        <div className={classnames(details.img_cont)}>
-          <img src={info.photos[0].full} alt={info.name} />
-        </div>
-        { searchType === 'animal' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
+      <div>
+        <Carousel photos={info.photos} />
+        <section className={classnames(details.section)}>
+          <Container restricted >
+            <Row>
+              { searchType === 'animal' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
+            </Row>
+          </Container>
+        </section>
       </div>
     )
   }

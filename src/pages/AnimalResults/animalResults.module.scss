@@ -1,7 +1,11 @@
-.container {
-  margin-top: 40px;
+@import '../../styles/definitions/breakpoints';
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly
+.section {
+  padding: 6rem 0;
+}
+
+.row {
+  @media (#{$max-tablets}) {
+    justify-content: center;
+  }
 }

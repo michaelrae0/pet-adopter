@@ -8,7 +8,7 @@ import AnimalResults from './pages/AnimalResults/index'
 import Details from './pages/Details/index'
 import ShelterResults from './pages/ShelterResults/index'
 
-import './index.scss';
+import './styles/app.scss';
 
 class App extends Component {
   render() {

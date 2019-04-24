@@ -1,0 +1,27 @@
+@import "../../styles/definitions/breakpoints";
+
+$site-width: 1262px;
+$gutter: 24px;
+$gutter_desktop: 32px;
+
+.container {
+  width: 100%;
+  padding-left: $gutter;
+  padding-right: $gutter;
+  margin: 0 auto;
+  max-width: $site-width;
+
+  @media (#{$min_tablets}) {
+    padding-left: $gutter_desktop;
+    padding-right: $gutter_desktop;
+  }
+  
+  &:focus {
+    outline: none;
+    border: none;
+  }
+
+  &__restricted {
+    max-width: $site-width * 0.8;
+  }
+}

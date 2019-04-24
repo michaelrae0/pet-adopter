@@ -1,0 +1,18 @@
+$fonts_path: "../fonts/";
+
+// Sizes
+$base-font-size: 16px;
+$ratio: 1.414;
+
+// Fonts
+// @font-face {
+//   font-family: 'Gotham-Light';
+//   src: url(#{$fonts_path}Gotham-Light-Regular.woff2) format('woff2'),
+//   url(#{$fonts_path}Gotham-Light-Regular.woff) format('woff');
+//   font-weight: normal;
+//   font-style: normal;
+// }
+
+$primary-family: 'neuzeit-grotesk', sans-serif;
+$primary-family-bold: 'neuzeit-grotesk-condensed', sans-serif;
+$alt-family: 'neuzeit-grotesk-extra-conden', sans-serif;

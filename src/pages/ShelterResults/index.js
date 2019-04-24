@@ -1,6 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import Container from '../../Components/Container'
+import Row from '../../Components/Row'
 import Loading from '../../Components/Loading/index'
 import Thumbnail from '../../Components/Thumbnail/index'
 
@@ -55,13 +57,15 @@ class ShelterResults extends React.Component {
       )
     })
 
+    if (this.state.isLoading) return <Loading />
     return (
-      <div className={classnames(shelterResults.container)}>
-
-        {this.state.isLoading && <Loading />}
-        {!this.state.isLoading && orgThumbnails}
-
-      </div>
+      <section className={shelterResults.section}>
+        <Container>
+          <Row className={shelterResults.row} wrap>
+            {!this.state.isLoading && orgThumbnails}
+          </Row>
+        </Container>
+      </section>
     )
   }
 }
