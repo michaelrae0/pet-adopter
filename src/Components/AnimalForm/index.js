@@ -3,32 +3,11 @@ import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
 import * as forms from '../../pages/Search/forms.module.scss'
-import api from '../../util/apiClient'
 
 class AnimalForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      type: '',
-      breed: '',
-      breeds: [],
-      location: '',
-    }
-  }
-
-  setBreeds = type => {
-    this.setState({ breeds: ['Loading...'] })
-
-    api.breeds( {type} )
-      .then( ({data}) => {
-        const breeds = data.breeds.map( breed => breed.name);
-        this.setState({ breeds })
-      })
-  }
-
   render() {
-    const { type, breed, breeds, location } = this.state
+    const { changeParentState, fetchBreeds, filters } = this.props;
+    const { type, breed, breeds, animalLocation } = filters;
 
     const breedOptions = breeds.map( breed => (
       <option value={breed} key={breed} >{breed}</option> 
@@ -41,13 +20,14 @@ class AnimalForm extends React.Component {
         <select 
           type='select' name='type' id='type'
           className={classnames(forms.form_info, forms.type)}
+          value={type}
           onChange={ e => {
-            if (e.target.value !== '') {
-              this.setBreeds(e.target.value);
+            if (e.target.value === '') {
+              changeParentState('breeds', [])
             } else {
-              this.setState({ breeds: [] })
+              fetchBreeds(e.target.value);
             }
-            this.setState({ type: e.target.value });
+            changeParentState('type', e.target.value);
           }}
         >
           <option value=''>All</option>
@@ -65,7 +45,8 @@ class AnimalForm extends React.Component {
         <select 
           placeholder='Boxer' type='select' name='breed' id='breed'
           className={classnames(forms.form_info, forms.breed)}
-          onChange={ e => this.setState({ breed: e.target.value }) }
+          value={breed}
+          onChange={ e => changeParentState('breed', e.target.value) }
         >
           <option value='' >All</option>
           {breedOptions}
@@ -75,15 +56,15 @@ class AnimalForm extends React.Component {
         <input
           placeholder='Atlanta, GA' type='text' name='location' id='location'
           className={classnames(forms.form_info, forms.location)}
-          value={location}
-          onChange={ e => this.setState({ location: e.target.value }) }
+          value={animalLocation}
+          onChange={ e => changeParentState('animalLocation', e.target.value) }
         />
 
         <div className={classnames(forms.outer_div_btn)}>
           <Link
             to={{
               pathname: "/animals",
-              state: { type, breed, location }
+              state: { type, breed, animalLocation }
             }} 
             className={classnames(forms.btn)}
           >

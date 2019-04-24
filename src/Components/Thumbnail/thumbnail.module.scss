@@ -1,8 +1,21 @@
+%shadow {
+  -moz-box-shadow: 0 0 7px #ccc;
+  -webkit-box-shadow: 0 0 7px #ccc;
+  box-shadow: 0 0 7px #aaa;
+}
+
 .container {
-  border: 2px lightgrey solid;
+  @extend %shadow;
+  // border: 2px lightgrey solid;
   border-radius: 10px;
   margin-bottom: 40px;
 
+  &:hover {
+    background-color: #eee;
+  }
+  &:active {
+    background-color: #ccc;
+  }
 }
 .image {
   height: 250px;

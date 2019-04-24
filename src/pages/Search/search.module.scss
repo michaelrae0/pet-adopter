@@ -3,8 +3,11 @@
   width: 700px;
   margin: 50px auto;
   border: 2px solid lightgrey;
-}
 
+  -moz-box-shadow: 2px 2px 4px #aaa;
+  -webkit-box-shadow: 2px 2px 4px #aaa;
+  box-shadow: 2px 2px 3px #777;
+}
 
 .selectors {
   display: flex;
@@ -14,30 +17,39 @@
   height: 80px;
   border-bottom: 2px solid lightgrey;
   font-size: 34px;
+
+  -moz-box-shadow: 0.5px 2px 2px #777, -0px 2px 2px #777;
+  -webkit-box-shadow: 0.5px 2px 2px #777, -0px 2px 2px #777;
+  box-shadow: 0.5px 2px 2px #777, -0px 2px 2px #777;
 }
 
-%form_selector {
+.selector {
   width: 50%;
 
   &:hover {
     background-color: lavender;
+    cursor: pointer;
   }
   p {
-    margin: 14px 0 0;
+    margin-top: 14px;
+  }
+
+  &__animals {
+    border-right: 1px solid lightgrey;
+  }
+  &__shelters {
+    border-left: 1px solid lightgrey;
   }
 }
-.animal_selector {
-  @extend %form_selector;
-  border-right: 1px solid lightgrey;
-}
-.shelter_selector {
-  @extend %form_selector;
-  border-left: 1px solid lightgrey;
-}
+
 .selected {
   background-color: lightgrey;
-}
 
+  &:hover {
+    background-color: lightgrey;
+    cursor: default;
+  }
+}
 
 .form_cont {
   padding: 10px 25px;

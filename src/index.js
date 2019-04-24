@@ -16,10 +16,12 @@ class App extends Component {
       <Router>
         <div className='home_container'>
           <Header />
+          <div className='pages'>
             <Route exact path='/' component={Search} />
             <Route path='/animals' component={AnimalResults} />
             <Route path='/shelters' component={ShelterResults} />
             <Route path='/details/:searchType/:id' component={Details} />
+          </div>
         </div>
       </Router>
     );

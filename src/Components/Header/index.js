@@ -20,23 +20,25 @@ class Header extends React.Component {
   render() {
     return (
       <div className={classnames(header.navbar)}>
-        <Link to='/'>
-          <div
-            className={classnames(header.image_container)}
-            onClick={this.handleOnClick}
-          >
-            <img 
-              src='http://placekitten.com/80/80' 
-              alt='' 
-              className={header.image}
-            />
+        <div className={classnames(header.link_section)}>
+          <Link to='/'>
+            <div
+              className={classnames(header.image_container)}
+              onClick={this.handleOnClick}
+            >
+              <img 
+                src='http://placekitten.com/60/60' 
+                alt='' 
+                className={header.image}
+              />
+            </div>
+          </Link>
+          <div className={header.categories}>
+            <h2 className={header.link} >All</h2>
+            <h2 className={header.link} >Dogs</h2>
+            <h2 className={header.link} >Cats</h2>
+            <h2 className={header.link} >Search</h2>
           </div>
-        </Link>
-        <div className={header.categories}>
-          <h2 className={header.link} >All</h2>
-          <h2 className={header.link} >Dogs</h2>
-          <h2 className={header.link} >Cats</h2>
-          <h2 className={header.link} >Search</h2>
         </div>
       </div>
       )
