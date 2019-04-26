@@ -1,28 +1,38 @@
-.navbar {
+@import '../../styles/definitions/breakpoints';
+
+$header-gutter: 24px;
+$gutter-desktop: 32px;
+
+// layout components
+.section {
   border-bottom: 1px rgba(0,0,0,.0975) solid;
   background-color: white;
+  padding: 0 $header-gutter;
+
+  @media (#{$min-tablets}) {
+    padding: 0 $gutter-desktop;
+  }
 }
-.link_section {
-  display: flex;
-  flex-direction: row;
+.row {
   justify-content: space-between;
   align-items:center;
 
-  max-width: 1250px;
   height: 80px;
   margin: 0 auto;
 }
-.image_container {
-  margin: 0 0 0 15px;
-}
-.image {
-  border-radius: 40px;
-}
-.categories {
-  display: inline-block;
 
-  h2 {
-    margin: 0 15px;
-    display: inline-block;
+// home image
+$image-diameter: 60px;
+.image {
+  height: $image-diameter;
+  border-radius: $image-diameter / 2;
+}
+
+// links
+.link {
+  display: inline-block;
+  margin-right: 2rem;
+  &:last-of-type {
+    margin-right: 0;
   }
 }
