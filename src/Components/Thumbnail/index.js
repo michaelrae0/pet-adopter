@@ -24,13 +24,10 @@ const Thumbnail = ({ images, header, body, id, category }) => {
   const backgroundImage = `url(${filterImages(images)})`
 
   return (
-
       <div className={classnames(thumbnail.container, thumbnail.col3)} >
-        <Link to={`/details/${category}/${id}`} >
-        
+        <Link to={`/details/${category}/${id}`} >        
           <div className={classnames(thumbnail.image_cont, 'background_image')} style={{ backgroundImage }}>
-          </div>
-          
+          </div>   
           <div className={thumbnail.text_cont}>
             <p className={classnames(thumbnail.header)}>{maxLen(header, 21)}</p>
             {mappedBody}
