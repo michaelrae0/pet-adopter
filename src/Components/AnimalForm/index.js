@@ -7,7 +7,7 @@ import * as forms from '../../pages/Search/forms.module.scss'
 class AnimalForm extends React.Component {
   render() {
     const { changeParentState, fetchBreeds, filters } = this.props;
-    const { type, breed, breeds, animalLocation } = filters;
+    const { type, breed, breeds, animalLocation, animalSearch } = filters;
 
     const breedOptions = breeds.map( breed => (
       <option value={breed} key={breed} >{breed}</option> 
@@ -64,7 +64,7 @@ class AnimalForm extends React.Component {
           <Link
             to={{
               pathname: "/animals",
-              state: { type, breed, animalLocation }
+              state: { type, breed, animalLocation, animalSearch }
             }} 
             className={classnames(forms.btn)}
           >

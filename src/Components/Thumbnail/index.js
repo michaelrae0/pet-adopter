@@ -4,33 +4,32 @@ import classnames from 'classnames'
 
 import * as thumbnail from './thumbnail.module.scss'
 
-const Thumbnail = ({ images, header, body, id, category }) => {
-  const filterImages = images => {
-    if (images) return images.medium;
+const Thumbnail = ({ image, title, subtitles, id, category }) => {
+  const filterImages = image => {
+    if (image) return image.medium;
     return 'http://placekitten.com/250/250'
   }
 
   const maxLen = (str, max) => {
-    if (str.length > 25) return str.substring(0, max) + '...';
+    if (str.length > 25) return str.slice(0, max) + '...';
     else return str 
   }
 
-  const mappedBody = body.map( line => (
-    <p className={classnames(thumbnail.body_line)} key={String(id) + line} >
-      {maxLen(line, 25)}
-    </p> 
-  ));
-
-  const backgroundImage = `url(${filterImages(images)})`
+  const backgroundImage = `url(${filterImages(image)})`
 
   return (
       <div className={classnames(thumbnail.container, thumbnail.col3)} >
         <Link to={`/details/${category}/${id}`} >        
-          <div className={classnames(thumbnail.image_cont, 'background_image')} style={{ backgroundImage }}>
-          </div>   
+          <div className={classnames(thumbnail.image_cont, 'background_image')} style={{ backgroundImage }} />
           <div className={thumbnail.text_cont}>
-            <p className={classnames(thumbnail.header)}>{maxLen(header, 21)}</p>
-            {mappedBody}
+            <p className={classnames(thumbnail.header)}>{maxLen(title, 21)}</p>
+            {subtitles.map( line => {
+              return (
+                <p className={classnames(thumbnail.body_line)} key={String(id) + line.slice(0, 3)} >
+                  {maxLen(line, 25)}
+                </p> 
+              )
+            })}
           </div>
         </Link>
       </div>

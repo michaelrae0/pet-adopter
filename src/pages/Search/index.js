@@ -14,7 +14,7 @@ class Search extends React.Component {
     super(props);
 
     this.state = {
-      animalForm: true,
+      animalSearch: true,
 
       type: '',
       breed: '',
@@ -36,7 +36,7 @@ class Search extends React.Component {
   }
 
   handleOnClick = bool => {
-    this.setState({ animalForm: bool })
+    this.setState({ animalSearch: bool })
   }
 
   changeParentState = ( property, value ) => {
@@ -47,7 +47,7 @@ class Search extends React.Component {
 
   render() {
     const { 
-      animalForm,
+      animalSearch,
       type,
       breed,
       breeds,
@@ -65,13 +65,13 @@ class Search extends React.Component {
             <div className={search.component}>
               <div className={classnames(search.selectors)}>
                 <div
-                  className={classnames(search.selector, search.selector__animals, {[search.selected]: animalForm})}
+                  className={classnames(search.selector, search.selector__animals, {[search.selected]: animalSearch})}
                   onClick={ () => this.handleOnClick(true) }
                 >
                   <p>Animals</p>
                 </div>
                 <div
-                  className={classnames(search.selector, search.selector__shelters, {[search.selected]: !animalForm})}
+                  className={classnames(search.selector, search.selector__shelters, {[search.selected]: !animalSearch})}
                   onClick={ () => this.handleOnClick(false) }
                 >
                   <p>Shelters</p>
@@ -79,15 +79,15 @@ class Search extends React.Component {
               </div>
 
               <div className={classnames(search.form_cont)}>
-                {animalForm &&
+                {animalSearch &&
                 <AnimalForm
-                  filters={{type, breed, breeds, animalLocation}}
+                  filters={{type, breed, breeds, animalLocation, animalSearch}}
                   changeParentState={this.changeParentState}
                   fetchBreeds={this.fetchBreeds}
                 />}
-                {!animalForm &&
+                {!animalSearch &&
                 <ShelterForm
-                  filters={{shelterLocation, distance}}
+                  filters={{shelterLocation, distance, animalSearch}}
                   changeParentState={this.changeParentState}
                 />}
               </div>
