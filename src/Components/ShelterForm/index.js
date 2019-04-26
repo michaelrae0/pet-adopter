@@ -7,7 +7,7 @@ import * as forms from '../../pages/Search/forms.module.scss'
 class ShelterForm extends React.Component {
   render() {
     const { changeParentState, filters } = this.props;
-    const { shelterLocation, distance } = filters;
+    const { shelterLocation, distance, animalSearch } = filters;
 
     return (
       <form>
@@ -37,7 +37,7 @@ class ShelterForm extends React.Component {
           <Link
             to={{
               pathname: "/shelters",
-              state: { shelterLocation, distance }
+              state: { shelterLocation, distance, animalSearch }
             }} 
             className={classnames(forms.btn)}
           >
