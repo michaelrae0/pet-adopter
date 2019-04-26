@@ -1,0 +1,84 @@
+// Layout components
+.section {
+  -moz-box-shadow: 0 0 7px #ccc;
+  -webkit-box-shadow: 0 0 7px #ccc;
+  box-shadow: 0 6px 7px -7px gray;
+  background-color: rgb(49, 48, 48);
+}
+
+.row {
+  justify-content: center;
+}
+
+// Carousel
+.carousel {
+  position: relative;
+  height: 600px;
+  max-width: 1000px;
+  text-align: center;
+}
+.image {
+  height: 100%;
+}
+.btn {
+  position: absolute;
+  top:0;
+
+  display: inline-block;
+  height: 100%;
+  width: 120px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__back {
+    left: 0;
+  }
+
+  &__next {
+    right: 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+    .arrow_container {
+      background-color: rgba(140, 140, 140, 0.4);
+    }
+    .arrow {
+      opacity: 1;
+    }
+  }
+}
+
+// SVGs
+$circle-diameter: 110px;
+$arrow-height: 75px;
+$arrow-width: 90px;
+.arrow_container, .arrow {
+  transition: all 0.25s ease-in-out;
+}
+
+.arrow_container {
+  background-color: rgba(120, 120, 120, 0.1);
+  height: $circle-diameter;
+  width: $circle-diameter;
+  border-radius: $circle-diameter / 2;
+
+}
+.arrow {
+  width: $arrow-width;
+  height: $arrow-height;
+  opacity: 0.5;
+
+  &_back {
+    transform: rotate(180deg);
+    margin: ($circle-diameter - $arrow-height)/2 ($circle-diameter - $arrow-width)/2 0 0;
+  }
+  &_next {
+    margin: ($circle-diameter - $arrow-height)/2 0 0 ($circle-diameter - $arrow-width)/2;
+  }
+  path {
+    stroke: rgb(50,50,50)
+  }
+}
