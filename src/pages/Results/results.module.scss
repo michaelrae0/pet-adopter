@@ -1,11 +1,49 @@
 @import '../../styles/definitions/breakpoints';
+@import '../../styles/definitions/colors';
 
 .section {
   padding: 6rem 0;
 }
 
-.row {
+.thumbnail_row {
   @media (#{$max-tablets}) {
     justify-content: center;
   }
+}
+
+.pagination_row {
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+$arrow-factor: 60px;
+
+.arrows { // 100w x 83.7h
+  width: $arrow-factor;
+  height: 0.837 * $arrow-factor;
+
+  &:hover {
+    path {
+      stroke: $primary;
+    }
+  }
+
+  &__back {
+    transform: rotate(180deg)
+  }
+  &__inactive {
+    path {
+      stroke: #e0e0e0;
+    }
+    &:hover {
+      path {
+        stroke: #e0e0e0;
+      }
+    }
+  }
+}
+.page_number {
+  display: flex;
+  align-items: center;
+  margin: 0 3rem;
 }

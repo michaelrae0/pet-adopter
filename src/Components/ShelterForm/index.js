@@ -36,7 +36,7 @@ class ShelterForm extends React.Component {
         <div className={classnames(forms.outer_div_btn)}>
           <Link
             to={{
-              pathname: "/shelters",
+              pathname: `/s/shelters/${1}`,
               state: { shelterLocation, distance, animalSearch }
             }} 
             className={classnames(forms.btn)}
