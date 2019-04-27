@@ -1,31 +1,55 @@
 @import '../../styles/definitions/breakpoints';
+@import '../../styles/definitions/colors';
+@import "../../styles/definitions/keyframes";
+
+$header-height-mobile: 60px;
+$header-height: 100px;
 
 $header-gutter: 24px;
 $gutter-desktop: 32px;
 
 // layout components
-.section {
-  border-bottom: 1px rgba(0,0,0,.0975) solid;
-  background-color: white;
+.site__header {
+  z-index: 100;
+  background-color: $white;
   padding: 0 $header-gutter;
+  height: $header-height-mobile;
+
+  &.state_fixed {
+    animation: fade_in_bottom 0.15s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    position:fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 3px 3px 1rem rgba(0,0,0, 0.15);
+  }
 
   @media (#{$min-tablets}) {
     padding: 0 $gutter-desktop;
+    height: $header-height;
   }
+}
+.container {
+  height: 100%;
 }
 .row {
   justify-content: space-between;
   align-items:center;
 
-  height: 80px;
   margin: 0 auto;
+  height: 100%;
 }
 
 // home image
+$image-diameter-mobile: 40px;
 $image-diameter: 60px;
-.image {
-  height: $image-diameter;
-  border-radius: $image-diameter / 2;
+.logo {
+  height: $image-diameter-mobile;
+  border-radius: $image-diameter-mobile / 2;
+
+  @media (#{$min-tablets}) {
+    height: $image-diameter;
+    border-radius: $image-diameter / 2;
+  }
 }
 
 // links

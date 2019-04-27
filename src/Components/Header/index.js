@@ -11,14 +11,40 @@ export default class Header extends React.Component {
     super(props);
 
     this.state = {
-      redirect: false
+      redirect: false,
+      isNavFixed: false,
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.fixSiteHeader);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.fixSiteHeader);
+  }
+
+  fixSiteHeader = () => {
+    const siteHeader = document.querySelector(`.${header.site__header}`);
+    if (window.scrollY >= siteHeader.offsetHeight) { // window y >= header height
+      document.body.style.paddingTop = siteHeader.offsetHeight + 'px';
+      siteHeader.classList.add(header.state_fixed);
+      this.setState({
+        isNavFixed: true,
+      });
+    } else {
+      siteHeader.classList.remove(header.state_fixed);
+      document.body.style.paddingTop = 0;
+      this.setState({
+        isNavFixed: false,
+      })
     }
   }
   
   render() {
     return (
-      <section className={header.section}>
-        <Container>
+      <section className={header.site__header}>
+        <Container className={header.container}>
           <Row className={header.row}>
             <Link to='/'>
               <div
@@ -28,7 +54,7 @@ export default class Header extends React.Component {
                 <img 
                   src='http://placekitten.com/60/60' 
                   alt='' 
-                  className={header.image}
+                  className={header.logo}
                 />
               </div>
             </Link>
