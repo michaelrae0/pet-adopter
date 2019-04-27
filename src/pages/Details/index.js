@@ -29,7 +29,7 @@ class Details extends React.Component {
     }
 
     // Choose b/t animal and org details
-    if (searchType === 'animal') {
+    if (searchType === 'animals') {
       api.animal(params)
         .then( ({data}) => {
           console.log(data.animal)
@@ -39,7 +39,7 @@ class Details extends React.Component {
           })
         })
     }
-    if (searchType === 'organization') {
+    if (searchType === 'shelters') {
       api.org(params)
         .then( ({data}) => {
           this.setState({
@@ -61,7 +61,7 @@ class Details extends React.Component {
         <section className={classnames(details.section)}>
           <Container restricted >
             <Row>
-              { searchType === 'animal' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
+              { searchType === 'animals' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
             </Row>
           </Container>
         </section>

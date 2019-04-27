@@ -1,0 +1,35 @@
+<svg
+  width="243.58267mm"
+  height="203.88644mm"
+  viewBox="0 0 243.58267 203.88644"
+  version="1.1"
+>
+  <g
+    id="layer1"
+    transform="translate(-67.586655,-31.40534)">
+    <path
+      fill='none'
+			stroke='#282828'
+			stroke-width='30'
+			stroke-linecap='butt'
+			stroke-linejoin='miter'
+			stroke-miterlimit='4'
+			stroke-dasharray='none'
+			stroke-opacity='1'
+			d="M 196.40501,224.45851 289.72302,132.85636 196.74088,42.142069"
+      id="path823"
+    />
+    <path
+      fill='none'
+			stroke='#282828'
+			stroke-width='30'
+			stroke-linecap='butt'
+			stroke-linejoin='miter'
+			stroke-miterlimit='4'
+			stroke-dasharray='none'
+			stroke-opacity='1'
+			d="M 78.094387,224.58722 171.41239,132.98507 78.430257,42.270778"
+      id="path823-2"
+    />
+  </g>
+</svg>
