@@ -1,15 +1,14 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import Container from '../../Components/Container'
-import Row from '../../Components/Row'
-import AnimalForm from '../../Components/AnimalForm/index'
-import ShelterForm from '../../Components/ShelterForm/index'
-
 import * as search from './search.module.scss'
 import api from '../../util/apiClient'
+import Container from '../../components/Container'
+import Row from '../../components/Row'
+import AnimalForm from '../../components/AnimalForm'
+import ShelterForm from '../../components/ShelterForm'
 
-class Search extends React.Component {
+export default class Search extends React.Component {
   constructor(props) {
     super(props);
 
@@ -56,8 +55,6 @@ class Search extends React.Component {
       distance,
     } = this.state
 
-    console.log(this.state.shelterLocation)
-
     return (
       <section className={search.section}>
         <Container>
@@ -98,5 +95,3 @@ class Search extends React.Component {
     )
   }
 }
-
-export default Search

@@ -6,17 +6,13 @@ import * as header from './header.module.scss'
 import Container from '../Container'
 import Row from '../Row'
 
-class Header extends React.Component {
+export default class Header extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       redirect: false
     }
-  }
-  
-  handleOnClick = () => {
-    this.setState({ redirect: true })
   }
   
   render() {
@@ -27,7 +23,7 @@ class Header extends React.Component {
             <Link to='/'>
               <div
                 className={classnames(header.image_container)}
-                onClick={this.handleOnClick}
+                onClick={() => this.setState({ redirect: true })}
               >
                 <img 
                   src='http://placekitten.com/60/60' 
@@ -45,8 +41,6 @@ class Header extends React.Component {
           </Row>
         </Container>
       </section>
-      )
+    )
   }
 }
-
-export default Header;

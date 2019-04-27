@@ -18,21 +18,21 @@ const Thumbnail = ({ image, title, subtitles, id, category }) => {
   const backgroundImage = `url(${filterImages(image)})`
 
   return (
-      <div className={classnames(thumbnail.container, thumbnail.col3)} >
-        <Link to={`/details/${category}/${id}`} >        
-          <div className={classnames(thumbnail.image_cont, 'background_image')} style={{ backgroundImage }} />
-          <div className={thumbnail.text_cont}>
-            <p className={classnames(thumbnail.header)}>{maxLen(title, 21)}</p>
-            {subtitles.map( line => {
-              return (
-                <p className={classnames(thumbnail.body_line)} key={String(id) + line.slice(0, 3)} >
-                  {maxLen(line, 25)}
-                </p> 
-              )
-            })}
-          </div>
-        </Link>
-      </div>
+    <div className={classnames(thumbnail.container, thumbnail.col3)} >
+      <Link to={`/details/${category}/${id}`} >        
+        <div className={classnames(thumbnail.image_cont, 'background_image')} style={{ backgroundImage }} />
+        <div className={thumbnail.text_cont}>
+          <p className={classnames(thumbnail.header)}>{maxLen(title, 21)}</p>
+          {subtitles.map( line => {
+            return (
+              <p className={classnames(thumbnail.body_line)} key={String(id) + line.slice(0, 3)} >
+                {maxLen(line, 25)}
+              </p> 
+            )
+          })}
+        </div>
+      </Link>
+    </div>
   )
 }
 

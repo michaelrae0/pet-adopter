@@ -1,17 +1,16 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import Container from '../../Components/Container'
-import Row from '../../Components/Row'
-import Loading from '../../Components/Loading/index'
-import Carousel from '../../Components/Carousel/index'
-import AnimalDetails from '../../Components/AnimalDetails/index'
-import ShelterDetails from '../../Components/ShelterDetails/index'
-
-import api from '../../util/apiClient'
 import * as details from './details.module.scss'
+import api from '../../util/apiClient'
+import Container from '../../components/Container'
+import Row from '../../components/Row'
+import Loading from '../../components/Loading'
+import Carousel from '../../components/Carousel'
+import AnimalDetails from '../../components/AnimalDetails'
+import ShelterDetails from '../../components/ShelterDetails'
 
-class Details extends React.Component {
+export default class Details extends React.Component {
   constructor(props) {
     super(props);
 
@@ -24,9 +23,7 @@ class Details extends React.Component {
   componentDidMount() {
     const { id, searchType } = this.props.match.params;
 
-    const params = {
-      id,
-    }
+    const params = { id };
 
     // Choose b/t animal and org details
     if (searchType === 'animals') {
@@ -54,7 +51,8 @@ class Details extends React.Component {
     const { info, isLoading } = this.state ;
     const { searchType } = this.props.match.params;
 
-    if (isLoading) return <Loading/>
+    if (isLoading) return <Loading/>;
+
     return (
       <div>
         <Carousel photos={info.photos} />
@@ -69,5 +67,3 @@ class Details extends React.Component {
     )
   }
 }
-
-export default Details;

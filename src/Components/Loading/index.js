@@ -1,10 +1,9 @@
 import React from 'react'
-import classnames from 'classnames'
 
 import * as loading from './loading.module.scss'
 import Row from '../Row'
 
-class Loading extends React.Component {
+export default class Loading extends React.Component {
   constructor(props) {
     super(props);
 
@@ -34,5 +33,3 @@ class Loading extends React.Component {
     )
   }
 }
-
-export default Loading

@@ -1,13 +1,12 @@
 import React from 'react'
 import classnames from 'classnames'
-// import InlineSVG from 'svg-inline-react'
 
 import * as cara from './carousel.module.scss'
 import Container from '../Container'
 import Row from '../Row'
 import { ReactComponent as ArrowSVG } from '../../images/Arrow.svg'
 
-class Carousel extends React.Component {
+export default class Carousel extends React.Component {
   constructor(props) {
     super(props);
 
@@ -67,7 +66,6 @@ class Carousel extends React.Component {
   
   render() {
     const { fullSizedPhotos, currentIndex, backAvailable, nextAvailable } = this.state;
-    console.log(fullSizedPhotos)
 
     // Navigation buttons won't render if currentIndex is 0 or length-1
     return (
@@ -95,5 +93,3 @@ class Carousel extends React.Component {
     )
   }
 }
-
-export default Carousel;

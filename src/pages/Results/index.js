@@ -4,16 +4,16 @@ import classnames from 'classnames'
 
 import * as results from './results.module.scss'
 import api from '../../util/apiClient.js'
-import Container from '../../Components/Container'
-import Row from '../../Components/Row'
-import Loading from '../../Components/Loading'
-import Thumbnail from '../../Components/Thumbnail'
-import { H2 } from '../../Components/Typography'
+import Container from '../../components/Container'
+import Row from '../../components/Row'
+import Loading from '../../components/Loading'
+import Thumbnail from '../../components/Thumbnail'
+import { H2 } from '../../components/Typography'
 import { ReactComponent as DoubleArrowsSVG } from '../../images/DoubleArrows.svg'
 
 
 
-class Results extends React.Component {
+export default class Results extends React.Component {
   constructor(props) {
     super(props);
 
@@ -47,12 +47,14 @@ class Results extends React.Component {
       }
     }
     else locationState = this.props.location.state;
+
     const { type, breed, location, distance } = locationState;
     const { category, page } = this.props.match.params;
     
     let params = {};
     params['page'] = page;
 
+    // Animals
     if (category === 'animals') {
       params['type'] = type ? type : ''
       params['breed'] = breed ? breed : ''
@@ -61,7 +63,6 @@ class Results extends React.Component {
       // Calls api for animal info
       api.animals(params)
         .then( ({ data }) => {
-          console.log(data.animals)
           this.setState({
             isLoading: false,
             animals: data.animals,
@@ -70,6 +71,7 @@ class Results extends React.Component {
         })
         .catch( e => console.log(e) );
     }
+    // Shelters
     else {
       if (location) {
         params['location'] = location
@@ -79,7 +81,6 @@ class Results extends React.Component {
       // Calls api for org info
       api.orgs(params)
         .then( ({ data }) => {
-          console.log(data)
           this.setState({
             isLoading: false,
             orgs: data.organizations,
@@ -96,7 +97,6 @@ class Results extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     const { animals, orgs, pagination } = this.state;
     const { ...locationState } = this.props.location.state;
     const { category } = this.props.match.params;
@@ -112,12 +112,12 @@ class Results extends React.Component {
               const subtitles = [animal.breeds.primary, `${animal.contact.address.city}, ${animal.contact.address.state}`];
               return (
                 <Thumbnail
+                  category={category}
                   title={animal.name}
                   subtitles={subtitles}
                   image={animal.photos[0]}
                   id={animal.id}
                   key={animal.id}
-                  category={category}
                 />
               );
             })}
@@ -126,12 +126,12 @@ class Results extends React.Component {
               const subtitles = [`${org.address.city}, ${org.address.state}`];
               return (
                 <Thumbnail
+                  category={category}
                   title={org.name}
                   subtitles={subtitles}
                   image={org.photos[0]}
                   id={org.id}
                   key={org.id}
-                  category={category}
                 />
               );
             })}
@@ -141,7 +141,7 @@ class Results extends React.Component {
             {pagination.current_page > 1 && 
             <Link 
               to={{
-                pathname: `/s/${category}/${+pagination.current_page-1}`,
+                pathname: `/s/${category}/${+pagination.current_page - 1}`,
                 state: {...locationState}
               }}
             >
@@ -158,7 +158,7 @@ class Results extends React.Component {
 
             <Link 
               to={{
-                pathname: `/s/${category}/${+pagination.current_page+1}`,
+                pathname: `/s/${category}/${+pagination.current_page + 1}`,
                 state: { ...locationState },
               }}
               replace
@@ -172,5 +172,3 @@ class Results extends React.Component {
     );
   }
 }
-
-export default Results;

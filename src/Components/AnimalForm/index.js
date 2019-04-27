@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 import * as forms from '../../pages/Search/forms.module.scss'
 
-class AnimalForm extends React.Component {
+export default class AnimalForm extends React.Component {
   render() {
     const { changeParentState, fetchBreeds, filters } = this.props;
     const { type, breed, breeds, animalLocation, animalSearch } = filters;
@@ -75,5 +75,3 @@ class AnimalForm extends React.Component {
     )
   }
 }
-
-export default AnimalForm;
