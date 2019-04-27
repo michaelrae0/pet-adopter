@@ -7,7 +7,7 @@ import * as thumbnail from './thumbnail.module.scss'
 const Thumbnail = ({ image, title, subtitles, id, category }) => {
   const filterImages = image => {
     if (image) return image.medium;
-    return 'http://placekitten.com/250/250'
+    return 'https://via.placeholder.com/300x250.png?text=Image+Unavailable'
   }
 
   const maxLen = (str, max) => {
