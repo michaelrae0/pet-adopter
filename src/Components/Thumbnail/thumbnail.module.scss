@@ -7,7 +7,7 @@ $gutter-desktop: 32px;
   -moz-box-shadow: 0 0 7px #ccc;
   -webkit-box-shadow: 0 0 7px #ccc;
   box-shadow: 0 0 7px #aaa;
-  margin: 2rem $thumbnail-gutter ;
+  margin: 2rem $thumbnail-gutter;
 
   &:hover {
     background-color: #eee;
@@ -49,4 +49,8 @@ $gutter-desktop: 32px;
   @media (min-width: 1300px) {
     width: calc(25% - (#{$gutter-desktop} * 2))
   }
+}
+
+a {
+  text-decoration: none;
 }
