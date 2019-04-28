@@ -56,13 +56,7 @@ export default class Details extends React.Component {
     return (
       <div>
         <Carousel photos={info.photos} />
-        <section className={classnames(details.section)}>
-          <Container restricted >
-            <Row>
-              { searchType === 'animals' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
-            </Row>
-          </Container>
-        </section>
+        { searchType === 'animals' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
       </div>
     )
   }
