@@ -42,14 +42,25 @@ $gutter-desktop: 32px;
 // home image
 $image-diameter-mobile: 40px;
 $image-diameter: 60px;
-.logo {
+.box__left {
+  display: flex;
   height: $image-diameter-mobile;
   border-radius: $image-diameter-mobile / 2;
+  align-items: center;
 
   @media (#{$min-tablets}) {
     height: $image-diameter;
     border-radius: $image-diameter / 2;
   }
+}
+
+.logo {
+  height: $image-diameter;
+  margin-left: -9px;
+  margin-right: 0.5rem;
+}
+.site_name {
+  display: inline-block;
 }
 
 // links

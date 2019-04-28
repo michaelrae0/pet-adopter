@@ -5,6 +5,8 @@ import classnames from 'classnames'
 import * as header from './header.module.scss'
 import Container from '../Container'
 import Row from '../Row'
+import logo from '../../images/paw-icon.png'
+import { H2 } from '../Typography'
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -42,23 +44,25 @@ export default class Header extends React.Component {
   }
   
   render() {
+    console.log(logo)
     return (
       <section className={header.site__header}>
         <Container className={header.container}>
           <Row className={header.row}>
             <Link to='/'>
               <div
-                className={classnames(header.image_container)}
+                className={classnames(header.box__left)}
                 onClick={() => this.setState({ redirect: true })}
               >
                 <img 
-                  src='http://placekitten.com/60/60' 
+                  src={logo} 
                   alt='' 
                   className={header.logo}
                 />
+                <H2 text={`Adopt a Pet`} className={header.site_name} />
               </div>
             </Link>
-            <div className={header.categories}>
+            <div className={header.box__right}>
               <h2 className={header.link} >All</h2>
               <h2 className={header.link} >Dogs</h2>
               <h2 className={header.link} >Cats</h2>
