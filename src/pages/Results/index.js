@@ -115,7 +115,7 @@ export default class Results extends React.Component {
                   category={category}
                   title={animal.name}
                   subtitles={subtitles}
-                  image={animal.photos[0]}
+                  images={animal.photos}
                   id={animal.id}
                   key={animal.id}
                 />
@@ -129,7 +129,7 @@ export default class Results extends React.Component {
                   category={category}
                   title={org.name}
                   subtitles={subtitles}
-                  image={org.photos[0]}
+                  images={org.photos}
                   id={org.id}
                   key={org.id}
                 />
