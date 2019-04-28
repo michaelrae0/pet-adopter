@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
 import * as thumbnail from './thumbnail.module.scss'
+import { H1, H2, H3, H4, H5 , H6, SectionBody } from '../Typography'
 
 class Thumbnail extends React.Component {
   constructor(props) {
@@ -11,7 +12,6 @@ class Thumbnail extends React.Component {
     this.state= {
       currentIndex: 0,
       prepareImage: false,
-      isMouseOver: false,
     }
   }
   filterImages = image => {
@@ -41,19 +41,16 @@ class Thumbnail extends React.Component {
   }
 
   handleMouseEnter = () => {
-    // if (this.state.isMouseOver) return;
     this.setState({
       prepareImages: true,
-      isMouseOver: true,
     })
-    this.intervalId = setInterval(this.changeImage, 2700);
+    this.intervalId = setInterval(this.changeImage, 1700);
   }
   handleMouseLeave = () => {
     clearInterval(this.intervalId)
     this.setState({
       currentIndex: 0,
-      prepareImage: false,
-      isMouseOver: false,
+      prepareImages: false,
     })
   }
 
@@ -62,10 +59,9 @@ class Thumbnail extends React.Component {
     const { currentIndex } = this.state;
 
     const backgroundImage = `url(${this.filterImages(images[currentIndex])})`;
-    // console.log(images)
 
     return (
-      <div className={classnames(thumbnail.container, thumbnail.col3)} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} >
+      <div className={classnames(thumbnail.component, thumbnail.col3)} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} >
         <Link to={`/details/${category}/${id}`} >        
           <div className={thumbnail.image_container}>
             <div className={classnames(thumbnail.image, {[thumbnail.image__active]: !currentIndex}, 'background_image')} style={{ backgroundImage }} />
@@ -84,12 +80,13 @@ class Thumbnail extends React.Component {
           </div>
 
           <div className={thumbnail.text_cont}>
-            <p className={classnames(thumbnail.header)}>{this.maxLen(title, 21)}</p>
+            <H2 className={classnames(thumbnail.title)} text={this.maxLen(title, 21)} />
             {subtitles.map( line => {
               return (
-                <p className={classnames(thumbnail.body_line)} key={String(id) + line.slice(0, 3)} >
-                  {this.maxLen(line, 25)}
-                </p> 
+                <H4 
+                  className={classnames(thumbnail.subtitle)} key={String(id) + line.slice(0, 3)}
+                  text={this.maxLen(line, 25)}
+                />
               )
             })}
           </div>

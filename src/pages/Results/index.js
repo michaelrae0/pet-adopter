@@ -51,8 +51,10 @@ export default class Results extends React.Component {
     const { type, breed, location, distance } = locationState;
     const { category, page } = this.props.match.params;
     
-    let params = {};
-    params['page'] = page;
+    let params = {
+      limit: 16,
+      page,
+    };
 
     // Animals
     if (category === 'animals') {
@@ -105,36 +107,38 @@ export default class Results extends React.Component {
 
     return (
       <section className={results.section}>
-        <Container>
-          <Row className={results.thumbnail_row} wrap>
-            {category === 'animals' && 
-            animals.map( animal => {
-              const subtitles = [animal.breeds.primary, `${animal.contact.address.city}, ${animal.contact.address.state}`];
-              return (
-                <Thumbnail
-                  category={category}
-                  title={animal.name}
-                  subtitles={subtitles}
-                  images={animal.photos}
-                  id={animal.id}
-                  key={animal.id}
-                />
-              );
-            })}
-            {category === 'shelters' && 
-            orgs.map( org => {
-              const subtitles = [`${org.address.city}, ${org.address.state}`];
-              return (
-                <Thumbnail
-                  category={category}
-                  title={org.name}
-                  subtitles={subtitles}
-                  images={org.photos}
-                  id={org.id}
-                  key={org.id}
-                />
-              );
-            })}
+        <Container className={results.container}>
+          <Row className={results.thumbnail_row} >
+            <div className={results.grid}>
+              {category === 'animals' && 
+              animals.map( animal => {
+                const subtitles = [animal.breeds.primary, `${animal.contact.address.city}, ${animal.contact.address.state}`];
+                return (
+                  <Thumbnail
+                    category={category}
+                    title={animal.name}
+                    subtitles={subtitles}
+                    images={animal.photos}
+                    id={animal.id}
+                    key={animal.id}
+                  />
+                );
+              })}
+              {category === 'shelters' && 
+              orgs.map( org => {
+                const subtitles = [`${org.address.city}, ${org.address.state}`];
+                return (
+                  <Thumbnail
+                    category={category}
+                    title={org.name}
+                    subtitles={subtitles}
+                    images={org.photos}
+                    id={org.id}
+                    key={org.id}
+                  />
+                );
+              })}
+            </div>
           </Row>
           <Row className={results.pagination_row}>
 

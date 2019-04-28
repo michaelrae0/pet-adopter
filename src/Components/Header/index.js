@@ -56,7 +56,7 @@ export default class Header extends React.Component {
               >
                 <img 
                   src={logo} 
-                  alt='' 
+                  alt='logo' 
                   className={header.logo}
                 />
                 <H2 text={`Adopt a Pet`} className={header.site_name} />
