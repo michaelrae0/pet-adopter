@@ -92,10 +92,14 @@ export default class Results extends React.Component {
         .catch( e => console.log(e) )
     }
   }
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.id ===this.props.id) {
 
-    }
+  // [...Array(8).keys] => [0, 1, 2, 3, 4, 5, 6, 7]; keys iterates over array and returns indexes
+  generatePages = (startAt = 5, endAt = 100) => {
+    const maxAdjacentPages = 4;
+    const leadingPages = Math.min(startAt - 1, maxAdjacentPages);
+    const trailingPages = Math.min(endAt - startAt, maxAdjacentPages);
+
+    return [...Array(1 + leadingPages + trailingPages).keys()].map(i => i + startAt - leadingPages)
   }
 
   render() {
@@ -141,33 +145,34 @@ export default class Results extends React.Component {
             </div>
           </Row>
           <Row className={results.pagination_row}>
-
-            {pagination.current_page > 1 && 
-            <Link 
-              to={{
-                pathname: `/s/${category}/${+pagination.current_page - 1}`,
-                state: {...locationState}
-              }}
-            >
-              <DoubleArrowsSVG className={classnames(results.arrows, results.arrows__back)} />
-            </Link>
-            }
-            {pagination.current_page === 1 &&
-            <DoubleArrowsSVG className={classnames(results.arrows, results.arrows__back, results.arrows__inactive)} />
-            }
-
-            <div className={results.page_number} >
-              <H2 text={`${pagination.current_page} of ${pagination.total_pages}`} />
+            
+            <div className={results.pages} >
+              {this.generatePages(pagination.current_page, Math.min(pagination.total_pages, 10000)).map( i => {
+                return (
+                  <Link
+                    className={classnames(results.page_number, {[results.page_number__active]: i === pagination.current_page})}
+                    to={{
+                      pathname: `/s/${category}/${i}`,
+                      state: {...locationState}   
+                    }}
+                  >
+                    <H2 
+                      
+                      text={i}
+                    />
+                  </Link>
+                )
+              })}
             </div>
-
-            <Link 
+            
+            <Link
+              className={results.next_btn}
               to={{
                 pathname: `/s/${category}/${+pagination.current_page + 1}`,
-                state: { ...locationState },
+                state: {...locationState}   
               }}
-              replace
             >
-              <DoubleArrowsSVG className={classnames(results.arrows, results.arrows__next)} />
+              <H2 text='Next' />
             </Link>
 
           </Row>
