@@ -3,7 +3,7 @@
 @import '../../components/Thumbnail/thumbnail.module.scss';
 
 .section {
-  padding: 4rem 0 6rem;
+  padding: 4rem 24px 2.8125rem;
 }
 
 .thumbnail_row {
@@ -30,7 +30,7 @@
 
 .pagination_row {
   justify-content: center;
-  margin-top: 4rem;
+  margin-top: 1rem;
 }
 
 $arrow-factor: 60px;
@@ -59,8 +59,40 @@ $arrow-factor: 60px;
     }
   }
 }
+
+.pages {
+  display: flex;
+  flex-direction: row;
+}
+
 .page_number {
   display: flex;
   align-items: center;
-  margin: 0 3rem;
+  margin-right: 2rem;
+  color: #d2d2d2;
+
+  &__active {
+    color: $primary;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+.next_btn {
+  // margin-top: 2rem;
+  margin-left: 2rem;
+  padding: 8px 16px;
+  border: 3px $primary solid;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: #f8f8f8;
+    color: $primary;
+  }
 }

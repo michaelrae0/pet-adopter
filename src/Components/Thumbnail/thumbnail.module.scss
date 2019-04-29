@@ -1,10 +1,10 @@
 @import '../../styles/definitions/breakpoints';
 @import '../../styles/definitions/colors';
 
-$thumbnail-gutter: 24px;
-$gutter-desktop: 1.2rem;
+$thumbnail-gutter: 0px;
+$gutter-desktop: 0.8rem;
 $thumbnail-width: 400px;
-$width-desktop: 225px;
+$width-desktop: 239px;
 
 .component {
   display: inline-block;
@@ -66,9 +66,9 @@ $width-desktop: 225px;
 
 .col3 {
   width: calc(100% - #{$thumbnail-gutter} * 2);
-  max-width: 400px;
+  max-width: $thumbnail-width;
 
   @media (#{$min-tablets}) {
-    width: 225px;
+    width: $width-desktop;
   }
 }
