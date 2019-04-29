@@ -1,9 +1,12 @@
+@import '../../styles/definitions/breakpoints';
+@import '../../styles/definitions/colors';
+
 // Layout components
 .section {
   -moz-box-shadow: 0 0 7px #ccc;
   -webkit-box-shadow: 0 0 7px #ccc;
   box-shadow: 0 6px 7px -7px gray;
-  background-color: rgb(49, 48, 48);
+  background-color: $metal;
 }
 
 .row {
@@ -81,4 +84,65 @@ $arrow-width: 90px;
   path {
     stroke: rgb(50,50,50)
   }
+}
+
+$preview-width: 180px;
+$preview-horizontal-margin: 0.15rem;
+$total-preview-width: calc(#{$preview-width} + 2 * #{$preview-horizontal-margin});
+@mixin preview-row-max-width($child-width, $n) {
+  max-width: calc(#{$child-width} * #{$n});
+}
+
+.preview_container {
+  display: flex;
+  justify-content: center;
+  background-color: $gray-dark;
+  width: 100%;
+
+}
+.preview_row {
+  @include preview-row-max-width($total-preview-width, 2);
+  justify-content: center;
+  overflow: hidden;
+
+  @media ($min-tablets) {
+    @include preview-row-max-width($total-preview-width, 5);
+  }
+}
+
+.previews {
+  display: flex;
+  flex-direction: row;
+  transition: all 0.35s ease-in-out;
+}
+
+.preview_image_container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 130px;
+  width: $preview-width;
+  margin: 0.3rem 0.15rem;
+  border: 1px rgba(190, 190, 190, 0.1) solid;
+
+  background-color: $gray-darker;
+  opacity: 0.3;
+  filter: grayscale(20%);
+  transition: all 0.2s;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  &__active {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+}
+
+.preview_image {
+  max-height: 100%;
+  max-width: 100%;
 }
