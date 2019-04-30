@@ -4,11 +4,13 @@ import classnames from 'classnames';
 
 import * as type from './typography.module.scss';
 
-export const H1 = ({id, className, text}) => (
+// Details main title
+export const H1 = ({id, className, text}) => ( 
   <h1 className={classnames(className, type.h1)} id={id}>{text}</h1>
 )
 
-export const H2 = ({id, className, text}) => (
+// Details subtitles
+export const H2 = ({id, className, text}) => ( 
   <h2 className={classnames(className, type.h2)} id={id}>{text}</h2>
 )
 
@@ -28,6 +30,7 @@ export const H6 = ({id, className, text, bold}) => (
   <h6 className={classnames(className, type.h6, {[type.bold]: bold})} id={id}>{text}</h6>
 )
 
-export const SectionBody = ({id, className, text}) => (
+// Details body text
+export const SectionBody = ({id, className, text}) => ( 
   <h3 className={classnames(className, type.sectionBody)} id={id}>{text}</h3>
 )

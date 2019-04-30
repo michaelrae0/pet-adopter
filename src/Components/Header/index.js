@@ -6,6 +6,7 @@ import * as header from './header.module.scss'
 import Container from '../Container'
 import Row from '../Row'
 import logo from '../../images/paw-icon.png'
+import SearchBar from '../SearchBar'
 import { H2 } from '../Typography'
 
 export default class Header extends React.Component {
@@ -61,11 +62,8 @@ export default class Header extends React.Component {
                 <H2 text={`Adopt a Pet`} className={header.site_name} />
               </div>
             </Link>
-            <div className={header.box__right}>
-              <h2 className={header.link} >All</h2>
-              <h2 className={header.link} >Dogs</h2>
-              <h2 className={header.link} >Cats</h2>
-              <h2 className={header.link} >Search</h2>
+            <div className={header.box__right }>
+              <SearchBar />
             </div>
           </Row>
         </Container>
