@@ -10,8 +10,10 @@ $width-desktop: 239px;
   display: inline-block;
   -moz-box-shadow: 0 0 4px #ccc;
   -webkit-box-shadow: 0 0 4px #ccc;
-  box-shadow: 0 0 4px #aaa;
-  margin: 2rem $thumbnail-gutter;
+  // box-shadow: 0 0 4px #aaa;
+  margin: 2rem 0 2rem $thumbnail-gutter;
+
+
 
   &:hover {
     background-color: #f8f8f8;
@@ -28,7 +30,20 @@ $width-desktop: 239px;
   }
 
   @media (#{$min-tablets}) {
-    margin: 2rem $gutter-desktop ;
+    margin: 2rem 0 2rem $gutter-desktop;
+
+    @media (max-width: 1100px) {
+      &:nth-child(3n-2) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  @media (min-width: 1100px) {
+
+    &:nth-child(4n-3) {
+      margin-left: 0;
+    }
   }
 }
 

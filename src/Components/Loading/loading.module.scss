@@ -1,11 +1,11 @@
 .container {
-  // background-color: pink;
-  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 80vh;
+}
 
-  span {
-    font-size: 22pt
-  }
+html {
+  overflow: -moz-scrollbars-vertical; 
+  overflow-y: scroll;
 }
