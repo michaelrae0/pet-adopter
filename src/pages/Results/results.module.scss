@@ -15,7 +15,8 @@
 }
 
 .grid {
-  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
   margin: 0 auto;
   @include calculateWidth($thumbnail-width, $thumbnail-gutter, 1);
 

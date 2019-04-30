@@ -85,7 +85,7 @@ class Thumbnail extends React.Component {
               return (
                 <H4 
                   className={classnames(thumbnail.subtitle)} key={String(id) + line.slice(0, 3)}
-                  text={this.maxLen(line, 25)}
+                  text={this.maxLen(line, 23)}
                 />
               )
             })}

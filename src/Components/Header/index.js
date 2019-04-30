@@ -44,7 +44,6 @@ export default class Header extends React.Component {
   }
   
   render() {
-    console.log(logo)
     return (
       <section className={header.site__header}>
         <Container className={header.container}>
