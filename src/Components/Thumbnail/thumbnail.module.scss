@@ -19,9 +19,9 @@ $width-desktop: 239px;
     background-color: #f8f8f8;
 
     .image {
-      background-position: calc(50% - 0.4rem) calc(50% - 0.4rem);
-      width: calc(100% + 0.8rem);
-      height: calc(100% + 0.8rem);
+      // background-position: calc(50% - 0.4rem) calc(50% - 0.4rem);
+      // width: calc(100% + 0.8rem);
+      // height: calc(100% + 0.8rem);
     }
 
     .title {
@@ -67,16 +67,28 @@ $width-desktop: 239px;
   }
 }
 
+@mixin visibleLines($line-height, $lines) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines; /* number of lines to show */
+  line-height: $line-height;        /* fallback */
+  max-height: #{$line-height * $lines};       /* fallback */
+}
 .text_cont {
   padding: 1rem 1.2rem;
 }
 .title {
-  font-weight: bold;
+  display: inline-block;
+  // font-weight: bold;
   margin-bottom: 0.5rem;
+
+  @include visibleLines(1.9rem, 1);
 }
 
 .subtitle {
-  padding-left: 0.4rem;
+  @include visibleLines(1.8rem, 1);
 }
 
 .col3 {

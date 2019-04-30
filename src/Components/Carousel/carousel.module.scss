@@ -100,7 +100,7 @@ $arrow-height: 60px;
 
 .arrow {
   height: $arrow-height;
-  opacity: 0.5;
+  opacity: 0.55;
 
   &_back {
     transform: rotate(180deg);
@@ -110,7 +110,7 @@ $arrow-height: 60px;
     margin: 0 0 0 0;
   }
   path {
-    stroke: #535353;
+    stroke: #393939;
     stroke-width: 25;
   }
 }
@@ -150,7 +150,7 @@ $total-preview-width: calc(#{$preview-width} + 2 * #{$preview-horizontal-margin}
   justify-content: center;
   align-items: center;
 
-  height: 130px;
+  height: 115px;
   width: $preview-width;
   margin: 0.3rem 0.15rem;
   border: 1px rgba(190, 190, 190, 0.1) solid;

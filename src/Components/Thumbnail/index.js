@@ -80,12 +80,12 @@ class Thumbnail extends React.Component {
           </div>
 
           <div className={thumbnail.text_cont}>
-            <H2 className={classnames(thumbnail.title)} text={this.maxLen(title, 21)} />
+            <H2 className={classnames(thumbnail.title)} text={title} />
             {subtitles.map( line => {
               return (
                 <H4 
                   className={classnames(thumbnail.subtitle)} key={String(id) + line.slice(0, 3)}
-                  text={this.maxLen(line, 23)}
+                  text={line}
                 />
               )
             })}
