@@ -13,7 +13,7 @@ export default class Carousel extends React.Component {
       caraPhotos: [],
       currentIndex: 0,
       backAvailable: false,
-      nextAvailable: false
+      nextAvailable: false,
     }
   }
   
@@ -30,66 +30,69 @@ export default class Carousel extends React.Component {
       caraPhotos = this.props.photos;
     }
 
-    this.setState({ caraPhotos });
-
-    this.arrowAvailability(0, caraPhotos);
+    this.setState({
+      caraPhotos,
+    });
   }
 
   componentDidMount() {
-    this.handlePreviewClick(0);
+    this.scrollCarousel(0);
   }
 
-  arrowAvailability = (index, photos) => {
+  updateArrowAvailability = (index, photos = this.state.caraPhotos) => {
     let back, next;
-
+    
     if (photos.length === 1 || photos.length === 0) {
       back = false;
       next = false;
     }
     else {
-      if (!index) back = false;
-      else        back = true;
-      if (index + 1 === photos.length) next = false;
-      else                             next = true;
+      if (index) back = true;
+      else       back = false;
+
+      if (index + 1 < photos.length) next = true;
+      else                           next = false;
     }
 
     this.setState({
       backAvailable: back,
       nextAvailable: next,
-      currentIndex: index,
     })
   }
 
-  handleOnClick = next => {
-    const { currentIndex, caraPhotos } = this.state;
+  handleArrowClick = isNext => {
+    const { currentIndex, backAvailable, nextAvailable } = this.state;
+    let newIndex = currentIndex;
 
-    if (next === false) {
-      this.arrowAvailability(currentIndex - 1, caraPhotos);
-    }
-    if (next === true) {
-      this.arrowAvailability(currentIndex + 1, caraPhotos);
-    }
+    if (!isNext && backAvailable) newIndex--;
+    else if (isNext && nextAvailable) newIndex++;  
+
+    this.scrollCarousel(newIndex);
   }
 
-  handlePreviewClick = (i, event = '') => {
-    if (event) event.preventDefault();
+  scrollCarousel = i => {
     const previews = document.querySelector(`.${cara.previews}`);
-    const offset = ((this.state.caraPhotos.length - 1) - (i * 2 )) ;
+    const offset = (this.state.caraPhotos.length - 1) - (i * 2 );
     const previewWidth = 180 + (16 * 0.15 * 2);
     const padding = offset * previewWidth;
 
-    if (padding >= 0) {
+    if (padding > 0) {
       previews.style.paddingLeft = padding + 'px';
       previews.style.paddingRight = 0 + 'px';
-    } else {
+    }
+    else if (padding === 0) {
+      previews.style.paddingLeft = previewWidth + 'px';
+      previews.style.paddingRight = previewWidth + 'px';
+    }
+    else {
       previews.style.paddingLeft = 0 + 'px';
       previews.style.paddingRight = -padding + 'px';
     }
 
-
     this.setState({
       currentIndex: i,
     })
+    this.updateArrowAvailability(i)
   }
   
   render() {
@@ -100,21 +103,16 @@ export default class Carousel extends React.Component {
         <Row className={cara.row}>
           <div className={cara.carousel}>
             <img src={caraPhotos[currentIndex].full} alt='' className={cara.image} />
-            {/* {backAvailable &&
-            <div className={classnames(cara.btn, cara.btn__back)} onClick={() => this.handleOnClick(false)} >
-              <div className={cara.arrow_container}>
-                <ArrowSVG className={classnames(cara.arrow, cara.arrow_back)} key={2} />
-              </div>
-            </div>}
-            {nextAvailable &&
-            <div className={classnames(cara.btn, cara.btn__next)} onClick={() => this.handleOnClick(true)} >
-              <div className={cara.arrow_container}>
-                <ArrowSVG className={classnames(cara.arrow, cara.arrow_next)} />
-              </div>
-            </div>} */}
           </div>
         </Row>
+
         <div className={cara.preview_container}>
+          <div
+            className={classnames(cara.arrow_container, cara.arrow_container_back, {[cara.arrow_container__active]: backAvailable})}
+            onClick={() => this.handleArrowClick(false)}
+          >
+            <ArrowSVG className={classnames(cara.arrow, cara.arrow_back)} key={2} />
+          </div>
           <Row className={cara.preview_row} noMargin>
             <div className={cara.previews} >
               {caraPhotos.map( (photo, i) => {
@@ -122,7 +120,7 @@ export default class Carousel extends React.Component {
                 return (
                   <div
                     className={classnames(cara.preview_image_container, {[cara.preview_image_container__active]: i === currentIndex})}
-                    onClick={e => this.handlePreviewClick(i, e)}
+                    onClick={() => this.scrollCarousel(i)}
                   >
                     <img src={photo.medium} alt='' className={cara.preview_image} />
                   </div>
@@ -130,6 +128,12 @@ export default class Carousel extends React.Component {
               })}
             </div>
           </Row>
+          <div 
+            className={classnames(cara.arrow_container, cara.arrow_container_next, {[cara.arrow_container__active]: nextAvailable})}
+            onClick={() => this.handleArrowClick(true)}
+          >
+            <ArrowSVG className={classnames(cara.arrow, cara.arrow_next)} key={2} />
+          </div>
         </div>
       </section>
     )
