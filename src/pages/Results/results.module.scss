@@ -11,7 +11,7 @@
 }
 
 @mixin calculateWidth($width, $margin, $n) {
-  width: calc(#{$width} * #{$n} + #{$margin} * 2*#{$n});
+  width: calc(#{$width} * #{$n} + #{$margin} * #{$n - 1});
 }
 
 .grid {
