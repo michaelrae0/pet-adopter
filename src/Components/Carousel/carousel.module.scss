@@ -7,6 +7,11 @@
   -webkit-box-shadow: 0 0 7px #ccc;
   box-shadow: 0 6px 7px -7px gray;
   background-color: $metal;
+
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
 }
 
 .row {
@@ -55,34 +60,58 @@
 }
 
 // SVGs
-$circle-diameter: 110px;
-$arrow-height: 75px;
-$arrow-width: 90px;
+$container-width: 90px;
+$arrow-height: 60px;
 .arrow_container, .arrow {
   transition: all 0.25s ease-in-out;
 }
 
 .arrow_container {
-  background-color: rgba(120, 120, 120, 0.1);
-  height: $circle-diameter;
-  width: $circle-diameter;
-  border-radius: $circle-diameter / 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $container-width;
 
+  &_back {
+    margin-right: 2rem;
+  }
+
+  &_next {
+    margin-left: 2rem;
+  }
+
+  &__active {
+    .arrow{
+      path {
+        stroke: #B3B3B3;
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      path {
+        stroke: $white;
+      }
+      .arrow {
+        opacity: 1;
+      }
+    }
+  }
 }
+
 .arrow {
-  width: $arrow-width;
   height: $arrow-height;
   opacity: 0.5;
 
   &_back {
     transform: rotate(180deg);
-    margin: ($circle-diameter - $arrow-height)/2 ($circle-diameter - $arrow-width)/2 0 0;
+    margin: 0 0 0 0;
   }
   &_next {
-    margin: ($circle-diameter - $arrow-height)/2 0 0 ($circle-diameter - $arrow-width)/2;
+    margin: 0 0 0 0;
   }
   path {
-    stroke: rgb(50,50,50)
+    stroke: #535353;
+    stroke-width: 25;
   }
 }
 
