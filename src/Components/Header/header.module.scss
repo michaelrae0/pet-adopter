@@ -3,7 +3,12 @@
 @import "../../styles/definitions/keyframes";
 
 $header-height-mobile: 60px;
-$header-height: 100px;
+$header-height: 90px;
+
+$image-diameter-mobile: 50px;
+$image-diameter: 60px;
+
+$search-icon-diameter: 40px;
 
 $header-gutter: 24px;
 $gutter-desktop: 32px;
@@ -21,6 +26,11 @@ $gutter-desktop: 32px;
     top: 0;
     width: 100%;
     box-shadow: 3px 3px 1rem rgba(0,0,0, 0.15);
+    height: $header-height-mobile;
+
+    .logo {
+      height: $image-diameter-mobile;
+    }
   }
 
   @media (#{$min-tablets}) {
@@ -42,8 +52,6 @@ $gutter-desktop: 32px;
 }
 
 // home image
-$image-diameter-mobile: 40px;
-$image-diameter: 60px;
 .box__left {
   display: flex;
   align-items: center;
@@ -57,20 +65,62 @@ $image-diameter: 60px;
 }
 
 .logo {
-  height: $image-diameter;
-  margin-left: -9px;
-  margin-right: 0.5rem;
+  height: $image-diameter-mobile;
+  margin: 0 0.5rem 0.5rem -0.5rem;
+  
+  @media (#{$min-tablets}) {
+    height: $image-diameter;
+    margin-bottom: 0.7rem;
+  }
 }
 
 .site_name {
   display: inline-block;
+  &:hover {
+    color: $secondary;
+  }
 }
 
-// links
-.link {
-  display: inline-block;
-  margin-right: 2rem;
-  &:last-of-type {
-    margin-right: 0;
+.box__right {
+  position: relative;
+
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */
+}
+
+.search_icon {
+  width: $search-icon-diameter;
+  height: $search-icon-diameter;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 3px #ccc;
+  }
+
+  @media (#{$min-tablets}) {
+    display: none;
+  }
+}
+
+.search_container {
+  display: none;
+  transition: all 0.25s;
+
+  &__active {
+    display: block;
+    position: absolute;
+    right: 5px;
+    bottom: -4rem;
+    z-index: 1000;
+    background-color: rgba(100,100,100,0.1);
+    padding: 0.4rem 0.6rem;
+    border-radius: 5px;
+    box-shadow: 0 0 6px rgba(100,100,100,0.1);
+  }
+
+  @media (#{$min-tablets}) {
+    display:block;
   }
 }
