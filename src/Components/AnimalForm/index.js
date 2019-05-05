@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
-import * as forms from '../../pages/Search/forms.module.scss'
+import * as forms from '../../pages/LandingPage/forms.module.scss'
 
 export default class AnimalForm extends React.Component {
   render() {

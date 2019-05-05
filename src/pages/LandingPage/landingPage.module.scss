@@ -1,4 +1,13 @@
+@import '../../styles/definitions/breakpoints';
+
 // In search component
+.section {
+  padding: 10rem $gutter 10rem;
+
+  @media (#{$min-tablets}) {
+    padding: 15rem $gutter-desktop;
+  }
+}
 .component {
   width: 700px;
   margin: 50px auto;

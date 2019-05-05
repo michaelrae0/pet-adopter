@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from "react-router-dom";
 
 import Header from './components/Header'
-import Search from './pages/Search'
+import LandingPage from './pages/LandingPage'
 import Results from './pages/Results'
 import Details from './pages/Details'
 
@@ -16,7 +16,7 @@ class App extends Component {
         <div className='home_container'>
           <Header />
           <div className='main'>
-            <Route exact path='/' component={Search} />
+            <Route exact path='/' component={LandingPage} />
             <Route path='/search/:type/:breed?/:page?' component={Results} />
             <Route path='/details/:searchType/:id' component={Details} />
           </div>
