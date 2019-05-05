@@ -1,5 +1,12 @@
 @import '../../styles/definitions/colors';
 
+$btn-width: 110px;
+$full-height: 55px;
+
+.component {
+  width: 100%;
+}
+
 .input {
   padding: 0.5rem 0.7rem;
   font-size: 1.2rem;
@@ -9,4 +16,37 @@
   // border-right: none;
   // border-top: none;
   outline: none;
+
+
+  &__full_sized {
+    float:left;
+    width: calc(100% - #{$btn-width});
+    height: $full-height;
+    margin: 0;
+    padding-left: 1rem;
+
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.submit_btn {
+  float: left;
+  width: $btn-width;
+  height:$full-height;
+  background-color: #08A6FF;
+  border: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+
+  color: $white;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #22afff;
+  }
 }

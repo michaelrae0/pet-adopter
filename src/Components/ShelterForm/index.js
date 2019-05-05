@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
-import * as forms from '../../pages/Search/forms.module.scss'
+import * as forms from '../../pages/Home/forms.module.scss'
 
 const ShelterForm = ({ changeParentState, filters }) => {
   const { shelterLocation, distance, animalSearch } = filters;

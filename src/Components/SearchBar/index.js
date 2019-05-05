@@ -1,4 +1,5 @@
 import React from 'react'
+import classnames from 'classnames'
 
 import * as bar from './searchBar.module.scss'
 import breedsTrie from '../../utils/breedsTrie'
@@ -17,7 +18,6 @@ export default class SearchBar extends React.Component {
 
   handleChange = e => {
     const trieResults = breedsTrie.startsWith(e.target.value);
-    console.log(trieResults)
 
     // flattens breeds of multiple types (ex. Abyssian - cat and bird)
     let flattenedResults = [];
@@ -36,22 +36,12 @@ export default class SearchBar extends React.Component {
         })
       }
     })
-    console.log(flattenedResults)
 
     this.setState({
       searchValue: e.target.value,
       suggestions: flattenedResults.slice(0, 10),
+      selectedNode: flattenedResults.length === 1 ? flattenedResults[0] : {},
     });
-
-    if ( flattenedResults.length === 1) {
-      this.setState({
-        selectedNode: flattenedResults[0],
-      })
-    } else {
-      this.setState({
-        selectedNode: {},
-      })
-    }
   }
 
   handleSubmit = (e, value, node) => {
@@ -81,17 +71,23 @@ export default class SearchBar extends React.Component {
 
   render() {
     const { searchValue, suggestions, selectedNode } = this.state;
+    const { isFullSized } = this.props;
     const startPattern = toTitleCase(searchValue);
 
+    const datalistId = isFullSized ? 'breeds_home' : 'breeds_header'
+
     return (
-      <form onSubmit={e => this.handleSubmit(e, searchValue, selectedNode)} autoComplete="off">
+      <form 
+        className={bar.component}
+        onSubmit={e => this.handleSubmit(e, searchValue, selectedNode)} 
+        autoComplete="off">
         <input
-          type='text' list='breeds' placeholder='Search' name='t' id='t'
-          className={bar.input}
+          type='text' list={datalistId} placeholder='Search' name='t' id='t'
+          className={classnames(bar.input, {[bar.input__full_sized]: isFullSized})}
           onChange={e => this.handleChange(e)}
           pattern={`^[${startPattern}].*`}
         />
-        <datalist id='breeds'>
+        <datalist id={datalistId}>
           {/* Animal Types */}
           {[
             'All',
@@ -111,6 +107,12 @@ export default class SearchBar extends React.Component {
             <option key={i} >{elem.breed}</option>
           ))}
         </datalist>
+        {isFullSized &&
+        <input
+          type='submit' value='Submit'
+          className={classnames(bar.submit_btn)}
+        />
+        }
       </form>
     )
   }
