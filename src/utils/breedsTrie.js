@@ -1,4 +1,5 @@
 import allBreeds from './breeds'
+import { toTitleCase } from './strings'
 
 class Node {
   constructor(value = '') {
@@ -9,7 +10,7 @@ class Node {
   }
 
 
-  put(name, type) {
+  put(name, type = null) {
     function processRemainder(child, str) {
       if (str.length) child.put(str, type);
       else {
@@ -98,21 +99,26 @@ class Node {
 }
 // ------------------------------------
 
+let typesTrie = new Node();
+['All','Dogs', 'Cats', 'Birds', 'Rabbits', 'Small & Furries', 'Fish & Reptiles', 'Horses', 'Barnyard','Shelters']
+  .forEach( elem => typesTrie.put(elem) )
 
-// const testArr = ['car', 'array', 'string', 'arr', 'airplane', 'arrow', 'cat', 'calf', 'calves', 'balloon', 'arrrrrrr', 'ar']
+let breedsTrie = new Node();
+allBreeds.forEach( elem => breedsTrie.put(elem.breed, elem.type) )
 
-let trie = new Node();
-allBreeds.forEach( elem => trie.put(elem.breed, elem.type) )
+
+const typesTrieClient = {
+  startsWith(str) {
+    const titleCasedStr = toTitleCase(str);
+    return typesTrie.getChildrenOf(titleCasedStr);
+  },
+}
 
 const breedsTrieClient = {
   startsWith(str) {
-    const titleCasedStr = 
-      str.toLowerCase()
-      .split(' ')
-      .map( elem => elem.charAt(0).toUpperCase() + elem.slice(1))
-      .join(' ');
-    return trie.getChildrenOf(titleCasedStr);
-  }
+    const titleCasedStr = toTitleCase(str);
+    return breedsTrie.getChildrenOf(titleCasedStr);
+  },
 }
 
-export default breedsTrieClient
+export { breedsTrieClient, typesTrieClient}

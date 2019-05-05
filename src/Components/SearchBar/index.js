@@ -2,7 +2,8 @@ import React from 'react'
 import classnames from 'classnames'
 
 import * as bar from './searchBar.module.scss'
-import breedsTrie from '../../utils/breedsTrie'
+import { H1, H2, H3, H4, H5, H6, SectionBody } from '../Typography'
+import { breedsTrieClient, typesTrieClient } from '../../utils/breedsTrie'
 import { toTitleCase, encodeURI } from '../../utils/strings'
 
 export default class SearchBar extends React.Component {
@@ -11,58 +12,84 @@ export default class SearchBar extends React.Component {
 
     this.state = {
       searchValue: '',
-      suggestions: [],
-      selectedNode: {},
+      breedSuggestions: [],
+      typeSuggestions: [],
+      selectedBreed: {},
+      isBarActive: false,
     }
   }
 
-  handleChange = e => {
-    const trieResults = breedsTrie.startsWith(e.target.value);
+  componentDidMount() {
+    window.addEventListener('click', e => this.setState({ isBarActive: false }));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('click', e => this.setState({ isBarActive: false }));
+  }
+
+  trieRequest = (str, client) => {
+    const trieResults = client.startsWith(str);
 
     // flattens breeds of multiple types (ex. Abyssian - cat and bird)
-    let flattenedResults = [];
+    let flatBreeds = [];
     trieResults.forEach( elem => {
       if (elem.types.length > 1) {
         elem.types.forEach( type => {
-          flattenedResults.push({
+          flatBreeds.push({
             breed: `${elem.breed} (${type})`,
             type: type,
           })
         })
       } else {
-        flattenedResults.push({
+        flatBreeds.push({
           breed: elem.breed,
           type: elem.types[0],
         })
       }
     })
 
+    return flatBreeds;
+  }
+
+  handleChange = e => {
+    const flatTypes = this.trieRequest(e.target.value, typesTrieClient)
+    const flatBreeds = this.trieRequest(e.target.value, breedsTrieClient)
+
     this.setState({
       searchValue: e.target.value,
-      suggestions: flattenedResults.slice(0, 10),
-      selectedNode: flattenedResults.length === 1 ? flattenedResults[0] : {},
+      typeSuggestions: flatTypes,
+      breedSuggestions: flatBreeds.slice(0, 7),
+      selectedBreed: flatBreeds.length === 1 ? flatBreeds[0] : {},
     });
   }
 
-  handleSubmit = (e, value, node) => {
-    let location = '/search'
-    let breed = '';
-    let type = '';
+  handleBarClick = e => {
+    const flatTypes = this.trieRequest(e.target.value, typesTrieClient)
+    const flatBreeds = this.trieRequest(e.target.value, breedsTrieClient)
 
-    if (value.indexOf('(') >= 0) {
-      const splitStr = value.trim().toLowerCase().split('(')
-      type = encodeURI(splitStr[1].slice(0, splitStr[1].length - 1));
-      breed = encodeURI(splitStr[0])
+    this.setState({
+      isBarActive: true,
+      typeSuggestions: flatTypes,
+      breedSuggestions: flatBreeds.slice(0, 7),
+    })
+    e.stopPropagation();
+  }
+
+  handleSubmit = (e, node) => {
+    let location = '/search'
+    let breed = node.breed;
+    let type = node.type;
+
+    if (type) {
+      breed = breed.indexOf('(') >= 0 ? // remove parentheses
+              encodeURI(breed.trim().toLowerCase().split('(')[0]) :
+              encodeURI(breed)
+      type = encodeURI(type);
       location += `/${type}/${breed}`
-    }
-    else if (!Object.keys(node).length) {
-      type = encodeURI(value);
-      location += `/${type}`
     }
     else {
-      type = encodeURI(node.type);
-      breed = encodeURI(node.breed);
-      location += `/${type}/${breed}`
+      type = encodeURI(breed);
+      location += `/${type}`
     }
 
     window.location.href = location
@@ -70,49 +97,79 @@ export default class SearchBar extends React.Component {
   }
 
   render() {
-    const { searchValue, suggestions, selectedNode } = this.state;
     const { isFullSized } = this.props;
-    const startPattern = toTitleCase(searchValue);
+    const {
+      searchValue,
+      breedSuggestions,
+      typeSuggestions,
+      selectedBreed,
+      isBarActive,
+    } = this.state;
 
-    const datalistId = isFullSized ? 'breeds_home' : 'breeds_header'
+
+    const autocompleteCategory = (arr, name) => (
+      <div className={classnames(bar.autocomplete_category)}>
+        <div 
+          className={classnames(bar.autocomplete_title, bar.autocomplete_text_line)}
+          text={name}
+        >
+          {name}
+        </div>
+        <div
+          className={bar.autocomplete_dividing_line}
+        />
+        <ul className={bar.autocomplete_list} >
+          {arr.map( elem => (
+            <li
+              className={classnames(bar.autocomplete_subtitle, bar.autocomplete_text_line)}
+              onClick={e => this.handleSubmit(e, elem)}
+              key={elem.breed}
+            >
+              {elem.breed}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
 
     return (
       <form 
         className={bar.component}
-        onSubmit={e => this.handleSubmit(e, searchValue, selectedNode)} 
-        autoComplete="off">
+        onSubmit={e => this.handleSubmit(e, searchValue, selectedBreed)} 
+        autoComplete="off"
+      >
+
         <input
-          type='text' list={datalistId} placeholder='Search' name='t' id='t'
-          className={classnames(bar.input, {[bar.input__full_sized]: isFullSized})}
-          onChange={e => this.handleChange(e)}
-          pattern={`^[${startPattern}].*`}
+          type='text'  placeholder='Search' name='t' id='t'
+          className={classnames(
+            bar.input, 
+            {[bar.input__full_sized]: isFullSized}, 
+            {[bar.input__active]: isBarActive},
+          )}
+          onClick={this.handleBarClick}
+          onChange={this.handleChange}
         />
-        <datalist id={datalistId}>
-          {/* Animal Types */}
-          {[
-            'All',
-            'Dogs', 
-            'Cats', 
-            'Birds', 
-            'Rabbits', 
-            'Small & Furries', 
-            'Fish & Reptiles', 
-            'Horses', 
-            'Barnyard',
-            'Shelters'
-            ].map( type => <option key={type}>{type}</option> )
-          }
-          {/* Trie Results */}
-          {suggestions && suggestions.map( (elem, i) => (
-            <option key={i} >{elem.breed}</option>
-          ))}
-        </datalist>
+
+
         {isFullSized &&
         <input
           type='submit' value='Submit'
           className={classnames(bar.submit_btn)}
-        />
-        }
+        />}
+
+
+        <div
+          className={classnames(
+            bar.autocomplete,
+            {[bar.autocomplete__active]: isBarActive},
+            {[bar.autocomplete__full_sized]: isFullSized}
+          )}
+          onClick={e => e.stopPropagation()}
+        >
+          {typeSuggestions.length > 0 && autocompleteCategory(typeSuggestions, 'Categories')}
+          {breedSuggestions.length > 0 && autocompleteCategory(breedSuggestions, 'Breeds')}
+        </div>
+
       </form>
     )
   }
