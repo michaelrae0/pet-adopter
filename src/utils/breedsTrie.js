@@ -34,6 +34,22 @@ class Node {
     }
   }
 
+  getData(str) {
+    const childrenArr = Object.keys(this.children);
+
+    // Reached end
+    if (str.length === 0 && this.isEnd) return this.types;
+
+    // Keep going
+    const char = str ? str.charAt(0) : null;
+    const isCharInChildren = (str && childrenArr.indexOf(char) !== -1); // char exists in children
+
+    if (isCharInChildren) {
+      const charNode = this.children[char];
+      return charNode.getData(str.slice(1))
+    }
+  }
+
 
   getChildrenOf(str, history = '') {
     const childrenArr = Object.keys(this.children); // [a, b, c, d, e]
@@ -109,16 +125,17 @@ allBreeds.forEach( elem => breedsTrie.put(elem.breed, elem.type) )
 
 const typesTrieClient = {
   startsWith(str) {
-    const titleCasedStr = toTitleCase(str);
-    return typesTrie.getChildrenOf(titleCasedStr);
+    return typesTrie.getChildrenOf(toTitleCase(str));
   },
 }
 
 const breedsTrieClient = {
   startsWith(str) {
-    const titleCasedStr = toTitleCase(str);
-    return breedsTrie.getChildrenOf(titleCasedStr);
+    return breedsTrie.getChildrenOf(toTitleCase(str));
   },
+  getType(str) {
+    return breedsTrie.getData(toTitleCase(str))
+  }
 }
 
 export { breedsTrieClient, typesTrieClient}

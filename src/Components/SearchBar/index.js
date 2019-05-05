@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import * as bar from './searchBar.module.scss'
 import { H1, H2, H3, H4, H5, H6, SectionBody } from '../Typography'
 import { breedsTrieClient, typesTrieClient } from '../../utils/breedsTrie'
-import { toTitleCase, encodeURI } from '../../utils/strings'
+import { removeParentheses, encodeURI } from '../../utils/strings'
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -76,14 +76,18 @@ export default class SearchBar extends React.Component {
   }
 
   handleSubmit = (e, node) => {
+    const filteredBreed = removeParentheses(node.breed.toLowerCase());
     let location = '/search'
-    let breed = node.breed;
-    let type = node.type;
+
+    let breed = filteredBreed[0];
+    const categorySearch = breed === 'all' || breed === 'dogs' || breed === 'cats' || breed === 'birds' || breed === 'barnyard' || breed === 'rabbits' || breed === 'small & furries' || breed === 'shelters' || breed === 'fish & reptiles' || breed === 'horses'
+
+    let type =  node.type         ? node.type.toLowerCase()            :        // type from node
+                filteredBreed[1]  ? filteredBreed[1]                   :        // type from parentheses
+                !categorySearch   ? breedsTrieClient.getType(breed)[0] : null;  // retrieve type |OR| type = null b/c its a category search
 
     if (type) {
-      breed = breed.indexOf('(') >= 0 ? // remove parentheses
-              encodeURI(breed.trim().toLowerCase().split('(')[0]) :
-              encodeURI(breed)
+      breed = encodeURI(breed)
       type = encodeURI(type);
       location += `/${type}/${breed}`
     }
@@ -105,7 +109,6 @@ export default class SearchBar extends React.Component {
       selectedBreed,
       isBarActive,
     } = this.state;
-
 
     const autocompleteCategory = (arr, name) => (
       <div className={classnames(bar.autocomplete_category)}>
@@ -132,10 +135,11 @@ export default class SearchBar extends React.Component {
       </div>
     )
 
+
     return (
       <form 
         className={bar.component}
-        onSubmit={e => this.handleSubmit(e, searchValue, selectedBreed)} 
+        onSubmit={e => this.handleSubmit(e, { breed: searchValue, type: null })} 
         autoComplete="off"
       >
 
