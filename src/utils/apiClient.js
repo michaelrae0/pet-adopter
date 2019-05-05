@@ -8,7 +8,7 @@ const api = {
     return get(url)
   },
   animal(params) {  // single animal
-    if (!params.id) throw "Enter an id!! Or use animals..";
+    if (!params.id) throw new Error("Enter an id!! Or use animals..");
     return this.animals(params);
   },
 
@@ -18,7 +18,7 @@ const api = {
     return get(url)
   },
   breeds(params) { // types -> type -> breeds
-    if (!params.type) throw "Enter a type!!";
+    if (!params.type) throw new Error("Enter a type!!");
     return this.types(params, true);
   },
 
@@ -28,7 +28,7 @@ const api = {
     return get(url)
   },
   org(params) {  // single shelter
-    if (!params.id) throw "Enter an id!! Or use orgs..";
+    if (!params.id) throw new Error("Enter an id!! Or use orgs..");
     return this.orgs(params);
   },
 };
@@ -54,6 +54,7 @@ function generateUrl(base, params, breedsOnly = false) {
     } else {
       url += '&';
     }
+    // url += i ? '&' : '?'
 
     url += `${param}=${params[param]}`
   })
@@ -61,13 +62,11 @@ function generateUrl(base, params, breedsOnly = false) {
   return url;
 }
 
+// wrapper around get - decides whether to retrive token
 function get(url) {
-  if (config) {
-    console.log('yo')
-    return axios.get(url, {headers: config});
-  }
+  if (config) return axios.get(url, {headers: config});
 
-  return authToken() // promise -> then -> return promise
+  else return authToken() // promise -> then -> return promise
     .then( ({data}) => {
       config = { Authorization: `Bearer ${data.access_token}` };
       return axios.get(url, {headers: config});

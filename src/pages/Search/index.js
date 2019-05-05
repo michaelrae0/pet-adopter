@@ -2,7 +2,8 @@ import React from 'react'
 import classnames from 'classnames'
 
 import * as search from './search.module.scss'
-import api from '../../util/apiClient'
+import api from '../../utils/apiClient'
+// import breedsTrie from '../../utils/breedsTrie'
 import Container from '../../components/Container'
 import Row from '../../components/Row'
 import AnimalForm from '../../components/AnimalForm'
@@ -54,6 +55,8 @@ export default class Search extends React.Component {
       shelterLocation,
       distance,
     } = this.state
+
+    // console.log(breedsTrie.startsWith('e'))
 
     return (
       <section className={search.section}>

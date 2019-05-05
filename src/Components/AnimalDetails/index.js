@@ -3,7 +3,7 @@ import React from 'react'
 import * as details from '../../pages/Details/details.module.scss'
 import Container from '../Container'
 import Row from '../Row'
-import { H1, H2, H3, H4 , H5 , H6, SectionBody } from '../Typography'
+import { H1, H2, SectionBody } from '../Typography'
 
 const AnimalDetails = ({ info }) => {
   const {

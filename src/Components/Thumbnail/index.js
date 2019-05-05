@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
 import * as thumbnail from './thumbnail.module.scss'
-import { H1, H2, H3, H4, H5 , H6, SectionBody } from '../Typography'
+import { H2, H4 } from '../Typography'
 
 class Thumbnail extends React.Component {
   constructor(props) {
@@ -69,11 +69,12 @@ class Thumbnail extends React.Component {
             images.map( (image, i) => {
               if (i === 0) return null;
 
-              const backgroundImage = `url(${images[i].medium})`;
+              const backgroundImage = `url(${image.medium})`;
               return (
                 <div
-                className={classnames(thumbnail.image, {[thumbnail.image__active]: currentIndex === i}, 'background_image')}
-                style={{ backgroundImage }}
+                  className={classnames(thumbnail.image, {[thumbnail.image__active]: currentIndex === i}, 'background_image')}
+                  style={{ backgroundImage }}
+                  key={i}
                 />
               )
             })}

@@ -1,5 +1,4 @@
 import React from 'react';
-import propTypes from 'prop-types';
 import classnames from 'classnames';
 
 import * as type from './typography.module.scss';
