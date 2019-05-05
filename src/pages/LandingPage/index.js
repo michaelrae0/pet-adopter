@@ -1,5 +1,4 @@
 import React from 'react'
-import classnames from 'classnames'
 
 import * as landing from './landingPage.module.scss'
 import api from '../../utils/apiClient'
@@ -8,21 +7,12 @@ import Row from '../../components/Row'
 import SearchBar from '../../components/SearchBar'
 
 export default class LandingPage extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      animalSearch: true,
-
-      type: '',
-      breed: '',
-      breeds: [],
-      animalLocation: '',
-
-      shelterLocation: '',
-      distance: 10,
-    }
-  }
+  //   this.state = {
+  //   }
+  // }
 
   fetchBreeds = type => {
     this.setState({ breeds: ['Loading...'] });
@@ -44,17 +34,6 @@ export default class LandingPage extends React.Component {
   }
 
   render() {
-    const { 
-      animalSearch,
-      type,
-      breed,
-      breeds,
-      animalLocation,
-      shelterLocation,
-      distance,
-    } = this.state
-
-    // console.log(breedsTrie.startsWith('e'))
 
     return (
       <section className={landing.section}>

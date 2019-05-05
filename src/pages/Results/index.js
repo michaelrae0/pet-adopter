@@ -46,7 +46,6 @@ export default class Results extends React.Component {
       params['type']  = type !== 'all' ? type : ''
       if (breed) params['breed'] = breed !== 'all' ? breed : ''
   
-      console.log('api hit')
       // Calls api for animal info
       api.animals(params)
         .then( ({ data }) => {
@@ -55,8 +54,6 @@ export default class Results extends React.Component {
             animals: data.animals,
             pagination: data.pagination,
           })
-          console.log(data)
-          console.log(this.state.isLoading)
         })
         .catch( e => console.log(e) );
     }
