@@ -15,9 +15,9 @@ class App extends Component {
       <BrowserRouter forceRefresh>
         <div className='home_container'>
           <Header />
-          <div className='pages'>
+          <div className='main'>
             <Route exact path='/' component={Search} />
-            <Route path='/s/:category/:page' component={Results} />
+            <Route path='/search/:type/:breed?/:page?' component={Results} />
             <Route path='/details/:searchType/:id' component={Details} />
           </div>
         </div>

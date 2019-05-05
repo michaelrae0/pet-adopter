@@ -1,10 +1,6 @@
 import React from 'react'
-import classnames from 'classnames'
 
-import * as details from './details.module.scss'
-import api from '../../util/apiClient'
-import Container from '../../components/Container'
-import Row from '../../components/Row'
+import api from '../../utils/apiClient'
 import Loading from '../../components/Loading'
 import Carousel from '../../components/Carousel'
 import AnimalDetails from '../../components/AnimalDetails'

@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
 import * as results from './results.module.scss'
-import api from '../../util/apiClient.js'
+import api from '../../utils/apiClient.js'
 import Container from '../../components/Container'
 import Row from '../../components/Row'
 import Loading from '../../components/Loading'
 import Thumbnail from '../../components/Thumbnail'
 import { H2 } from '../../components/Typography'
-import { ReactComponent as DoubleArrowsSVG } from '../../images/DoubleArrows.svg'
-
-
 
 export default class Results extends React.Component {
   constructor(props) {
@@ -37,31 +34,19 @@ export default class Results extends React.Component {
   }
 
   componentDidMount() {
-    let locationState = {}
-    if (!this.props.location.state) {
-      locationState = {
-        type: '',
-        breed: '',
-        location: '',
-        distance: '',
-      }
-    }
-    else locationState = this.props.location.state;
-
-    const { type, breed, location, distance } = locationState;
-    const { category, page } = this.props.match.params;
+    const { type, breed, page } = this.props.match.params;
     
     let params = {
       limit: 16,
-      page,
+      page: page ? page : 1,
     };
 
     // Animals
-    if (category === 'animals') {
-      params['type'] = type ? type : ''
-      params['breed'] = breed ? breed : ''
-      if (location) params['location'] = location
+    if (type !== 'shelters') {
+      params['type']  = type !== 'all' ? type : ''
+      if (breed) params['breed'] = breed !== 'all' ? breed : ''
   
+      console.log('api hit')
       // Calls api for animal info
       api.animals(params)
         .then( ({ data }) => {
@@ -70,16 +55,13 @@ export default class Results extends React.Component {
             animals: data.animals,
             pagination: data.pagination,
           })
+          console.log(data)
+          console.log(this.state.isLoading)
         })
         .catch( e => console.log(e) );
     }
     // Shelters
     else {
-      if (location) {
-        params['location'] = location
-        params['distance'] = distance // requires location to be set
-      }
-  
       // Calls api for org info
       api.orgs(params)
         .then( ({ data }) => {
@@ -104,8 +86,8 @@ export default class Results extends React.Component {
 
   render() {
     const { animals, orgs, pagination } = this.state;
-    const { ...locationState } = this.props.location.state;
-    const { category } = this.props.match.params;
+    const { type, breed } = this.props.match.params;
+    const category = type === 'shelters' ? 'shelters' : 'animals' 
 
     if (this.state.isLoading) return <Loading />;
 
@@ -152,9 +134,9 @@ export default class Results extends React.Component {
                   <Link
                     className={classnames(results.page_number, {[results.page_number__active]: i === pagination.current_page})}
                     to={{
-                      pathname: `/s/${category}/${i}`,
-                      state: {...locationState}   
+                      pathname: `/search/${type}/${breed ? breed : 'all'}/${i}`,
                     }}
+                    key={i}
                   >
                     <H2 
                       
@@ -168,8 +150,7 @@ export default class Results extends React.Component {
             <Link
               className={results.next_btn}
               to={{
-                pathname: `/s/${category}/${+pagination.current_page + 1}`,
-                state: {...locationState}   
+                pathname: `/search/${type}/${breed ? breed : 'all'}/${+pagination.current_page + 1}`,
               }}
             >
               <H2 text='Next' />
