@@ -3,8 +3,12 @@
 $btn-width: 110px;
 $full-height: 55px;
 
+$input-width: 300px;
+$desktop-input-width: calc(100% - #{$btn-width});
+
 .component {
   width: 100%;
+  position: relative;
 }
 
 .input {
@@ -12,15 +16,12 @@ $full-height: 55px;
   font-size: 1.2rem;
   border-radius: 4px;
   border: 1px solid $gray-light;
-  // border-left: none;
-  // border-right: none;
-  // border-top: none;
+  width: $input-width;
   outline: none;
-
 
   &__full_sized {
     float:left;
-    width: calc(100% - #{$btn-width});
+    width: $desktop-input-width;
     height: $full-height;
     margin: 0;
     padding-left: 1rem;
@@ -29,12 +30,18 @@ $full-height: 55px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
+
+  &__active {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
 }
 
 .submit_btn {
   float: left;
   width: $btn-width;
   height:$full-height;
+
   background-color: #08A6FF;
   border: none;
   border-top-right-radius: 4px;
@@ -48,5 +55,67 @@ $full-height: 55px;
   &:hover {
     cursor: pointer;
     background-color: #22afff;
+  }
+}
+
+.autocomplete {
+  display: none;
+  position: absolute;
+  border: 1px solid $gray-light;
+  width: $input-width;
+  max-height: 18rem;
+  padding-top: 0.4rem;
+  z-index: 10;
+  background-color: $white;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top:none;
+
+  overflow: auto;
+
+  &__full_sized {
+    top: $full-height;
+    width: $desktop-input-width;
+    max-height:20rem;
+  }
+
+  &__active {
+    display: block;
+  }
+
+  &_text_line {
+    padding-left: 1rem;
+  }
+
+  &_title {
+    color: $gray;
+    font-weight: 300;
+    font-size: 1.3rem;
+
+    line-height: 2rem;
+  }
+
+  &_subtitle {
+    font-size: 1.1rem;
+    line-height: 1.7rem;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $gray-lighter;
+      color: $primary;
+    }
+  }
+
+  &_list {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &_dividing_line {
+    height: 1px;
+    width: calc(100% - 2rem);
+    background-color: $gray-light;
+    margin: 0 auto;
   }
 }
