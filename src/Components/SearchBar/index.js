@@ -2,8 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import * as bar from './searchBar.module.scss'
-import { H1, H2, H3, H4, H5, H6, SectionBody } from '../Typography'
-import { breedsTrieClient, typesTrieClient } from '../../utils/breedsTrie'
+import { breedsTrieClient, typesTrieClient } from '../../utils/tries'
 import { removeParentheses, encodeURI } from '../../utils/strings'
 
 export default class SearchBar extends React.Component {
@@ -12,6 +11,7 @@ export default class SearchBar extends React.Component {
 
     this.state = {
       searchValue: '',
+      tempValue: '',
       breedSuggestions: [],
       typeSuggestions: [],
       selectedBreed: {},
@@ -51,6 +51,12 @@ export default class SearchBar extends React.Component {
     return flatBreeds;
   }
 
+  handleMouseOver = (str = '') => {
+    this.setState({
+      tempValue: str,
+    })
+  }
+
   handleChange = e => {
     const flatTypes = this.trieRequest(e.target.value, typesTrieClient)
     const flatBreeds = this.trieRequest(e.target.value, breedsTrieClient)
@@ -79,7 +85,7 @@ export default class SearchBar extends React.Component {
     const filteredBreed = removeParentheses(node.breed.toLowerCase());
     let location = '/search'
 
-    let breed = filteredBreed[0];
+    let breed = filteredBreed[0] || 'all';
     const categorySearch = breed === 'all' || breed === 'dogs' || breed === 'cats' || breed === 'birds' || breed === 'barnyard' || breed === 'rabbits' || breed === 'small & furries' || breed === 'shelters' || breed === 'fish & reptiles' || breed === 'horses'
 
     let type =  node.type         ? node.type.toLowerCase()            :        // type from node
@@ -104,9 +110,9 @@ export default class SearchBar extends React.Component {
     const { isFullSized } = this.props;
     const {
       searchValue,
+      tempValue,
       breedSuggestions,
       typeSuggestions,
-      selectedBreed,
       isBarActive,
     } = this.state;
 
@@ -125,8 +131,10 @@ export default class SearchBar extends React.Component {
           {arr.map( elem => (
             <li
               className={classnames(bar.autocomplete_subtitle, bar.autocomplete_text_line)}
-              onClick={e => this.handleSubmit(e, elem)}
               key={elem.breed}
+              onClick={e => this.handleSubmit(e, elem)}
+              onMouseEnter={() => this.handleMouseOver(elem.breed)}
+              onMouseLeave={() => this.handleMouseOver()}
             >
               {elem.breed}
             </li>
@@ -137,14 +145,15 @@ export default class SearchBar extends React.Component {
 
 
     return (
-      <form 
+      <form
+        autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
         className={bar.component}
-        onSubmit={e => this.handleSubmit(e, { breed: searchValue, type: null })} 
-        autoComplete="off"
+        onSubmit={e => this.handleSubmit(e, { breed: searchValue, type: null })}
       >
 
         <input
-          type='text'  placeholder='Search' name='t' id='t'
+          type='text' placeholder='Search'
+          value={tempValue ? tempValue : searchValue}
           className={classnames(
             bar.input, 
             {[bar.input__full_sized]: isFullSized}, 

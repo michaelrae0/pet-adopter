@@ -67,7 +67,6 @@ export default class Header extends React.Component {
   
   render() {
     const { isNavActive } = this.state;
-    console.log(isNavActive)
 
     return (
       <section className={header.site__header}>
