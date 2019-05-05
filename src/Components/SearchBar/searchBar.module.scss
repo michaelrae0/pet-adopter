@@ -90,9 +90,24 @@ $desktop-input-width: calc(100% - #{$btn-width});
   &_title {
     color: $gray;
     font-weight: 300;
-    font-size: 1.3rem;
+    font-size: 0.9rem;
+    padding-left: 0.6rem;
+    letter-spacing: 0.35px;
 
     line-height: 2rem;
+  }
+
+  &_dividing_line {
+    height: 1px;
+    width: calc(100% - 1.2rem);
+    background-color: $gray-light;
+    margin: 0 auto;
+  }
+
+  &_no_match{
+    margin-bottom: 0.4rem;
+    font-size: 1.1rem;
+    line-height: 1.6rem;
   }
 
   &_subtitle {
@@ -110,12 +125,5 @@ $desktop-input-width: calc(100% - #{$btn-width});
   &_list {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-  }
-
-  &_dividing_line {
-    height: 1px;
-    width: calc(100% - 2rem);
-    background-color: $gray-light;
-    margin: 0 auto;
   }
 }

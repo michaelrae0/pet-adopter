@@ -120,7 +120,6 @@ export default class SearchBar extends React.Component {
       <div className={classnames(bar.autocomplete_category)}>
         <div 
           className={classnames(bar.autocomplete_title, bar.autocomplete_text_line)}
-          text={name}
         >
           {name}
         </div>
@@ -153,7 +152,7 @@ export default class SearchBar extends React.Component {
 
         <input
           type='text' placeholder='Search'
-          value={tempValue ? tempValue : searchValue}
+          value={searchValue}
           className={classnames(
             bar.input, 
             {[bar.input__full_sized]: isFullSized}, 
@@ -181,6 +180,13 @@ export default class SearchBar extends React.Component {
         >
           {typeSuggestions.length > 0 && autocompleteCategory(typeSuggestions, 'Categories')}
           {breedSuggestions.length > 0 && autocompleteCategory(breedSuggestions, 'Breeds')}
+          {!typeSuggestions.length && !breedSuggestions.length &&
+          <div 
+            className={classnames(bar.autocomplete_title, bar.autocomplete_text_line, bar.autocomplete_no_match)}
+          >
+            No Matches
+          </div>
+          }
         </div>
 
       </form>
