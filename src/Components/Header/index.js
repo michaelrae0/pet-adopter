@@ -69,7 +69,7 @@ export default class Header extends React.Component {
     const { isNavActive } = this.state;
 
     return (
-      <section className={header.site__header}>
+      <section className={classnames(header.site__header)}>
         <Container className={header.container}>
           <Row className={header.row}>
             <Link to='/'>

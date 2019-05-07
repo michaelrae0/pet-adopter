@@ -1,3 +1,4 @@
+@import '../../styles/definitions/breakpoints';
 @import '../../styles/definitions/colors';
 
 $btn-width: 110px;
@@ -5,6 +6,7 @@ $full-height: 55px;
 
 $input-width: 300px;
 $desktop-input-width: calc(100% - #{$btn-width});
+$desktop-max-width: 800px;
 
 .component {
   width: 100%;
@@ -22,6 +24,7 @@ $desktop-input-width: calc(100% - #{$btn-width});
   &__full_sized {
     float:left;
     width: $desktop-input-width;
+    max-width: $desktop-max-width;
     height: $full-height;
     margin: 0;
     padding-left: 1rem;
@@ -63,7 +66,7 @@ $desktop-input-width: calc(100% - #{$btn-width});
   position: absolute;
   border: 1px solid $gray-light;
   width: $input-width;
-  max-height: 18rem;
+  max-height: 10rem;
   padding-top: 0.4rem;
   z-index: 10;
   background-color: $white;
@@ -76,7 +79,12 @@ $desktop-input-width: calc(100% - #{$btn-width});
   &__full_sized {
     top: $full-height;
     width: $desktop-input-width;
-    max-height:20rem;
+    max-width: $desktop-max-width;
+    max-height: 10rem;
+
+    @media (#{$min-tablets}) {
+      max-height: 18rem;
+    }
   }
 
   &__active {

@@ -8,14 +8,31 @@ import Results from './pages/Results'
 import Details from './pages/Details'
 
 import './styles/app.scss';
+import * as index from './index.module.scss'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state={
+      onLandingPage: false,
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      onLandingPage: window.location.pathname === '/',
+    })
+  }
+
   render() {
+    const { onLandingPage } = this.state;
+
     return (
       <BrowserRouter forceRefresh>
-        <div className='home_container'>
-          <Header />
-          <div className='main'>
+        <div className={index.home_container} >
+          {!onLandingPage && <Header />}
+          <div className={index.main}>
             <Route exact path='/' component={LandingPage} />
             <Route path='/search/:type/:breed?/:page?' component={Results} />
             <Route path='/details/:searchType/:id' component={Details} />

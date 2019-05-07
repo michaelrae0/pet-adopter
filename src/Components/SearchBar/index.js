@@ -110,7 +110,6 @@ export default class SearchBar extends React.Component {
     const { isFullSized } = this.props;
     const {
       searchValue,
-      tempValue,
       breedSuggestions,
       typeSuggestions,
       isBarActive,
