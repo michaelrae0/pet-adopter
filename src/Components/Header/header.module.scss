@@ -20,6 +20,10 @@ $gutter-desktop: 32px;
   padding: 0 $header-gutter;
   height: $header-height-mobile;
 
+  &__transparent {
+    background-color: transparent;
+  }
+
   &.state_fixed {
     animation: fade_in_bottom 0.15s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     position:fixed;

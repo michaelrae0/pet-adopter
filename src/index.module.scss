@@ -1,0 +1,12 @@
+@import './styles/definitions/breakpoints';
+@import './styles/definitions/colors';
+
+.home_container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+}
