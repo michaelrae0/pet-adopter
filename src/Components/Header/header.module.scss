@@ -19,6 +19,7 @@ $gutter-desktop: 32px;
   background-color: $white;
   padding: 0 $header-gutter;
   height: $header-height-mobile;
+  border-bottom: 1px solid $gray-lighter;
 
   &__transparent {
     background-color: transparent;

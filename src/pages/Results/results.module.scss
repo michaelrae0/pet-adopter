@@ -2,98 +2,98 @@
 @import '../../styles/definitions/colors';
 @import '../../components/Thumbnail/thumbnail.module.scss';
 
-.section {
-  padding: 4rem 24px 2.8125rem;
-}
-
-.thumbnail_row {
-  justify-content: center;
-}
-
 @mixin calculateWidth($width, $margin, $n) {
-  width: calc(#{$width} * #{$n} + #{$margin} * #{$n - 1});
+  width: calc(#{$width} * #{$n} + #{$margin} * 2 * #{$n});
+}
+
+.section {
+  padding: 0 24px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 4rem;
+  padding-bottom: 2.8125rem;
+  min-height: calc(100vh - 90px); // screen height - header height
 }
 
 .grid {
-  display: flex;
-  flex-wrap: wrap;
   margin: 0 auto;
+
+  &__row {
+    justify-content: center;
+    flex: 1;
+  }
+
   @include calculateWidth($thumbnail-width, $thumbnail-gutter, 1);
 
   @media (#{$min-tablets}) {
     @include calculateWidth($width-desktop, $gutter-desktop, 3);
   }
 
-  @media (min-width: 1100px) {
+  @media (min-width: 1150px) {
     @include calculateWidth($width-desktop, $gutter-desktop, 4);
-  }
-}
-
-.pagination_row {
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-$arrow-factor: 60px;
-
-.arrows { // 100w x 83.7h
-  width: $arrow-factor;
-  height: 0.837 * $arrow-factor;
-
-  &:hover {
-    path {
-      stroke: $primary;
-    }
-  }
-
-  &__back {
-    transform: rotate(180deg)
-  }
-  &__inactive {
-    path {
-      stroke: #e0e0e0;
-    }
-    &:hover {
-      path {
-        stroke: #e0e0e0;
-      }
-    }
   }
 }
 
 .pages {
   display: flex;
   flex-direction: row;
-}
 
-.page_number {
-  display: flex;
-  align-items: center;
-  margin-right: 2rem;
-  color: #d2d2d2;
-
-  &__active {
-    color: $primary;
+  @media (#{$min-tablets}) {
+    margin-left: calc(95px + 1.5rem);
   }
 
-  &:last-of-type {
-    margin-right: 0;
+  &__row {
+    justify-content: center;
+    margin-top: 1rem;
   }
 
-  &:hover {
-    color: $primary;
+  &__page_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0.25rem;
+    min-height: 48px;
+    min-width: 48px;
+    border-radius: 5px;
+    background-color: $white-dark;
+  
+    &__active {
+      color: $primary;
+    }
+    &:hover {
+      background-color: $white-darker;
+
+      .pages__page_text {
+        color: $primary;
+      }
+    }
   }
-}
 
-.next_btn {
-  // margin-top: 2rem;
-  margin-left: 2rem;
-  padding: 8px 16px;
-  border: 3px $primary solid;
-  border-radius: 3px;
+  &__next_btn {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    margin-left: 1.5rem;
+    min-height: 48px;
+    min-width: 95px;
 
-  &:hover {
-    background-color: #f8f8f8;
-    color: $primary;
+    border: 3px $primary solid;
+    border-radius: 3px;
+    background-color: $white-dark;
+  
+    &:hover {
+      background-color: $white-darker;
+      
+      .pages__next_text {
+        color: $primary;
+      }
+    }
+
+    @media (#{$max-tablets}) {
+      display: none;
+    }
   }
 }

@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import * as bar from './searchBar.module.scss'
 import { breedsTrieClient, typesTrieClient } from '../../utils/tries'
 import { removeParentheses, encodeURI } from '../../utils/strings'
+import { H3, H4, H6 } from '../Typography'
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -116,25 +117,19 @@ export default class SearchBar extends React.Component {
     } = this.state;
 
     const autocompleteCategory = (arr, name) => (
-      <div className={classnames(bar.autocomplete_category)}>
-        <div 
-          className={classnames(bar.autocomplete_title, bar.autocomplete_text_line)}
-        >
-          {name}
-        </div>
-        <div
-          className={bar.autocomplete_dividing_line}
-        />
-        <ul className={bar.autocomplete_list} >
+      <div className={bar.autocomplete__category}>
+        <H6 className={bar.autocomplete__title} text={name} />
+        <div className={bar.autocomplete__dividing_line}/>
+        <ul className={bar.autocomplete__list} >
           {arr.map( elem => (
             <li
-              className={classnames(bar.autocomplete_subtitle, bar.autocomplete_text_line)}
+              className={classnames(bar.autocomplete__subtitle, bar.autocomplete__text_line)}
               key={elem.breed}
               onClick={e => this.handleSubmit(e, elem)}
               onMouseEnter={() => this.handleMouseOver(elem.breed)}
               onMouseLeave={() => this.handleMouseOver()}
             >
-              {elem.breed}
+              <H4 text={elem.breed}/>
             </li>
           ))}
         </ul>
@@ -152,40 +147,23 @@ export default class SearchBar extends React.Component {
         <input
           type='text' placeholder='Search'
           value={searchValue}
-          className={classnames(
-            bar.input, 
-            {[bar.input__full_sized]: isFullSized}, 
-            {[bar.input__active]: isBarActive},
-          )}
+          className={classnames(bar.input, {[bar.input__full_sized]: isFullSized}, {[bar.input__active]: isBarActive})}
           onClick={this.handleBarClick}
           onChange={this.handleChange}
         />
 
 
         {isFullSized &&
-        <input
-          type='submit' value='Submit'
-          className={classnames(bar.submit_btn)}
-        />}
+        <div className={bar.submit__btn} onClick={e => this.handleSubmit(e, { breed: searchValue, type: null })} >
+          <H3 className={bar.submit__text} text={'Submit'} />
+        </div>}
 
 
-        <div
-          className={classnames(
-            bar.autocomplete,
-            {[bar.autocomplete__active]: isBarActive},
-            {[bar.autocomplete__full_sized]: isFullSized}
-          )}
-          onClick={e => e.stopPropagation()}
-        >
+        <div className={classnames(bar.autocomplete, {[bar.autocomplete__active]: isBarActive}, {[bar.autocomplete__full_sized]: isFullSized})} onClick={e => e.stopPropagation()}>
           {typeSuggestions.length > 0 && autocompleteCategory(typeSuggestions, 'Categories')}
           {breedSuggestions.length > 0 && autocompleteCategory(breedSuggestions, 'Breeds')}
           {!typeSuggestions.length && !breedSuggestions.length &&
-          <div 
-            className={classnames(bar.autocomplete_title, bar.autocomplete_text_line, bar.autocomplete_no_match)}
-          >
-            No Matches
-          </div>
-          }
+          <H6 className={classnames(bar.autocomplete__title, bar.autocomplete__no_match)} text='No Matches'/>}
         </div>
 
       </form>

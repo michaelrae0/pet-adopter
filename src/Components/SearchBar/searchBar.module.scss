@@ -15,49 +15,55 @@ $desktop-max-width: 800px;
 
 .input {
   padding: 0.5rem 0.7rem;
-  font-size: 1.2rem;
-  border-radius: 4px;
-  border: 1px solid $gray-light;
+  font-size: 1.25rem;
+
   width: $input-width;
   outline: none;
+  border: 1px $gray-light solid;
+  border-radius: 4px;
 
   &__full_sized {
     float:left;
+    height: $full-height;
     width: $desktop-input-width;
     max-width: $desktop-max-width;
-    height: $full-height;
+
     margin: 0;
     padding-left: 1rem;
 
-    border-right: none;
+    border: none;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
   }
 
   &__active {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 }
 
-.submit_btn {
-  float: left;
-  width: $btn-width;
-  height:$full-height;
+.submit {
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: $btn-width;
+    height: $full-height;
 
-  background-color: #08A6FF;
-  border: none;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+    background-color: #08A6FF;
+    border: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 
-  color: $white;
-  font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: 1px;
+    &:hover {
+      cursor: pointer;
+      background-color: #22afff;
+    }
+  }
 
-  &:hover {
-    cursor: pointer;
-    background-color: #22afff;
+  &__text {
+    color: $white;
   }
 }
 
@@ -68,11 +74,11 @@ $desktop-max-width: 800px;
   width: $input-width;
   max-height: 10rem;
   padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
   z-index: 10;
   background-color: $white;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  border-top:none;
 
   overflow: auto;
 
@@ -91,34 +97,26 @@ $desktop-max-width: 800px;
     display: block;
   }
 
-  &_text_line {
+  &__text_line {
     padding-left: 1rem;
   }
 
-  &_title {
-    color: $gray;
-    font-weight: 300;
-    font-size: 0.9rem;
+  &__title {
     padding-left: 0.6rem;
-    letter-spacing: 0.35px;
-
-    line-height: 2rem;
   }
 
-  &_dividing_line {
+  &__dividing_line {
     height: 1px;
     width: calc(100% - 1.2rem);
     background-color: $gray-light;
     margin: 0 auto;
   }
 
-  &_no_match{
+  &__no_match{
     margin-bottom: 0.4rem;
-    font-size: 1.1rem;
-    line-height: 1.6rem;
   }
 
-  &_subtitle {
+  &__subtitle {
     font-size: 1.1rem;
     line-height: 1.7rem;
     transition: all 0.15s ease-in-out;
@@ -130,8 +128,7 @@ $desktop-max-width: 800px;
     }
   }
 
-  &_list {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
+  &__list {
+    margin: 0.2rem 0;
   }
 }

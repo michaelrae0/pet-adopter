@@ -1,59 +1,82 @@
 import React from 'react'
+import titleCase from 'title-case'
 
 import * as details from '../../pages/Details/details.module.scss'
 import Container from '../Container'
 import Row from '../Row'
-import { H1, H2, SectionBody } from '../Typography'
+import Bullet from '../Bullet'
+import { H2, H4, SectionBody } from '../Typography'
 
 const AnimalDetails = ({ info }) => {
   const {
     name,
     description,
-    breed,
-    size,
+    breeds,
     coat,
     gender,
     status,
     contact,
+    age,
   } = info;
 
-  const {
-    address1,
-    city,
-    state,
-  } = contact.address;
+  const { city, state } = contact.address;
+
+  const cityState = `${city}, ${state}`;
+
+  const formattedBreed = breeds => {
+    const breed = breeds.secondary ? `${breeds.primary} & ${breeds.secondary} Mix` : 
+                  breeds.mixed     ? `${breeds.primary} Mix`                       : breeds.primary;
+    return breed;
+  }
+
+  const formattedAge = (age, type) => {
+    if (age === 'Baby') {
+      switch (type) {
+        case 'Dog':
+          return 'Puppy';
+        case 'Cat':
+          return 'Kitten';
+        default:
+          return age;
+      }
+    }
+    else return age;
+  }
+
+  const bulletSeparatedLine = (...strings) => {
+    return (
+      <>
+        {strings.map( (string, i) => (
+          i === strings.length - 1 ? 
+          <React.Fragment key={i}>{string}</React.Fragment> : 
+          <React.Fragment key={i}>{string}<Bullet/></React.Fragment>
+        ))}
+      </>
+    )
+  }
 
   return (
     <section className={details.section}>
-      <Container restricted >
-        <Row className={details.row}>
-          <div className={details.primary}>
-            <H1 className={details.name} text={`Meet ${name}`} />
-            <SectionBody className={details.description} text={description} />
+      <Container className={details.container} restricted >
+        <Row className={details.row} noMargin>
+          <div className={details.header}>
+            <H2 className={details.header__title} text={`Meet ${name}`} />
+            <H4 className={details.header__subtitle} text={bulletSeparatedLine(formattedBreed(breeds), cityState)}/>
+            <H4 className={details.header__content} text={bulletSeparatedLine(formattedAge(age, info.type), gender, `${coat} Coat`, titleCase(status))}/>
           </div>
 
-          <div className={details.secondary}>
-
-            <div className={details.info_type} >
-              <H2 className={details.subtitle} text={`Personal Info`} />
-              <div className={details.detail_group} >
-                <SectionBody text={`Breed: ${breed}`} />
-                <SectionBody text={`Size: ${size}`} />
-                <SectionBody text={`Hair: ${coat}`} />
-                <SectionBody text={`Gender: ${gender}`} />
-                <SectionBody text={`Status: ${status.charAt(0).toUpperCase() + status.slice(1)}`} />
-              </div>
+          <div className={details.content}>
+            <div className={details.primary} >
+              <SectionBody className={details.primary__subtitle} text={description} />
             </div>
 
-            <div className={details.info_type} >
-              <H2 className={details.subtitle} text={`Contact Info`} />
-              <div className={details.detail_group} >
-                <SectionBody text={`Address: ${address1}, ${city}, ${state}`} />
-                <SectionBody text={`Phone: ${contact.phone}`} />
-                <SectionBody text={`Email: ${contact.email}`} />
-              </div>
+            <div className={details.secondary} >
+              {contact.phone && <SectionBody className={details.secondary__subtitle} text={`${contact.phone}`} />}
+              {contact.email && <SectionBody 
+                className={details.secondary__subtitle} 
+                text={<a href={`mailto:${contact.email}`} className={details.secondary__email} >{contact.email}</a>} 
+              />}
             </div>
-
           </div>
         </Row>
       </Container>

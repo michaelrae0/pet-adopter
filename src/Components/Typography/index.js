@@ -13,8 +13,8 @@ export const H2 = ({id, className, text}) => (
   <h2 className={classnames(className, type.h2)} id={id}>{text}</h2>
 )
 
-export const H3 = ({id, className, text}) => (
-  <h3 className={classnames(className, type.h3)} id={id}>{text}</h3>
+export const H3 = ({id, className, text, bold}) => (
+  <h3 className={classnames(className, type.h3, {[type.bold]: bold})} id={id}>{text}</h3>
 )
 
 export const H4 = ({id, className, text, bold}) => (

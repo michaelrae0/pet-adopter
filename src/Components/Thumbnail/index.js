@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
+import titleCase from 'title-case'
 
 import * as thumbnail from './thumbnail.module.scss'
-import { H2, H4 } from '../Typography'
+import { H3, H5 } from '../Typography'
 
 class Thumbnail extends React.Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class Thumbnail extends React.Component {
     const backgroundImage = `url(${this.filterImages(images[currentIndex])})`;
 
     return (
-      <div className={classnames(thumbnail.component, thumbnail.col3)} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} >
+      <div className={thumbnail.item} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} >
         <Link to={`/details/${category}/${id}`} >        
           <div className={thumbnail.image_container}>
             <div className={classnames(thumbnail.image, {[thumbnail.image__active]: !currentIndex}, 'background_image')} style={{ backgroundImage }} />
@@ -81,13 +82,10 @@ class Thumbnail extends React.Component {
           </div>
 
           <div className={thumbnail.text_cont}>
-            <H2 className={classnames(thumbnail.title)} text={title} />
+            <H3 className={thumbnail.title} text={titleCase(title)} />
             {subtitles.map( line => {
               return (
-                <H4 
-                  className={classnames(thumbnail.subtitle)} key={String(id) + line.slice(0, 3)}
-                  text={line}
-                />
+                <H5 className={thumbnail.subtitle} key={String(id) + line.slice(0, 3)} text={line}/>
               )
             })}
           </div>
