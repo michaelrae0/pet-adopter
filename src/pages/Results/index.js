@@ -8,7 +8,7 @@ import Container from '../../components/Container'
 import Row from '../../components/Row'
 import Loading from '../../components/Loading'
 import Thumbnail from '../../components/Thumbnail'
-import { H2 } from '../../components/Typography'
+import { H3 } from '../../components/Typography'
 
 export default class Results extends React.Component {
   constructor(props) {
@@ -49,6 +49,10 @@ export default class Results extends React.Component {
       // Calls api for animal info
       api.animals(params)
         .then( ({ data }) => {
+          console.log('Pagination')
+          console.log(data.pagination)
+          console.log('Animal results')
+          console.log(data.animals)
           this.setState({
             isLoading: false,
             animals: data.animals,
@@ -62,6 +66,10 @@ export default class Results extends React.Component {
       // Calls api for org info
       api.orgs(params)
         .then( ({ data }) => {
+          console.log('Pagination')
+          console.log(data.pagination)
+          console.log('Shelter results')
+          console.log(data.organizations)
           this.setState({
             isLoading: false,
             orgs: data.organizations,
@@ -91,7 +99,7 @@ export default class Results extends React.Component {
     return (
       <section className={results.section}>
         <Container className={results.container}>
-          <Row className={results.thumbnail_row} >
+          <Row className={results.grid__row} >
             <div className={results.grid}>
               {category === 'animals' && 
               animals.map( animal => {
@@ -123,34 +131,27 @@ export default class Results extends React.Component {
               })}
             </div>
           </Row>
-          <Row className={results.pagination_row}>
+          <Row className={results.pages__row}>
             
             <div className={results.pages} >
               {this.generatePages(pagination.current_page, Math.min(pagination.total_pages, 10000)).map( i => {
                 return (
                   <Link
-                    className={classnames(results.page_number, {[results.page_number__active]: i === pagination.current_page})}
-                    to={{
-                      pathname: `/search/${type}/${breed ? breed : 'all'}/${i}`,
-                    }}
+                    className={classnames(results.pages__page_btn, {[results.pages_number__active]: i === pagination.current_page})}
+                    to={{ pathname: `/search/${type}/${breed ? breed : 'all'}/${i}` }}
                     key={i}
                   >
-                    <H2 
-                      
-                      text={i}
-                    />
+                    <H3 className={results.pages__page_text} text={i} bold />
                   </Link>
                 )
               })}
             </div>
             
             <Link
-              className={results.next_btn}
-              to={{
-                pathname: `/search/${type}/${breed ? breed : 'all'}/${+pagination.current_page + 1}`,
-              }}
+              className={results.pages__next_btn}
+              to={{ pathname: `/search/${type}/${breed ? breed : 'all'}/${+pagination.current_page + 1}` }}
             >
-              <H2 text='Next' />
+              <H3 className={results.pages__next_text} text='Next' bold />
             </Link>
 
           </Row>

@@ -1,5 +1,4 @@
 import React from 'react'
-import classnames from 'classnames'
 
 import * as landing from './landingPage.module.scss'
 import api from '../../utils/apiClient'
@@ -9,13 +8,6 @@ import Row from '../../components/Row'
 import SearchBar from '../../components/SearchBar'
 
 export default class LandingPage extends React.Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = {
-  //   }
-  // }
-
   fetchBreeds = type => {
     this.setState({ breeds: ['Loading...'] });
 

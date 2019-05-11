@@ -12,9 +12,9 @@
   background-position: center -50px;
 
   @media (#{$min-tablets}) {
-    min-height: 700px;
+    min-height: 40vw;
     height: 100%;
-    padding: 15rem $gutter-desktop 0rem;
+    padding: 32.5vh $gutter-desktop 0rem;
     background-size: cover;
     background-position: center 30%;
   }

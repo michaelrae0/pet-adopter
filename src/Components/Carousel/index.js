@@ -121,6 +121,7 @@ export default class Carousel extends React.Component {
                   <div
                     className={classnames(cara.preview_image_container, {[cara.preview_image_container__active]: i === currentIndex})}
                     onClick={() => this.scrollCarousel(i)}
+                    key={i}
                   >
                     <img src={photo.medium} alt='' className={cara.preview_image} />
                   </div>

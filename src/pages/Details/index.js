@@ -25,6 +25,7 @@ export default class Details extends React.Component {
     if (searchType === 'animals') {
       api.animal(params)
         .then( ({data}) => {
+          console.log('Animal details:')
           console.log(data.animal)
           this.setState({
             info: data.animal,
@@ -35,6 +36,8 @@ export default class Details extends React.Component {
     if (searchType === 'shelters') {
       api.org(params)
         .then( ({data}) => {
+          console.log('Shelter details:')
+          console.log(data.organization)
           this.setState({
             info: data.organization,
             isLoading: false

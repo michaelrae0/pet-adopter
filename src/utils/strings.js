@@ -1,9 +1,3 @@
-const toTitleCase = str => {
-  const loweredArr = str.trim().toLowerCase().split(" ");
-  const titled = loweredArr.map( substr => substr.charAt(0).toUpperCase() + substr.slice(1) );
-  return titled.join(' ');
-}
-
 const removeParentheses = str => {
   const split = str.trim().split('(')
   if (split.length > 1) split[1] = split[1].slice(0, split[1].length - 1);
@@ -26,7 +20,6 @@ const encodeURI = str => {
 }
 
 export {
-  toTitleCase,
   removeParentheses,
   encodeURI,
 }

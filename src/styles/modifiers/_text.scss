@@ -23,68 +23,78 @@
 
 h1, .h1, h2, .h2,
 h3, .h3, h4, .h4, path {
-  transition: all 0.25s ease-in-out;
+  // transition: all 0.25s ease-in-out;
 }
 
-h1, .h1 {
+h1, .h1 { // LandingPage Title
   @include font_loader($primary-family-bold, 9, 'n');
   font-size: 2.25rem;
   line-height: 3.75rem;
+  font-weight: 900;
   @media (#{$min_tablets}) {
     font-size: 2.25rem;
   }
 }
 
-h2, .h2 {
-  @include font_loader($primary-family-bold, 9, 'n');
+h2, .h2 { // Details Title, Header Title
+  @include font_loader($primary-family-bold, 5, 'n');
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  @media (#{$min_tablets}) {
+    font-size: 2.25rem;
+  }
+}
+
+h3, .h3 { // Thumbnail Title, Page Buttons, Next Button, LandingPage Button
+  @include font_loader($primary-family-bold, 5, 'n');
   font-size: 1.5rem;
-  line-height: 1.75rem;
+  line-height: 1.5rem;
   @media (#{$min_tablets}) {
     font-size: 1.5rem;
   }
 }
 
-h3, .h3 {
-  @include font_loader($primary-family-bold, 9, 'n');
-  font-size: 1.125rem;
-  line-height: 1.5rem;
+h4, .h4 { // Details Subtitles, Search Bar Selections
+  @include font_loader($primary-family, 5, 'n');
+  font-size: 1.1875rem;
+  line-height: 1.75rem;
   @media (#{$min_tablets}) {
-    font-size: 1.125rem;
+    font-size: 1.1875rem;
   }
 }
 
-h4, .h4 {
-  @include font_loader($primary-family, 4, 'n');
+h5, .h5 { // Thumbnail Subtitle,
+  @include font_loader($primary-family, 5, 'n');
   font-size: 1rem;
-  line-height: 1.75rem;
+  line-height: 1.125rem;
   @media (#{$min_tablets}) {
     font-size: 1rem;
   }
 }
 
-h5, .h5 {
-  @include font_loader($primary-family, 6, 'n');
-  font-size: 0.8125rem;
+h6, .h6 { // Search Bar Categories
+  @include font_loader($primary-family-bold, 5, 'n');
+  font-size: 1rem;
   line-height: 1.125rem;
-  letter-spacing: 0.1625rem;
+  letter-spacing: 0.35px;
+  line-height: 1.8rem;
+  color: $gray;
   @media (#{$min_tablets}) {
-    font-size: 0.8125rem;
+    font-size: 1rem;
   }
 }
 
-h6, .h6 {
-  @include font_loader($primary-family-bold, 9, 'n');
-  font-size: 0.8125rem;
-  line-height: 1.125rem;
-  text-transform: uppercase;
-  @media (#{$min_tablets}) {
-    font-size: 0.8125rem;
-  }
-}
-
-.sectionBody {
+.sectionBody { // Details Content
   @include font_loader($primary-family, 3, 'n');
-  line-height: 2.1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  @media (#{$min-tablets}) {
+    font-size: 1rem;
+  }
+}
+
+.bold {
+  @include font_loader($primary-family, 7, 'n');
 }
 
 .remark-content, .remark_content {

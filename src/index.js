@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from "react-router-dom";
 
+import './styles/app.scss';
+import * as index from './index.module.scss'
 import Header from './components/Header'
 import LandingPage from './pages/LandingPage'
 import Results from './pages/Results'
 import Details from './pages/Details'
-
-import './styles/app.scss';
-import * as index from './index.module.scss'
 
 class App extends Component {
   constructor(props) {

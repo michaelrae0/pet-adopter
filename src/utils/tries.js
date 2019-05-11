@@ -1,5 +1,5 @@
 import allBreeds from './breeds'
-import { toTitleCase } from './strings'
+import titleCase from 'title-case'
 
 class Node {
   constructor(value = '') {
@@ -59,7 +59,6 @@ class Node {
     const isCharInChildren = (str && childrenArr.indexOf(char) !== -1); // char exists in children
 
     // work through str one char at a time until its empty
-    // if full str is an end, record it
     if (isCharInChildren) {
       const charNode = this.children[char];
       const deeperChildren = charNode.getChildrenOf(str.slice(1), history + char);
@@ -125,16 +124,16 @@ allBreeds.forEach( elem => breedsTrie.put(elem.breed, elem.type) )
 
 const typesTrieClient = {
   startsWith(str) {
-    return typesTrie.getChildrenOf(toTitleCase(str));
+    return typesTrie.getChildrenOf(titleCase(str));
   },
 }
 
 const breedsTrieClient = {
   startsWith(str) {
-    return breedsTrie.getChildrenOf(toTitleCase(str));
+    return breedsTrie.getChildrenOf(titleCase(str));
   },
   getType(str) {
-    return breedsTrie.getData(toTitleCase(str))
+    return breedsTrie.getData(titleCase(str))
   }
 }
 
