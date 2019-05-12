@@ -33,7 +33,7 @@ class App extends Component {
           {!onLandingPage && <Header />}
           <div className={index.main}>
             <Route exact path='/' component={LandingPage} />
-            <Route path='/search/:type/:breed?/:page?' component={Results} />
+            <Route path='/search/:type/:breed?/:zip?/:page?' component={Results} />
             <Route path='/details/:searchType/:id' component={Details} />
           </div>
         </div>

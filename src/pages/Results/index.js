@@ -34,12 +34,16 @@ export default class Results extends React.Component {
   }
 
   componentDidMount() {
-    const { type, breed, page } = this.props.match.params;
-    
+    const { type, breed, zip, page } = this.props.match.params;
+    console.log(`zip: ${zip}`)
     let params = {
       limit: 16,
       page: page ? page : 1,
     };
+    if (/^\d{5}$/.test(zip)) {
+      params['location'] = zip
+      params['distance'] = 20 //radius
+    }
 
     // Animals
     if (type !== 'shelters') {
@@ -91,7 +95,7 @@ export default class Results extends React.Component {
 
   render() {
     const { animals, orgs, pagination } = this.state;
-    const { type, breed } = this.props.match.params;
+    const { type, breed, zip } = this.props.match.params;
     const category = type === 'shelters' ? 'shelters' : 'animals' 
 
     if (this.state.isLoading) return <Loading />;
@@ -138,7 +142,7 @@ export default class Results extends React.Component {
                 return (
                   <Link
                     className={classnames(results.pages__page_btn, {[results.pages_number__active]: i === pagination.current_page})}
-                    to={{ pathname: `/search/${type}/${breed ? breed : 'all'}/${i}` }}
+                    to={{ pathname: `/search/${type}/${breed ? breed : 'all'}/${zip ? zip : 'defaultlocation'}/${i}` }}
                     key={i}
                   >
                     <H3 className={results.pages__page_text} text={i} bold />
@@ -149,7 +153,7 @@ export default class Results extends React.Component {
             
             <Link
               className={results.pages__next_btn}
-              to={{ pathname: `/search/${type}/${breed ? breed : 'all'}/${+pagination.current_page + 1}` }}
+              to={{ pathname: `/search/${type}/${breed ? breed : 'all'}/${zip ? zip : 'defaultlocation'}/${+pagination.current_page + 1}` }}
             >
               <H3 className={results.pages__next_text} text='Next' bold />
             </Link>
