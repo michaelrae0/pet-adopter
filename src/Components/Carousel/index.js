@@ -100,40 +100,35 @@ export default class Carousel extends React.Component {
 
     return (
       <section className={cara.section}>
-        <Row className={cara.row}>
-          <div className={cara.carousel}>
-            <img src={caraPhotos[currentIndex].full} alt='' className={cara.image} />
+        <Row className={cara.cara__row}>
+          <div className={cara.cara__image_container}>
+            <img src={caraPhotos[currentIndex].full} alt='' className={cara.cara__image} />
           </div>
         </Row>
 
-        <div className={cara.preview_container}>
-          <div
-            className={classnames(cara.arrow_container, cara.arrow_container_back, {[cara.arrow_container__active]: backAvailable})}
-            onClick={() => this.handleArrowClick(false)}
-          >
-            <ArrowSVG className={classnames(cara.arrow, cara.arrow_back)} key={2} />
+        <div className={cara.previews__container}>
+
+          <div className={classnames(cara.arrow__container, cara.arrow__container_back, {[cara.arrow__container__active]: backAvailable})} onClick={() => this.handleArrowClick(false)}>
+            <ArrowSVG className={classnames(cara.arrow, cara.arrow__back)} key={2} />
           </div>
-          <Row className={cara.preview_row} noMargin>
+
+
+          <Row className={cara.previews__row} noMargin>
             <div className={cara.previews} >
               {caraPhotos.map( (photo, i) => {
                 
                 return (
-                  <div
-                    className={classnames(cara.preview_image_container, {[cara.preview_image_container__active]: i === currentIndex})}
-                    onClick={() => this.scrollCarousel(i)}
-                    key={i}
-                  >
-                    <img src={photo.medium} alt='' className={cara.preview_image} />
+                  <div className={classnames(cara.previews__image_container, {[cara.previews__image_container__active]: i === currentIndex})} onClick={() => this.scrollCarousel(i)} key={i}>
+                    <img src={photo.medium} alt='' className={cara.previews__image} />
                   </div>
                 )
               })}
             </div>
           </Row>
-          <div 
-            className={classnames(cara.arrow_container, cara.arrow_container_next, {[cara.arrow_container__active]: nextAvailable})}
-            onClick={() => this.handleArrowClick(true)}
-          >
-            <ArrowSVG className={classnames(cara.arrow, cara.arrow_next)} key={2} />
+
+
+          <div className={classnames(cara.arrow__container, cara.arrow__container_next, {[cara.arrow__container__active]: nextAvailable})} onClick={() => this.handleArrowClick(true)}>
+            <ArrowSVG className={classnames(cara.arrow, cara.arrow__next)} key={2} />
           </div>
         </div>
       </section>
