@@ -15,7 +15,7 @@ $gutter-desktop: 32px;
 
 // layout components
 .site__header {
-  z-index: 100;
+  z-index: 10000;
   background-color: $white;
   padding: 0 $header-gutter;
   height: $header-height-mobile;
