@@ -3,7 +3,6 @@ import classnames from 'classnames'
 
 import * as cara from './carousel.module.scss'
 import Row from '../Row'
-import { ReactComponent as ArrowSVG } from '../../images/Arrow.svg'
 
 export default class Carousel extends React.Component {
   constructor(props) {
@@ -11,7 +10,11 @@ export default class Carousel extends React.Component {
 
     this.state = {
       caraPhotos: [],
+      imageCollection: [],
+
+      imagesLoaded: false,
       currentIndex: 0,
+
       backAvailable: false,
       nextAvailable: false,
     }
@@ -19,24 +22,32 @@ export default class Carousel extends React.Component {
   
   componentWillMount() {
     let caraPhotos = [];
+    let imageCollection = [];
 
     if (!this.props.photos[0]) {
       caraPhotos = [{
         full: 'https://via.placeholder.com/900x700.png?text=No+Image+Available',
         medium: 'https://via.placeholder.com/900x700.png?text=No+Image+Available',
       }];
+      imageCollection.length = 1;
     }
     else {
       caraPhotos = this.props.photos;
+      imageCollection.length = caraPhotos.length;
     }
+    imageCollection.fill(null)
 
     this.setState({
       caraPhotos,
+      imageCollection,
     });
   }
 
   componentDidMount() {
-    this.scrollCarousel(0);
+    window.addEventListener('resize', () => this.handleImageClick(this.state.currentIndex, true))
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', () => this.handleImageClick(this.state.currentIndex, true))
   }
 
   updateArrowAvailability = (index, photos = this.state.caraPhotos) => {
@@ -70,67 +81,79 @@ export default class Carousel extends React.Component {
     this.scrollCarousel(newIndex);
   }
 
-  scrollCarousel = i => {
-    const previews = document.querySelector(`.${cara.previews}`);
-    const offset = (this.state.caraPhotos.length - 1) - (i * 2 );
-    const previewWidth = 180 + (16 * 0.15 * 2);
-    const padding = offset * previewWidth;
+  fetchImageWidths = () => {
+    const { imageCollection } = this.state;
 
-    if (padding > 0) {
-      previews.style.paddingLeft = padding + 'px';
-      previews.style.paddingRight = 0 + 'px';
+    let result = [];
+    for(let i = 0; i < imageCollection.length; i++) {
+      result.push(imageCollection[i].offsetWidth)
     }
-    else if (padding === 0) {
-      previews.style.paddingLeft = previewWidth + 'px';
-      previews.style.paddingRight = previewWidth + 'px';
+
+    return result
+  }
+
+  handleLoad = (i) => {
+    let collection = this.state.imageCollection;
+    collection[i] = 'loaded'
+
+    if (collection.indexOf(null) === -1) {
+      const imageCollection = document.getElementsByClassName(`${cara.cara__image}`)
+      this.setState({
+        imageCollection,
+      })
+      this.handleImageClick(0, false, imageCollection[0].offsetWidth)
     }
-    else {
-      previews.style.paddingLeft = 0 + 'px';
-      previews.style.paddingRight = -padding + 'px';
-    }
+  }
+  handleImageClick = (i, isScrollEvent, initialWidth = null) => {
+    const scrollingContainer = document.querySelector(`.${cara.cara__scrolling_container}`)
+    const viewport = document.querySelector(`.${cara.cara__viewport}`)
+
+    const imageWidths = !initialWidth && this.fetchImageWidths(); 
+    const clickedImage = initialWidth || imageWidths[i];
+    const viewportWidth = viewport.offsetWidth;
+    const widthBefore = i > 0 ? imageWidths.slice(0, i).reduce( (sum, width) => sum + width ) : 0;
+
+    const offsetLeft = (viewportWidth / 2 - (clickedImage / 2 + widthBefore)) / viewportWidth * 100;
+    scrollingContainer.style.left = offsetLeft + '%';
+    // remove laggy resizing
+    scrollingContainer.style.transition = isScrollEvent ? 'none' : 'left 0.35s ease-in-out';
 
     this.setState({
       currentIndex: i,
+      imagesLoaded: true,
     })
-    this.updateArrowAvailability(i)
   }
   
   render() {
-    const { caraPhotos, currentIndex, backAvailable, nextAvailable } = this.state;
+    const { caraPhotos, imagesLoaded, currentIndex } = this.state;
+
+    const formattedContainers = photos => {
+      return photos.map( (photo, i) => {
+        return (
+          <div className={classnames(cara.cara__image_container, {[cara.cara__image_container__active]: currentIndex === i})} key={i}>
+            <img 
+              src={photo.full} 
+              alt='' 
+              className={cara.cara__image} 
+              onLoad={() => this.handleLoad(i)}
+              onClick={() => this.handleImageClick(i)}
+            />
+          </div>
+        )
+      })
+    }
 
     return (
       <section className={cara.section}>
-        <Row className={cara.cara__row}>
-          <div className={cara.cara__image_container}>
-            <img src={caraPhotos[currentIndex].full} alt='' className={cara.cara__image} />
+        <Row className={cara.cara__row} noMargin>
+          <div className={cara.cara__viewport}>
+            <div className={classnames(cara.cara__scrolling_container, {[cara.cara__scrolling_container__loading]: !imagesLoaded})} >
+              
+              {formattedContainers(caraPhotos)}
+
+            </div>
           </div>
         </Row>
-
-        <div className={cara.previews__container}>
-
-          <div className={classnames(cara.arrow__container, cara.arrow__container_back, {[cara.arrow__container__active]: backAvailable})} onClick={() => this.handleArrowClick(false)}>
-            <ArrowSVG className={classnames(cara.arrow, cara.arrow__back)} key={2} />
-          </div>
-
-
-          <Row className={cara.previews__row} noMargin>
-            <div className={cara.previews} >
-              {caraPhotos.map( (photo, i) => {
-                
-                return (
-                  <div className={classnames(cara.previews__image_container, {[cara.previews__image_container__active]: i === currentIndex})} onClick={() => this.scrollCarousel(i)} key={i}>
-                    <img src={photo.medium} alt='' className={cara.previews__image} />
-                  </div>
-                )
-              })}
-            </div>
-          </Row>
-
-
-          <div className={classnames(cara.arrow__container, cara.arrow__container_next, {[cara.arrow__container__active]: nextAvailable})} onClick={() => this.handleArrowClick(true)}>
-            <ArrowSVG className={classnames(cara.arrow, cara.arrow__next)} key={2} />
-          </div>
-        </div>
       </section>
     )
   }
