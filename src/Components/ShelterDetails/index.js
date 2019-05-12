@@ -31,8 +31,8 @@ const ShelterDetails = ({ info }) => {
 
           <div className={details.content}>
             {(mission_statement || adoption.policy) && <div className={details.primary}>
-              <SectionBody className={details.statement} text={mission_statement} />
-              <SectionBody text={adoption.policy} />
+              <SectionBody className={details.primary__subtitle} text={mission_statement} />
+              <SectionBody className={details.primary__subtitle} text={adoption.policy} />
             </div>}
 
             <div className={details.secondary}>
