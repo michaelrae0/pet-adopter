@@ -36,10 +36,12 @@ h1, .h1 { // LandingPage Title
   }
 }
 
-h2, .h2 { // Details Title, Header Title
+h2, .h2 { // Details Title
   @include font_loader($primary-family-bold, 5, 'n');
   font-size: 2.25rem;
   line-height: 2.5rem;
+  letter-spacing: 1px;
+  color: $primary;
   @media (#{$min_tablets}) {
     font-size: 2.25rem;
   }

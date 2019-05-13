@@ -61,15 +61,21 @@
     background-color: $white-dark;
   
     &__active {
-      color: $primary;
+      background-color: $white-darker;
+      .pages__page_text {
+        color: $secondary;
+      }
     }
     &:hover {
       background-color: $white-darker;
 
       .pages__page_text {
-        color: $primary;
+        color: $secondary;
       }
     }
+  }
+  &__page_text {
+    color: $primary;
   }
 
   &__next_btn {
@@ -86,14 +92,18 @@
   
     &:hover {
       background-color: $white-darker;
+      // border-color: $secondary;
       
       .pages__next_text {
-        color: $primary;
+        color: $secondary;
       }
     }
 
     @media (#{$max-tablets}) {
       display: none;
     }
+  }
+  &__next_text {
+    color: $primary;
   }
 }

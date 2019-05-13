@@ -16,6 +16,11 @@ $width-desktop: 239px;
   &:hover {
     background-color: $white-dark;
 
+    .image {
+      transform: scale(1.05);
+      transition: all 0.6s ease-in-out;
+    }
+
     .title {
       color: $secondary;
     }
@@ -62,6 +67,7 @@ $width-desktop: 239px;
 .title {
   display: inline-block;
   margin-bottom: 0.25rem;
+  color: $primary;
 
   @include visibleLines(1.9rem, 1);
 }
