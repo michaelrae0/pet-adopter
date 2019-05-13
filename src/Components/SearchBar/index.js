@@ -118,7 +118,7 @@ export default class SearchBar extends React.Component {
       location += `/${type}/all/${filteredZip}`
     }
 
-    window.location.href = location
+    this.props.history.push(location)
     e.preventDefault()
   }
 
@@ -131,6 +131,7 @@ export default class SearchBar extends React.Component {
       typeSuggestions,
       isBarActive,
     } = this.state;
+    console.log(this.props.history)
 
     const autocompleteCategory = (arr, name) => (
       <div className={bar.autocomplete__category}>

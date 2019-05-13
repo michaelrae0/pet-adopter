@@ -30,7 +30,6 @@ export default class LandingPage extends React.Component {
   render() {
     const image = require('../../images/Running_Dog_Background.jpg');
     const backgroundImage = `url(${image})`
-
     return (
       <section className={landing.section} style={{backgroundImage}} >
         <Container>
@@ -39,7 +38,7 @@ export default class LandingPage extends React.Component {
               className={landing.title}
               text='Find Your Next Best Friend'
             />
-            <SearchBar isFullSized />
+            <SearchBar isFullSized history={this.props.history} />
           </Row>
         </Container>
       </section>

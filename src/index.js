@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import './styles/app.scss';
 import * as index from './index.module.scss'
@@ -10,32 +10,16 @@ import Results from './pages/Results'
 import Details from './pages/Details'
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state={
-      onLandingPage: false,
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      onLandingPage: window.location.pathname === '/',
-    })
-  }
-
   render() {
-    const { onLandingPage } = this.state;
-
     return (
-      <BrowserRouter forceRefresh>
+      <BrowserRouter forceRefresh basename={process.env.PUBLIC_URL}>
         <div className={index.home_container} >
-          {!onLandingPage && <Header />}
-          <div className={index.main}>
-            <Route exact path='/' component={LandingPage} />
-            <Route path='/search/:type/:breed?/:zip?/:page?' component={Results} />
-            <Route path='/details/:searchType/:id' component={Details} />
-          </div>
+          <Switch>
+            <Route exact path={`/`} component={LandingPage} />
+            <Route component={Header} />
+          </Switch>
+          <Route exact path={`/search/:type/:breed?/:zip?/:page?`} component={Results} />
+          <Route path='/details/:searchType/:id' component={Details} />
         </div>
       </BrowserRouter>
     );
