@@ -5,10 +5,9 @@ import classnames from 'classnames'
 import * as header from './header.module.scss'
 import Container from '../Container'
 import Row from '../Row'
-import logo from '../../images/paw-icon.png'
 import SearchBar from '../SearchBar'
-import { ReactComponent as SearchSVG } from '../../images/Search.svg'
-import { H2 } from '../Typography'
+import { ReactComponent as FishSVG } from '../../images/fish.svg'
+import { ReactComponent as SearchSVG } from '../../images/search-icon.svg'
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -73,16 +72,8 @@ export default class Header extends React.Component {
         <Container className={header.container}>
           <Row className={header.row}>
             <Link to='/'>
-              <div
-                className={classnames(header.box__left)}
-                onClick={() => this.setState({ redirect: true })}
-              >
-                <img 
-                  src={logo} 
-                  alt='logo' 
-                  className={header.logo}
-                />
-                <H2 text={`Pet Adopter`} className={header.site_name} />
+              <div className={classnames(header.box__left)} onClick={() => this.setState({ redirect: true })} >
+                <FishSVG className={header.logo} />
               </div>
             </Link>
             <div className={header.box__right } >

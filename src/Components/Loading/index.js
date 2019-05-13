@@ -6,7 +6,7 @@ import { ReactComponent as LoadingSVG } from '../../images/Loading.svg'
 
 const Loading = () => (
   <Row className={loading.container} noMargin>
-    <LoadingSVG />
+    <LoadingSVG className={loading.svg} />
   </Row>
 )
 

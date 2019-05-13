@@ -82,7 +82,7 @@ class Thumbnail extends React.Component {
           </div>
 
           <div className={thumbnail.text_cont}>
-            <H3 className={thumbnail.title} text={titleCase(title)} />
+            <H3 className={thumbnail.title} text={titleCase(title)} bold />
             {subtitles.map( line => {
               return (
                 <H5 className={thumbnail.subtitle} key={String(id) + line.slice(0, 3)} text={line}/>

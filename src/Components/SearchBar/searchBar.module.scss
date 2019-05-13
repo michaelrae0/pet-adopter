@@ -4,19 +4,20 @@
 $btn-width: 110px;
 $full-height: 55px;
 
-$zip-width: 90px;
-$input-width: 340px - $zip-width;
-$desktop-input-width: calc(100% - #{$zip-width} - #{$btn-width});
+$form-max-width: 350px;
 $desktop-form-max-width: 900px;
+$zip-width: 90px;
+$input-width: $form-max-width - $zip-width;
+$desktop-input-width: calc(100% - #{$zip-width} - #{$btn-width});
 
 .form {
   position: relative;
   height: 45px;
-  max-width: 340px;
+  width: $form-max-width;
 
   &__full_sized {
     height: $full_height;
-    max-width: $desktop-form-max-width;
+    width: $desktop-form-max-width;
   }
 }
 

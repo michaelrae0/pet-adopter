@@ -35,7 +35,7 @@ export default class Results extends React.Component {
 
   componentDidMount() {
     const { type, breed, zip, page } = this.props.match.params;
-    console.log(`zip: ${zip}`)
+
     let params = {
       limit: 16,
       page: page ? page : 1,
@@ -141,7 +141,7 @@ export default class Results extends React.Component {
               {this.generatePages(pagination.current_page, Math.min(pagination.total_pages, 10000)).map( i => {
                 return (
                   <Link
-                    className={classnames(results.pages__page_btn, {[results.pages_number__active]: i === pagination.current_page})}
+                    className={classnames(results.pages__page_btn, {[results.pages__page_btn__active]: i === pagination.current_page})}
                     to={{ pathname: `/search/${type}/${breed ? breed : 'all'}/${zip ? zip : 'defaultlocation'}/${i}` }}
                     key={i}
                   >

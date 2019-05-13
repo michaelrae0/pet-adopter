@@ -8,7 +8,7 @@ $header-height: 90px;
 $image-diameter-mobile: 50px;
 $image-diameter: 60px;
 
-$search-icon-diameter: 40px;
+$search-icon-diameter: 35px;
 
 $header-gutter: 24px;
 $gutter-desktop: 32px;
@@ -71,11 +71,11 @@ $gutter-desktop: 32px;
 
 .logo {
   height: $image-diameter-mobile;
-  margin: 0 0.5rem 0.5rem -0.5rem;
+  width: 200px;
   
   @media (#{$min-tablets}) {
     height: $image-diameter;
-    margin-bottom: 0.7rem;
+    width: 250px;
   }
 }
 
@@ -101,7 +101,6 @@ $gutter-desktop: 32px;
 
   &:hover {
     cursor: pointer;
-    box-shadow: 1px 1px 3px #ccc;
   }
 
   @media (#{$min-tablets}) {
