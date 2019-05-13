@@ -4,7 +4,6 @@ import titleCase from 'title-case'
 import * as details from '../../pages/Details/details.module.scss'
 import Container from '../Container'
 import Row from '../Row'
-import Bullet from '../Bullet'
 import { H2, H4, SectionBody } from '../Typography'
 
 const AnimalDetails = ({ info }) => {
@@ -43,14 +42,19 @@ const AnimalDetails = ({ info }) => {
     else return age;
   }
 
+  const formattedCoat = (coat) => coat ? `${coat} Coat` : null;
+
+  const Bullet = () => <span style={{ margin: '0 0.6rem' }}>•</span>;
+
   const bulletSeparatedLine = (...strings) => {
     return (
       <>
-        {strings.map( (string, i) => (
-          i === strings.length - 1 ? 
+        {strings.map( (string, i) => {
+          if (!string) return null;
+          else return i === strings.length - 1 ? 
           <React.Fragment key={i}>{string}</React.Fragment> : 
           <React.Fragment key={i}>{string}<Bullet/></React.Fragment>
-        ))}
+        })}
       </>
     )
   }
@@ -62,7 +66,7 @@ const AnimalDetails = ({ info }) => {
           <div className={details.header}>
             <H2 className={details.header__title} text={`Meet ${name}`} />
             <H4 className={details.header__subtitle} text={bulletSeparatedLine(formattedBreed(breeds), cityState)}/>
-            <H4 className={details.header__content} text={bulletSeparatedLine(formattedAge(age, info.type), gender, `${coat} Coat`, titleCase(status))}/>
+            <H4 className={details.header__content} text={bulletSeparatedLine(formattedAge(age, info.type), gender, formattedCoat(coat), titleCase(status))}/>
           </div>
 
           <div className={details.content}>

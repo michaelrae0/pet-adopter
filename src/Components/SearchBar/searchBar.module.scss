@@ -4,41 +4,88 @@
 $btn-width: 110px;
 $full-height: 55px;
 
-$input-width: 300px;
-$desktop-input-width: calc(100% - #{$btn-width});
-$desktop-max-width: 800px;
+$zip-width: 90px;
+$input-width: 340px - $zip-width;
+$desktop-input-width: calc(100% - #{$zip-width} - #{$btn-width});
+$desktop-form-max-width: 900px;
 
-.component {
-  width: 100%;
+.form {
   position: relative;
+  height: 45px;
+  max-width: 340px;
+
+  &__full_sized {
+    height: $full_height;
+    max-width: $desktop-form-max-width;
+  }
 }
 
 .input {
   padding: 0.5rem 0.7rem;
   font-size: 1.25rem;
+  float: left;
 
   width: $input-width;
   outline: none;
   border: 1px $gray-light solid;
   border-radius: 4px;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 
   &__full_sized {
-    float:left;
     height: $full-height;
     width: $desktop-input-width;
-    max-width: $desktop-max-width;
 
     margin: 0;
     padding-left: 1rem;
 
     border: none;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    
   }
 
   &__active {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+  }
+}
+
+.zip {
+  padding: 0.5rem 0;
+  padding-left: 1.05rem;
+  font-size: 1.25rem;
+  width: $zip-width;
+  float: left;
+  border: 1px $gray-light solid;
+  border-left: none;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  outline: none;
+
+  &__full_sized {
+    height: $full-height;
+    border: none;
+    border-radius: 0;
+  }
+
+  &__border {
+    position: absolute;
+    right: $zip-width;
+    height: 60%;
+    top: 20%;
+    width: 1px;
+    background-color: $gray-light;
+
+    &__full_sized {
+      right: $btn-width + $zip-width;
+      height: 70%;
+      top: 15%;
+    }
+  }
+
+  &__empty {
+    padding-left: 1.8rem;
   }
 }
 
@@ -70,6 +117,7 @@ $desktop-max-width: 800px;
 .autocomplete {
   display: none;
   position: absolute;
+  top: 44px;
   border: 1px solid $gray-light;
   width: $input-width;
   max-height: 10rem;
@@ -85,7 +133,6 @@ $desktop-max-width: 800px;
   &__full_sized {
     top: $full-height;
     width: $desktop-input-width;
-    max-width: $desktop-max-width;
     max-height: 10rem;
 
     @media (#{$min-tablets}) {
@@ -131,4 +178,9 @@ $desktop-max-width: 800px;
   &__list {
     margin: 0.2rem 0;
   }
+}
+
+// just allows form submission by pressing enter
+.submit_on_enter {
+  display: none;
 }

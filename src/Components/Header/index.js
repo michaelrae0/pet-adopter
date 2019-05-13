@@ -28,7 +28,7 @@ export default class Header extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.fixSiteHeader);
-    window.addEventListener('resize', this.deactivateSiteHeader);
+    window.removeEventListener('resize', this.deactivateSiteHeader);
   }
 
   fixSiteHeader = () => {
@@ -82,13 +82,13 @@ export default class Header extends React.Component {
                   alt='logo' 
                   className={header.logo}
                 />
-                <H2 text={`Adopt a Pet`} className={header.site_name} />
+                <H2 text={`Pet Adopter`} className={header.site_name} />
               </div>
             </Link>
             <div className={header.box__right } >
               <SearchSVG className={header.search_icon} onClick={this.handleClick}/>
               <div className={classnames(header.search_container, {[header.search_container__active]: isNavActive})}>
-                <SearchBar className={classnames({[header.search_bar__active]: isNavActive})} />
+                <SearchBar className={classnames({[header.search_bar__active]: isNavActive})} history={this.props.history} />
               </div>
             </div>
           </Row>

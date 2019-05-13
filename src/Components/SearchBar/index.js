@@ -12,7 +12,7 @@ export default class SearchBar extends React.Component {
 
     this.state = {
       searchValue: '',
-      tempValue: '',
+      zipValue: '',
       breedSuggestions: [],
       typeSuggestions: [],
       selectedBreed: {},
@@ -21,11 +21,17 @@ export default class SearchBar extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('click', e => this.setState({ isBarActive: false }));
+    window.addEventListener('click', this.closeAutocomplete);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('click', e => this.setState({ isBarActive: false }));
+    window.removeEventListener('click', this.closeAutocomplete);
+  }
+
+  closeAutocomplete = () => {
+    this.setState({ 
+      isBarActive: false,
+    })
   }
 
   trieRequest = (str, client) => {
@@ -70,6 +76,13 @@ export default class SearchBar extends React.Component {
     });
   }
 
+  handleZipChange = e => {
+    // 1 to 5 digits
+    this.setState({
+      zipValue: /^\d{0,5}$/.test(e.target.value) ? e.target.value : this.state.zipValue,
+    })
+  }
+
   handleBarClick = e => {
     const flatTypes = this.trieRequest(e.target.value, typesTrieClient)
     const flatBreeds = this.trieRequest(e.target.value, breedsTrieClient)
@@ -83,6 +96,8 @@ export default class SearchBar extends React.Component {
   }
 
   handleSubmit = (e, node) => {
+    const { zipValue } = this.state;
+    const filteredZip = /^\d{5}$/.test(zipValue) ? zipValue : 'defaultlocation';
     const filteredBreed = removeParentheses(node.breed.toLowerCase());
     let location = '/search'
 
@@ -96,14 +111,14 @@ export default class SearchBar extends React.Component {
     if (type) {
       breed = encodeURI(breed)
       type = encodeURI(type);
-      location += `/${type}/${breed}`
+      location += `/${type}/${breed}/${filteredZip}`
     }
     else {
       type = encodeURI(breed);
-      location += `/${type}`
+      location += `/${type}/all/${filteredZip}`
     }
 
-    window.location.href = location
+    this.props.history.push(location)
     e.preventDefault()
   }
 
@@ -111,10 +126,12 @@ export default class SearchBar extends React.Component {
     const { isFullSized } = this.props;
     const {
       searchValue,
+      zipValue,
       breedSuggestions,
       typeSuggestions,
       isBarActive,
     } = this.state;
+    console.log(this.props.history)
 
     const autocompleteCategory = (arr, name) => (
       <div className={bar.autocomplete__category}>
@@ -140,16 +157,26 @@ export default class SearchBar extends React.Component {
     return (
       <form
         autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false"
-        className={bar.component}
+        className={classnames(bar.form, {[bar.form__full_sized]: isFullSized})}
         onSubmit={e => this.handleSubmit(e, { breed: searchValue, type: null })}
       >
 
         <input
           type='text' placeholder='Search'
           value={searchValue}
+          id={isFullSized ? 'fullBar' : 'smallBar' }
           className={classnames(bar.input, {[bar.input__full_sized]: isFullSized}, {[bar.input__active]: isBarActive})}
           onClick={this.handleBarClick}
           onChange={this.handleChange}
+        />
+
+        <div className={classnames(bar.zip__border, {[bar.zip__border__full_sized]: isFullSized})}/>
+
+        <input 
+          type='test' placeholder='Zip'
+          value={zipValue}
+          className={classnames(bar.zip, {[bar.zip__full_sized]: isFullSized}, {[bar.zip__empty]: !zipValue})}
+          onChange={this.handleZipChange}
         />
 
 
@@ -159,12 +186,14 @@ export default class SearchBar extends React.Component {
         </div>}
 
 
-        <div className={classnames(bar.autocomplete, {[bar.autocomplete__active]: isBarActive}, {[bar.autocomplete__full_sized]: isFullSized})} onClick={e => e.stopPropagation()}>
+        <div id={isFullSized ? 'fullAuto' : 'smallAuto'} className={classnames(bar.autocomplete, {[bar.autocomplete__active]: isBarActive}, {[bar.autocomplete__full_sized]: isFullSized})} onClick={e => e.stopPropagation()}>
           {typeSuggestions.length > 0 && autocompleteCategory(typeSuggestions, 'Categories')}
           {breedSuggestions.length > 0 && autocompleteCategory(breedSuggestions, 'Breeds')}
           {!typeSuggestions.length && !breedSuggestions.length &&
           <H6 className={classnames(bar.autocomplete__title, bar.autocomplete__no_match)} text='No Matches'/>}
         </div>
+
+        <input type="submit" className={bar.submit_on_enter} />
 
       </form>
     )
