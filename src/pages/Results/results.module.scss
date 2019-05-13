@@ -1,6 +1,6 @@
 @import '../../styles/definitions/breakpoints';
 @import '../../styles/definitions/colors';
-@import '../../components/Thumbnail/thumbnail.module.scss';
+@import '../../Components/Thumbnail/thumbnail.module.scss';
 
 @mixin calculateWidth($width, $margin, $n) {
   width: calc(#{$width} * #{$n} + #{$margin} * 2 * #{$n});

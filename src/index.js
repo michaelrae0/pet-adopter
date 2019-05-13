@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import './styles/app.scss';
 import * as index from './index.module.scss'
-import Header from './components/Header'
+import Header from './Components/Header'
 import LandingPage from './pages/LandingPage'
 import Results from './pages/Results'
 import Details from './pages/Details'

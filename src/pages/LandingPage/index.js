@@ -2,10 +2,10 @@ import React from 'react'
 
 import * as landing from './landingPage.module.scss'
 import api from '../../utils/apiClient'
-import { H1 } from '../../components/Typography'
-import Container from '../../components/Container'
-import Row from '../../components/Row'
-import SearchBar from '../../components/SearchBar'
+import { H1 } from '../../Components/Typography'
+import Container from '../../Components/Container'
+import Row from '../../Components/Row'
+import SearchBar from '../../Components/SearchBar'
 
 export default class LandingPage extends React.Component {
   fetchBreeds = type => {

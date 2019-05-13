@@ -4,11 +4,11 @@ import classnames from 'classnames'
 
 import * as results from './results.module.scss'
 import api from '../../utils/apiClient.js'
-import Container from '../../components/Container'
-import Row from '../../components/Row'
-import Loading from '../../components/Loading'
-import Thumbnail from '../../components/Thumbnail'
-import { H3 } from '../../components/Typography'
+import Container from '../../Components/Container'
+import Row from '../../Components/Row'
+import Loading from '../../Components/Loading'
+import Thumbnail from '../../Components/Thumbnail'
+import { H3 } from '../../Components/Typography'
 
 export default class Results extends React.Component {
   constructor(props) {

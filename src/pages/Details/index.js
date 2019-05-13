@@ -1,10 +1,10 @@
 import React from 'react'
 
 import api from '../../utils/apiClient'
-import Loading from '../../components/Loading'
-import Carousel from '../../components/Carousel'
-import AnimalDetails from '../../components/AnimalDetails'
-import ShelterDetails from '../../components/ShelterDetails'
+import Loading from '../../Components/Loading'
+import Carousel from '../../Components/Carousel'
+import AnimalDetails from '../../Components/AnimalDetails'
+import ShelterDetails from '../../Components/ShelterDetails'
 
 export default class Details extends React.Component {
   constructor(props) {
