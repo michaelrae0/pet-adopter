@@ -1,4 +1,5 @@
 import React from 'react'
+import queryString from 'query-string'
 
 import * as details from './details.module.scss'
 import api from '../../utils/apiClient'
@@ -18,12 +19,13 @@ export default class Details extends React.Component {
   }
 
   componentDidMount() {
-    const { id, searchType } = this.props.match.params;
+    const searchParams = queryString.parse(this.props.location.search);
+    const { category, id } = searchParams;
 
     const params = { id };
 
     // Choose b/t animal and org details
-    if (searchType === 'animals') {
+    if (category === 'animals') {
       api.animal(params)
         .then( ({data}) => {
           console.log('Animal details:')
@@ -34,7 +36,7 @@ export default class Details extends React.Component {
           })
         })
     }
-    if (searchType === 'shelters') {
+    if (category === 'shelters') {
       api.org(params)
         .then( ({data}) => {
           console.log('Shelter details:')
@@ -49,14 +51,15 @@ export default class Details extends React.Component {
   
   render() {
     const { info, isLoading } = this.state ;
-    const { searchType } = this.props.match.params;
+    const searchParams = queryString.parse(this.props.location.search);
+    const { category } = searchParams;
 
     if (isLoading) return <Loading/>;
 
     return (
       <div className={details.page_wrapper}>
         <Carousel photos={info.photos} />
-        { searchType === 'animals' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
+        { category === 'animals' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
       </div>
     )
   }

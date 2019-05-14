@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
+import queryString from 'query-string'
 
 import * as results from './results.module.scss'
 import api from '../../utils/apiClient.js'
@@ -8,6 +9,7 @@ import Container from '../../Components/Container'
 import Row from '../../Components/Row'
 import Loading from '../../Components/Loading'
 import Thumbnail from '../../Components/Thumbnail'
+import { addSearchParams } from '../../utils/strings'
 import { H3 } from '../../Components/Typography'
 
 export default class Results extends React.Component {
@@ -34,7 +36,8 @@ export default class Results extends React.Component {
   }
 
   componentDidMount() {
-    const { type, breed, zip, page } = this.props.match.params;
+    const searchParams = queryString.parse(this.props.location.search)
+    const { type, breed, zip, page } = searchParams;
 
     let params = {
       limit: 16,
@@ -95,7 +98,8 @@ export default class Results extends React.Component {
 
   render() {
     const { animals, orgs, pagination } = this.state;
-    const { type, breed, zip } = this.props.match.params;
+    const searchParams = queryString.parse(this.props.location.search);
+    const { type, breed, zip } = searchParams;
     const { persistentZip } = this.props.location.state;
     const category = type === 'shelters' ? 'shelters' : 'animals' 
 
@@ -146,7 +150,7 @@ export default class Results extends React.Component {
                   <Link
                     className={classnames(results.pages__page_btn, {[results.pages__page_btn__active]: i === pagination.current_page})}
                     to={{ 
-                      pathname: `/search/${type}/${breed ? breed : 'all'}/${zip ? zip : 'defaultlocation'}/${i}`,
+                      pathname: `/search${addSearchParams(['type', type,     'breed', breed ? breed : '',     'zip', zip ? zip : '',     'page', i], true)}`,
                       state: {persistentZip: persistentZip ? persistentZip : ''},
                     }}
                     key={i}
@@ -160,7 +164,7 @@ export default class Results extends React.Component {
             <Link
               className={results.pages__next_btn}
               to={{ 
-                pathname: `/search/${type}/${breed ? breed : 'all'}/${zip ? zip : 'defaultlocation'}/${+pagination.current_page + 1}`,
+                pathname: `/search${addSearchParams(['type', type,     'breed', breed ? breed : '',     'zip', zip ? zip : '',     'page', +pagination.current_page + 1], true)}`,
                 state: {persistentZip: persistentZip ? persistentZip : ''},
               }}
             >

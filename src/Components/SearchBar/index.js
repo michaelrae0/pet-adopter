@@ -3,7 +3,7 @@ import classnames from 'classnames'
 
 import * as bar from './searchBar.module.scss'
 import { breedsTrieClient, typesTrieClient } from '../../utils/tries'
-import { removeParentheses, encodeURI } from '../../utils/strings'
+import { addSearchParams, removeParentheses, encodeURI } from '../../utils/strings'
 import { H3, H4, H6 } from '../Typography'
 
 export default class SearchBar extends React.Component {
@@ -103,7 +103,7 @@ export default class SearchBar extends React.Component {
 
   handleSubmit = (e, node) => {
     const { zipValue } = this.state;
-    const filteredZip = /^\d{5}$/.test(zipValue) ? zipValue : 'defaultlocation';
+    const filteredZip = /^\d{5}$/.test(zipValue) ? zipValue : '';
     const filteredBreed = removeParentheses(node.breed.toLowerCase());
     let location = '/search'
 
@@ -117,11 +117,11 @@ export default class SearchBar extends React.Component {
     if (type) {
       breed = encodeURI(breed)
       type = encodeURI(type);
-      location += `/${type}/${breed}/${filteredZip}`
+      location += addSearchParams(['type', type,     'breed', breed,     'zip', filteredZip], true);
     }
     else {
       type = encodeURI(breed);
-      location += `/${type}/all/${filteredZip}`
+      location += addSearchParams(['type', type,     'zip', filteredZip], true);
     }
 
     this.props.history.push(location, {persistentZip: filteredZip ? filteredZip : ''})

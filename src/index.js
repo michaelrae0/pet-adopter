@@ -15,11 +15,11 @@ class App extends Component {
       <BrowserRouter forceRefresh basename={process.env.PUBLIC_URL}>
         <div className={index.home_container} >
           <Switch>
-            <Route exact path={`/`} component={LandingPage} />
+            <Route exact path='/' component={LandingPage} />
             <Route component={Header} />
           </Switch>
-          <Route exact path={`/search/:type/:breed?/:zip?/:page?`} component={Results} />
-          <Route path='/details/:searchType/:id' component={Details} />
+          <Route path='/search' component={Results} />
+          <Route path='/details' component={Details} />
         </div>
       </BrowserRouter>
     );

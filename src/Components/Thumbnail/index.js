@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import titleCase from 'title-case'
 
 import * as thumbnail from './thumbnail.module.scss'
+import { addSearchParams } from '../../utils/strings'
 import { H3, H5 } from '../Typography'
 
 class Thumbnail extends React.Component {
@@ -65,7 +66,7 @@ class Thumbnail extends React.Component {
       <div className={thumbnail.item} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} >
         <Link 
           to={{
-            pathname: `/details/${category}/${id}`,
+            pathname: `/details${addSearchParams(['category', category,     'id', id], true)}`,
             state: {persistentZip: persistentZip ? persistentZip : ''},
           }}>        
           <div className={thumbnail.image_container}>

@@ -9,6 +9,7 @@
     "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
     "petfinder-client": "^1.0.2",
+    "query-string": "^6.5.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",

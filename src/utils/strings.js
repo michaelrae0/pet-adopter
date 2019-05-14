@@ -1,3 +1,15 @@
+const addSearchParams = (arr, isStart = false) => {
+  let result = ''
+
+  for (let i = 0; i < arr.length; i = i + 2) {
+    if (arr[i+1] === '') continue;
+
+    result += (isStart ? '?' : '&') + `${arr[i]}=${arr[i+1]}`
+    isStart = false;
+  }
+  return result
+}
+
 const removeParentheses = str => {
   const split = str.trim().split('(')
   if (split.length > 1) split[1] = split[1].slice(0, split[1].length - 1);
@@ -20,6 +32,7 @@ const encodeURI = str => {
 }
 
 export {
+  addSearchParams,
   removeParentheses,
   encodeURI,
 }
