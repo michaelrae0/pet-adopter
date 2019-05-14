@@ -21,6 +21,12 @@ export default class SearchBar extends React.Component {
   }
 
   componentDidMount() {
+    const { persistentZip } = this.props;
+
+    this.setState({
+      zipValue: /^\d{5}$/.test(persistentZip) ? persistentZip : '',
+    });
+
     window.addEventListener('click', this.closeAutocomplete);
   }
 
@@ -118,7 +124,7 @@ export default class SearchBar extends React.Component {
       location += `/${type}/all/${filteredZip}`
     }
 
-    this.props.history.push(location)
+    this.props.history.push(location, {persistentZip: filteredZip ? filteredZip : ''})
     e.preventDefault()
   }
 

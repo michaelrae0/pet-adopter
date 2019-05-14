@@ -96,6 +96,7 @@ export default class Results extends React.Component {
   render() {
     const { animals, orgs, pagination } = this.state;
     const { type, breed, zip } = this.props.match.params;
+    const { persistentZip } = this.props.location.state;
     const category = type === 'shelters' ? 'shelters' : 'animals' 
 
     if (this.state.isLoading) return <Loading />;
@@ -116,6 +117,7 @@ export default class Results extends React.Component {
                     images={animal.photos}
                     id={animal.id}
                     key={animal.id}
+                    persistentZip={persistentZip}
                   />
                 );
               })}
@@ -130,6 +132,7 @@ export default class Results extends React.Component {
                     images={org.photos}
                     id={org.id}
                     key={org.id}
+                    persistentZip={persistentZip}
                   />
                 );
               })}
@@ -142,7 +145,10 @@ export default class Results extends React.Component {
                 return (
                   <Link
                     className={classnames(results.pages__page_btn, {[results.pages__page_btn__active]: i === pagination.current_page})}
-                    to={{ pathname: `/search/${type}/${breed ? breed : 'all'}/${zip ? zip : 'defaultlocation'}/${i}` }}
+                    to={{ 
+                      pathname: `/search/${type}/${breed ? breed : 'all'}/${zip ? zip : 'defaultlocation'}/${i}`,
+                      state: {persistentZip: persistentZip ? persistentZip : ''},
+                    }}
                     key={i}
                   >
                     <H3 className={results.pages__page_text} text={i} bold />
@@ -153,7 +159,10 @@ export default class Results extends React.Component {
             
             <Link
               className={results.pages__next_btn}
-              to={{ pathname: `/search/${type}/${breed ? breed : 'all'}/${zip ? zip : 'defaultlocation'}/${+pagination.current_page + 1}` }}
+              to={{ 
+                pathname: `/search/${type}/${breed ? breed : 'all'}/${zip ? zip : 'defaultlocation'}/${+pagination.current_page + 1}`,
+                state: {persistentZip: persistentZip ? persistentZip : ''},
+              }}
             >
               <H3 className={results.pages__next_text} text='Next' bold />
             </Link>

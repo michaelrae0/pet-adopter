@@ -8,8 +8,6 @@ import { H2, SectionBody } from '../Typography'
 const ShelterDetails = ({ info }) => {
   const {
     name,
-    mission_statement,
-    adoption,
     address,
     phone,
     email,

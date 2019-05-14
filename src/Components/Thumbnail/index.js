@@ -56,14 +56,18 @@ class Thumbnail extends React.Component {
   }
 
   render () {
-    const { images, title, subtitles, id, category } = this.props;
+    const { images, title, subtitles, id, category, persistentZip } = this.props;
     const { currentIndex } = this.state;
 
     const backgroundImage = `url(${this.filterImages(images[currentIndex])})`;
 
     return (
       <div className={thumbnail.item} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} >
-        <Link to={`/details/${category}/${id}`} >        
+        <Link 
+          to={{
+            pathname: `/details/${category}/${id}`,
+            state: {persistentZip: persistentZip ? persistentZip : ''},
+          }}>        
           <div className={thumbnail.image_container}>
             <div className={classnames(thumbnail.image, {[thumbnail.image__active]: !currentIndex}, 'background_image')} style={{ backgroundImage }} />
             {this.state.prepareImages &&

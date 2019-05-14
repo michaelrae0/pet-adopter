@@ -9,7 +9,6 @@ import { H2, H4, SectionBody } from '../Typography'
 const AnimalDetails = ({ info }) => {
   const {
     name,
-    description,
     breeds,
     coat,
     gender,
