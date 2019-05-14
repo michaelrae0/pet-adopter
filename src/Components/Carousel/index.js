@@ -3,6 +3,7 @@ import classnames from 'classnames'
 
 import * as cara from './carousel.module.scss'
 import Row from '../Row'
+import { fetchFallbackImage } from '../../utils/images';
 
 export default class Carousel extends React.Component {
   constructor(props) {
@@ -26,8 +27,8 @@ export default class Carousel extends React.Component {
 
     if (!this.props.photos[0]) {
       caraPhotos = [{
-        full: 'https://via.placeholder.com/900x700.png?text=No+Image+Available',
-        medium: 'https://via.placeholder.com/900x700.png?text=No+Image+Available',
+        full: fetchFallbackImage(this.props.type),
+        medium: fetchFallbackImage(this.props.type),
       }];
       imageCollection.length = 1;
     }

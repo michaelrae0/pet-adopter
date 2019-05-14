@@ -5,6 +5,7 @@ import titleCase from 'title-case'
 
 import * as thumbnail from './thumbnail.module.scss'
 import { addSearchParams } from '../../utils/strings'
+import { fetchFallbackImage } from '../../utils/images'
 import { H3, H5 } from '../Typography'
 
 class Thumbnail extends React.Component {
@@ -16,9 +17,9 @@ class Thumbnail extends React.Component {
       prepareImage: false,
     }
   }
-  filterImages = image => {
+  filterImages = (image, type) => {
     if (image) return image.medium;
-    return 'https://via.placeholder.com/300x250.png?text=Image+Unavailable'
+    else return fetchFallbackImage(type);
   }
 
   maxLen = (str, max) => {
@@ -57,10 +58,10 @@ class Thumbnail extends React.Component {
   }
 
   render () {
-    const { images, title, subtitles, id, category, persistentZip } = this.props;
+    const { images, title, subtitles, type, id, category, persistentZip } = this.props;
     const { currentIndex } = this.state;
 
-    const backgroundImage = `url(${this.filterImages(images[currentIndex])})`;
+    const backgroundImage = `url(${this.filterImages(images[currentIndex], type)})`;
 
     return (
       <div className={thumbnail.item} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave} >

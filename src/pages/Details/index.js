@@ -58,7 +58,7 @@ export default class Details extends React.Component {
 
     return (
       <div className={details.page_wrapper}>
-        <Carousel photos={info.photos} />
+        <Carousel photos={info.photos} type={info.type ? info.type : 'Shelter'} />
         { category === 'animals' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
       </div>
     )

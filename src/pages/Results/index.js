@@ -50,7 +50,7 @@ export default class Results extends React.Component {
 
     // Animals
     if (type !== 'shelters') {
-      params['type']  = type !== 'all' ? type : ''
+      params['type']  = type !== 'all' ? encodeURIComponent(type) : ''
       if (breed) params['breed'] = breed !== 'all' ? breed : ''
   
       // Calls api for animal info
@@ -118,6 +118,7 @@ export default class Results extends React.Component {
                     category={category}
                     title={animal.name}
                     subtitles={subtitles}
+                    type={animal.type}
                     images={animal.photos}
                     id={animal.id}
                     key={animal.id}
@@ -133,6 +134,7 @@ export default class Results extends React.Component {
                     category={category}
                     title={org.name}
                     subtitles={subtitles}
+                    type='Shelter'
                     images={org.photos}
                     id={org.id}
                     key={org.id}
