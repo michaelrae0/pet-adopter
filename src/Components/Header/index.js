@@ -82,7 +82,7 @@ export default class Header extends React.Component {
             <div className={header.box__right } >
               <SearchSVG className={header.search_icon} onClick={this.handleClick}/>
               <div className={classnames(header.search_container, {[header.search_container__active]: isNavActive})}>
-                <SearchBar className={classnames({[header.search_bar__active]: isNavActive})} history={this.props.history} persistentZip={persistentZip} />
+                <SearchBar history={this.props.history} persistentZip={persistentZip} />
               </div>
             </div>
           </Row>

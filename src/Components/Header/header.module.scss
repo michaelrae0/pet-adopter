@@ -112,9 +112,11 @@ $gutter-desktop: 32px;
   display: none;
   padding: 0;
   opacity: 0;
-  bottom: -9rem;
+  bottom: -8.0rem;
 
-  $trans-time: .35s ease-in-out;
+  $trans-time: 0.35s ease-in-out;
+  transition: opacity $trans-time, bottom $trans-time;
+
   &__active {
     display: block;
     opacity: 1;
@@ -126,7 +128,6 @@ $gutter-desktop: 32px;
     background-color: $white;
     border: 1px $gray-lighter solid;
     border-top: none;
-    box-shadow: 2px 4px 4px rgba(0,0,0, 0.15);
 
     transition: opacity $trans-time, bottom $trans-time;
   }
@@ -134,5 +135,6 @@ $gutter-desktop: 32px;
   @media (#{$min-tablets}) {
     display:block;
     opacity: 1;
+    transition: none;
   }
 }
