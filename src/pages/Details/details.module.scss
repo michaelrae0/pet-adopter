@@ -5,9 +5,22 @@ $details-gutter: 24px;
 $gutter-desktop: 32px;
 
 // layout components
+html {
+  overflow-y:auto;
+}
+.page_wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100% - 60px);
+
+  @media (#{$min-tablets}) {
+    min-height: calc(100% - 90px);
+  }
+}
 .section {
   padding: 2rem $details-gutter;
   background-color: $gray-lighter;
+  flex: 3;
 
   @media (#{$min-tablets}) {
     padding: 2rem $gutter-desktop;

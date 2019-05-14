@@ -70,9 +70,6 @@ const AnimalDetails = ({ info }) => {
           </div>
 
           <div className={details.content}>
-            <div className={details.primary} >
-              <SectionBody className={details.primary__subtitle} text={description} />
-            </div>
 
             <div className={details.secondary} >
               {contact.phone && <SectionBody className={details.secondary__subtitle} text={`${contact.phone}`} />}

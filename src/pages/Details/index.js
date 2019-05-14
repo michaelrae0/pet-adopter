@@ -1,5 +1,6 @@
 import React from 'react'
 
+import * as details from './details.module.scss'
 import api from '../../utils/apiClient'
 import Loading from '../../Components/Loading'
 import Carousel from '../../Components/Carousel'
@@ -53,7 +54,7 @@ export default class Details extends React.Component {
     if (isLoading) return <Loading/>;
 
     return (
-      <div>
+      <div className={details.page_wrapper}>
         <Carousel photos={info.photos} />
         { searchType === 'animals' ? <AnimalDetails info={info} /> : <ShelterDetails info={info} /> }
       </div>
