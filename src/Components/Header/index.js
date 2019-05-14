@@ -23,11 +23,13 @@ export default class Header extends React.Component {
   componentDidMount() {
     window.addEventListener('scroll', this.fixSiteHeader);
     window.addEventListener('resize', this.deactivateSiteHeader);
+    window.addEventListener('click', () => this.deactivateSiteHeader(true))
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.fixSiteHeader);
     window.removeEventListener('resize', this.deactivateSiteHeader);
+    window.removeEventListener('click', () => this.deactivateSiteHeader(true))
   }
 
   fixSiteHeader = () => {
@@ -49,8 +51,8 @@ export default class Header extends React.Component {
     }
   }
 
-  deactivateSiteHeader = () => {
-    if (window.innerWidth >= 993) {
+  deactivateSiteHeader = (isClick = false) => {
+    if (window.innerWidth >= 993 || (isClick && this.state.isNavActive === true)) {
       this.setState({
         isNavActive: false,
       })
@@ -68,7 +70,7 @@ export default class Header extends React.Component {
     const { isNavActive } = this.state;
 
     return (
-      <section className={classnames(header.site__header)}>
+      <section className={classnames(header.site__header)} onClick={e => e.stopPropagation()} >
         <Container className={header.container}>
           <Row className={header.row}>
             <Link to='/'>

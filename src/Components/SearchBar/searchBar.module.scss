@@ -14,10 +14,11 @@ $desktop-input-width: calc(100% - #{$zip-width} - #{$btn-width});
   position: relative;
   height: 45px;
   width: $form-max-width;
-
+  
   &__full_sized {
     height: $full_height;
-    width: $desktop-form-max-width;
+    width: 100%;
+    max-width: $desktop-form-max-width;
   }
 }
 
@@ -37,6 +38,7 @@ $desktop-input-width: calc(100% - #{$zip-width} - #{$btn-width});
   &__full_sized {
     height: $full-height;
     width: $desktop-input-width;
+    max-width: $desktop-input-width;
 
     margin: 0;
     padding-left: 1rem;

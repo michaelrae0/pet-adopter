@@ -110,21 +110,29 @@ $gutter-desktop: 32px;
 
 .search_container {
   display: none;
-  transition: all 0.25s;
+  padding: 0;
+  opacity: 0;
+  bottom: -9rem;
 
+  $trans-time: .35s ease-in-out;
   &__active {
     display: block;
+    opacity: 1;
     position: absolute;
-    right: 5px;
-    bottom: -4rem;
-    z-index: 1000;
-    background-color: rgba(100,100,100,0.1);
-    padding: 0.4rem 0.6rem;
-    border-radius: 5px;
-    box-shadow: 0 0 6px rgba(100,100,100,0.1);
+    right: 0px;
+    bottom: -5.48rem;
+    z-index: 11000;
+    padding: 1.0rem 1.5rem;
+    background-color: $white;
+    border: 1px $gray-lighter solid;
+    border-top: none;
+    box-shadow: 2px 4px 4px rgba(0,0,0, 0.15);
+
+    transition: opacity $trans-time, bottom $trans-time;
   }
 
   @media (#{$min-tablets}) {
     display:block;
+    opacity: 1;
   }
 }
