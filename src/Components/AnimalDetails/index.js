@@ -65,7 +65,7 @@ const AnimalDetails = ({ info }) => {
           <div className={details.header}>
             <H2 className={details.header__title} text={`Meet ${name}`} />
             <H4 className={details.header__subtitle} text={bulletSeparatedLine(formattedBreed(breeds), cityState)} bold/>
-            <H4 className={details.header__content} text={bulletSeparatedLine(formattedAge(age, info.type), gender, formattedCoat(coat), titleCase(status))}/>
+            <H4 className={details.header__content} text={bulletSeparatedLine(formattedAge(age, info.type), gender !== 'Unknown' ? gender : 'Unknown Gender', formattedCoat(coat), titleCase(status))}/>
           </div>
 
           <div className={details.content}>

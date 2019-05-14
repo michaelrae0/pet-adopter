@@ -100,7 +100,7 @@ export default class Results extends React.Component {
     const { animals, orgs, pagination } = this.state;
     const searchParams = queryString.parse(this.props.location.search);
     const { type, breed, zip } = searchParams;
-    const { persistentZip } = this.props.location.state;
+    const { persistentZip } = this.props.location.state ? this.props.location.state : '';
     const category = type === 'shelters' ? 'shelters' : 'animals' 
 
     if (this.state.isLoading) return <Loading />;

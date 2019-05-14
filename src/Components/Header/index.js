@@ -68,7 +68,7 @@ export default class Header extends React.Component {
   
   render() {
     const { isNavActive } = this.state;
-    const { persistentZip } = this.props.location.state;
+    const { persistentZip } = this.props.location.state ? this.props.location.state : '';
 
     return (
       <section className={classnames(header.site__header)} onClick={e => e.stopPropagation()} >
