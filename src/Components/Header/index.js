@@ -14,7 +14,6 @@ export default class Header extends React.Component {
     super(props);
 
     this.state = {
-      redirect: false,
       isNavFixed: false,
       isNavActive: false,
     }
@@ -74,8 +73,8 @@ export default class Header extends React.Component {
       <section className={classnames(header.site__header)} onClick={e => e.stopPropagation()} >
         <Container className={header.container}>
           <Row className={header.row}>
-            <Link to='/'>
-              <div className={classnames(header.box__left)} onClick={() => this.setState({ redirect: true })} >
+            <Link to={{ pathname: '/', state: { persistentZip: persistentZip }}}>
+              <div className={classnames(header.box__left)} >
                 <FishSVG className={header.logo} />
               </div>
             </Link>
