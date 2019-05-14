@@ -43,14 +43,13 @@ html {
   border-bottom: 1px $gray-light solid;
 
   &__title {
-    margin-bottom: 0.8rem
+    margin-bottom: 0.8rem;
   }
 
   &__subtitle {
     padding-left: 0.1rem;
-    margin-top: -0.7rem;
+    margin-top: -0.5rem;
     margin-bottom: 1rem;
-    color: $primary;
   }
 
   &__content {
