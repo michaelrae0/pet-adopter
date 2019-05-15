@@ -18,19 +18,23 @@ html {
   }
 }
 .section {
-  padding: 2rem $details-gutter;
+  padding: 0 $details-gutter;
   background-color: $gray-lighter;
   flex: 3;
 
   @media (#{$min-tablets}) {
-    padding: 2rem $gutter-desktop;
+    padding: 0 $gutter-desktop;
   }
 }
 .container {
-  border-radius: 1rem;
-  padding: $gutter-desktop;
   background-color: $white;
   max-width: 750px;
+  height: 100%;
+  padding: 2rem $gutter-desktop;
+
+  @media (#{$min-tablets}) {
+    padding: 2rem $gutter-desktop;
+  }
 }
 .row {
   max-width: 1000px;

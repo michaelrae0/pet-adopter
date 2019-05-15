@@ -34,7 +34,7 @@ export default class LandingPage extends React.Component {
     
     return (
       <section className={landing.section} style={{backgroundImage}} >
-        <Container>
+        <Container className={landing.container}>
           <Row className={landing.row}>
             <H1
               className={landing.title}
