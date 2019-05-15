@@ -2,7 +2,7 @@
 
 Feeling lonely? Need a friend? Adopt one!
 
-Work in progress
+https://pet-adopter-prod.herokuapp.com/ (Heroku server may take a minute to load)
 
 ## Installation
 
