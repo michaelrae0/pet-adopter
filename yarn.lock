@@ -7387,6 +7387,11 @@ petfinder-client@^1.0.2:
     is-node "^1.0.2"
     url "^0.11.0"
 
+phone-formatter@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/phone-formatter/-/phone-formatter-0.0.2.tgz#f3626c7d274860f014f70f43a87566a16b0e7ace"
+  integrity sha1-82JsfSdIYPAU9w9DqHVmoWsOes4=
+
 pify@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"

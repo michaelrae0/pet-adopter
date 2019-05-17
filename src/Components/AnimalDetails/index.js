@@ -1,5 +1,6 @@
 import React from 'react'
 import titleCase from 'title-case'
+import phoneFormatter from 'phone-formatter'
 
 import * as details from '../../pages/Details/details.module.scss'
 import Container from '../Container'
@@ -22,8 +23,10 @@ const AnimalDetails = ({ info }) => {
   const cityState = `${city}, ${state}`;
 
   const formattedBreed = breeds => {
-    const breed = breeds.secondary ? `${breeds.primary} & ${breeds.secondary} Mix` : 
-                  breeds.mixed     ? `${breeds.primary} Mix`                       : breeds.primary;
+    const breed = breeds.secondary                  ? `${breeds.primary} & ${breeds.secondary} Mix` : 
+                  breeds.primary === 'Mixed Breed'  ? `${breeds.primary}`                           : 
+                  breeds.mixed                      ? `${breeds.primary} Mix`                       :
+                  breeds.primary;
     return breed;
   }
 
@@ -42,6 +45,11 @@ const AnimalDetails = ({ info }) => {
   }
 
   const formattedCoat = (coat) => coat ? `${coat} Coat` : null;
+
+  const formattedPhoneNumbers = numbers => {
+    const formattedPhones = numbers.split(',').map( number => phoneFormatter.format(number.trim(), "(NNN) NNN-NNNN") )
+    return formattedPhones.join(', ');
+  }
 
   const Bullet = () => <span style={{ margin: '0 0.6rem' }}>•</span>;
 
@@ -71,7 +79,7 @@ const AnimalDetails = ({ info }) => {
           <div className={details.content}>
 
             <div className={details.secondary} >
-              {contact.phone && <SectionBody className={details.secondary__subtitle} text={`${contact.phone}`} />}
+              {contact.phone && <SectionBody className={details.secondary__subtitle} text={`${formattedPhoneNumbers(contact.phone)}`} />}
               {contact.email && <SectionBody 
                 className={details.secondary__subtitle} 
                 text={<a href={`mailto:${contact.email}`} className={details.secondary__email} >{contact.email}</a>} 

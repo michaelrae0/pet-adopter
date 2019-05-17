@@ -1,4 +1,5 @@
 import React from 'react'
+import phoneFormatter from 'phone-formatter'
 
 import * as details from '../../pages/Details/details.module.scss'
 import Container from '../Container'
@@ -14,8 +15,12 @@ const ShelterDetails = ({ info }) => {
   } = info;
 
   const formattedAddress = address => {
-    const cityState = `${address.city}, ${address.state}`;
-    return address.address1 ? `${address.address1}, ${cityState}` : cityState;
+    return `${address.city}, ${address.state}`;
+  }
+  
+  const formattedPhoneNumbers = numbers => {
+    const formattedPhones = numbers.split(',').map( number => phoneFormatter.format(number.trim(), "(NNN) NNN-NNNN") )
+    return formattedPhones.join(', ');
   }
  
   return (
@@ -31,7 +36,7 @@ const ShelterDetails = ({ info }) => {
 
             <div className={details.secondary}>
               <SectionBody className={details.secondary__subtitle} text={formattedAddress(address)}/>
-              {phone && <SectionBody className={details.secondary__subtitle} text={`${phone}`} />}
+              {phone && <SectionBody className={details.secondary__subtitle} text={`${formattedPhoneNumbers(phone)}`} />}
               {email && <SectionBody 
                 className={details.secondary__subtitle} 
                 text={<a href={`mailto:${email}`} className={details.secondary__email} >{email}</a>} 
