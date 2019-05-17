@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 
 import * as cara from './carousel.module.scss'
+import Container from '../Container'
 import Row from '../Row'
 import { fetchFallbackImage } from '../../utils/images';
 
@@ -144,6 +145,17 @@ export default class Carousel extends React.Component {
       })
     }
 
+    const formattedSubCara = photos => {
+      return photos.map( (photo, i) => {
+        return (
+          <div 
+            className={classnames(cara.subcara, {[cara.subcara__active]: currentIndex === i})} 
+            onClick={() => this.handleImageClick(i)}
+            key={i}/>
+        )
+      })
+    }
+
     return (
       <section className={cara.section}>
         <Row className={cara.cara__row} noMargin>
@@ -155,6 +167,13 @@ export default class Carousel extends React.Component {
             </div>
           </div>
         </Row>
+        <div className={cara.subcara__wrapper}>
+          <Container className={cara.subcara__container}>
+            <Row className={cara.subcara__row}>
+              {formattedSubCara(caraPhotos)}
+            </Row>
+          </Container>
+        </div>
       </section>
     )
   }

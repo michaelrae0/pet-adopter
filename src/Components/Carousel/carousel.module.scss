@@ -5,6 +5,7 @@ $cara-height: 300px;
 $cara-desktop-height: 500px;
 $base-shadow-color:  rgba(black, 0.50);
 $cara-shadows: 10px 0px 10px $base-shadow-color, -10px 0px 10px $base-shadow-color;
+$subcara-diameter: .75rem;
 
 $preview-width: 180px;
 $preview-horizontal-margin: 0.15rem;
@@ -21,7 +22,7 @@ $arrow-height: 60px;
   -moz-box-shadow: 0 0 7px #ccc;
   -webkit-box-shadow: 0 0 7px #ccc;
   box-shadow: 0 6px 7px -7px $gray;
-  background-color: $metal;
+  background-color: $gray-lighter;
 
   -webkit-user-select: none; /* webkit (safari, chrome) browsers */
   -moz-user-select: none; /* mozilla browsers */
@@ -145,6 +146,40 @@ $arrow-height: 60px;
         opacity: 1;
       }
     }
+  }
+}
+
+
+.subcara {
+  height: $subcara-diameter;
+  width: $subcara-diameter;
+  border-radius: $subcara-diameter / 2;
+  background-color: $gray-light;
+  margin: 0 0.28rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &__active {
+    background-color: $purple;
+  }
+
+  &__wrapper {
+    padding: 0 $gutter;
+    @media (#{$min-tablets}) {
+      padding: 0 $gutter-desktop;
+    }
+  }
+  &__container {
+    max-width: 750px;
+    background-color: $white;
+    padding: 1rem 0 0;
+  }
+  &__row {
+    display: flex;
+    justify-content: center;
+    
   }
 }
 

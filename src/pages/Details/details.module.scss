@@ -1,9 +1,6 @@
 @import '../../styles/definitions/breakpoints';
 @import '../../styles/definitions/colors';
 
-$details-gutter: 24px;
-$gutter-desktop: 32px;
-
 // layout components
 html {
   overflow-y:auto;
@@ -18,7 +15,7 @@ html {
   }
 }
 .section {
-  padding: 0 $details-gutter;
+  padding: 0 $gutter;
   background-color: $gray-lighter;
   flex: 3;
 
@@ -30,11 +27,7 @@ html {
   background-color: $white;
   max-width: 750px;
   height: 100%;
-  padding: 2rem $gutter-desktop;
-
-  @media (#{$min-tablets}) {
-    padding: 2rem $gutter-desktop;
-  }
+  padding: 1rem $gutter-desktop 2rem;
 }
 .row {
   max-width: 1000px;
