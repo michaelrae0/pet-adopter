@@ -22,7 +22,8 @@ $width-desktop: 239px;
     }
 
     .title {
-      color: $secondary;
+      transition: all 0.25s ease-in-out;
+      color: $purple-dark;
     }
   }
 

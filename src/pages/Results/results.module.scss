@@ -63,14 +63,14 @@
     &__active {
       background-color: $white-darker;
       .pages__page_text {
-        color: $secondary;
+        color: $purple-dark;
       }
     }
     &:hover {
       background-color: $white-darker;
 
       .pages__page_text {
-        color: $secondary;
+        color: $purple-dark;
       }
     }
   }
@@ -92,10 +92,10 @@
   
     &:hover {
       background-color: $white-darker;
-      // border-color: $secondary;
+      border-color: $purple-dark;
       
       .pages__next_text {
-        color: $secondary;
+        color: $purple-dark;
       }
     }
 
@@ -104,6 +104,6 @@
     }
   }
   &__next_text {
-    color: $primary;
+    color: $purple;
   }
 }
