@@ -25,11 +25,8 @@
 }
 
 .title {
-  // max-width: 20rem;
   margin-bottom: 1.4rem;
-  color: $white;
   letter-spacing: 2px;
-  @include stroke(2, black );
 
   @media (max-width: 400px) {
     max-width: 20rem;

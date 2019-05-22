@@ -29,11 +29,9 @@ export default class LandingPage extends React.Component {
 
   render() {
     const { persistentZip } = this.props.location.state ? this.props.location.state : '';
-    const image = require('../../images/Running_Dog_Background.jpg');
-    const backgroundImage = `url(${image})`
     
     return (
-      <section className={landing.section} style={{backgroundImage}} >
+      <section className={landing.section} >
         <Container className={landing.container}>
           <Row className={landing.row}>
             <H1

@@ -42,9 +42,7 @@ $desktop-input-width: calc(100% - #{$zip-width} - #{$btn-width});
 
     margin: 0;
     padding-left: 1rem;
-
-    border: none;
-    
+    border-right: none;
   }
 
   &__active {
@@ -68,7 +66,6 @@ $desktop-input-width: calc(100% - #{$zip-width} - #{$btn-width});
 
   &__full_sized {
     height: $full-height;
-    border: none;
     border-radius: 0;
   }
 
