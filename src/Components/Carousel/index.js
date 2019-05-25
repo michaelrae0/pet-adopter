@@ -86,7 +86,9 @@ export default class Carousel extends React.Component {
   fetchImageWidths = () => {
     const { imageCollection } = this.state;
 
+    // calculate every time incase images change width (mobile/desktop)
     let result = [];
+    // can't use forEach on collections
     for(let i = 0; i < imageCollection.length; i++) {
       result.push(imageCollection[i].offsetWidth)
     }
@@ -107,18 +109,23 @@ export default class Carousel extends React.Component {
     }
   }
   handleImageClick = (i, isScrollEvent, initialWidth = null) => {
+    const { imagesLoaded } = this.state;
+
+    // Fetch divs for width lookups and updating styles
     const scrollingContainer = document.querySelector(`.${cara.cara__scrolling_container}`)
     const viewport = document.querySelector(`.${cara.cara__viewport}`)
 
+    // initialWidth is only truthy when all images first finish loading
     const imageWidths = !initialWidth && this.fetchImageWidths(); 
     const clickedImage = initialWidth || imageWidths[i];
     const viewportWidth = viewport.offsetWidth;
     const widthBefore = i > 0 ? imageWidths.slice(0, i).reduce( (sum, width) => sum + width ) : 0;
 
-    const offsetLeft = (viewportWidth / 2 - (clickedImage / 2 + widthBefore)) / viewportWidth * 100;
-    scrollingContainer.style.left = offsetLeft + '%';
-    // remove laggy resizing
-    scrollingContainer.style.transition = isScrollEvent ? 'none' : 'left 0.35s ease-in-out';
+    const offsetX = viewportWidth / 2 - (clickedImage / 2 + widthBefore);
+    scrollingContainer.style.transform = `translateX(${offsetX}px)`;
+
+    // remove laggy resizing (isScrollEvent) and transition on first load (!imagesLoaded)
+    scrollingContainer.style.transition = isScrollEvent || !imagesLoaded ? 'none' : 'transform 0.35s ease-in-out';
 
     this.setState({
       currentIndex: i,
@@ -170,7 +177,9 @@ export default class Carousel extends React.Component {
         <div className={cara.subcara__wrapper}>
           <Container className={cara.subcara__container}>
             <Row className={cara.subcara__row}>
+
               {formattedSubCara(caraPhotos)}
+              
             </Row>
           </Container>
         </div>
