@@ -70,7 +70,7 @@ class Thumbnail extends React.Component {
             pathname: `/details${addSearchParams(['category', category,     'id', id], true)}`,
             state: {persistentZip: persistentZip ? persistentZip : ''},
           }}>        
-          <div className={thumbnail.image_container}>
+          <div className={thumbnail.image__container}>
             <div className={classnames(thumbnail.image, {[thumbnail.image__active]: !currentIndex}, 'background_image')} style={{ backgroundImage }} />
             {this.state.prepareImages &&
             images.map( (image, i) => {
@@ -85,6 +85,7 @@ class Thumbnail extends React.Component {
                 />
               )
             })}
+            {images.length > 1 && <div className={thumbnail.image__loading_bar} />}
           </div>
 
           <div className={thumbnail.text_cont}>
