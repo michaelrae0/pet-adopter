@@ -5,7 +5,7 @@ import phoneFormatter from 'phone-formatter'
 import * as details from '../../pages/Details/details.module.scss'
 import Container from '../Container'
 import Row from '../Row'
-import { H2, H4, SectionBody } from '../Typography'
+import { H1, H2, H3, H4, H5, SectionBody } from '../Typography'
 
 const AnimalDetails = ({ info }) => {
   const {
@@ -71,16 +71,16 @@ const AnimalDetails = ({ info }) => {
       <Container className={details.container} restricted >
         <Row className={details.row} noMargin>
           <div className={details.header}>
-            <H2 className={details.header__title} text={`Meet ${name}`} />
-            <H4 className={details.header__subtitle} text={bulletSeparatedLine(formattedBreed(breeds), cityState)} bold/>
+            <H1 className={details.header__title} text={titleCase(`Meet ${name}`)} />
+            <H4 className={details.header__subtitle} text={bulletSeparatedLine(formattedBreed(breeds), cityState)} />
             <H4 className={details.header__content} text={bulletSeparatedLine(formattedAge(age, info.type), gender !== 'Unknown' ? gender : 'Unknown Gender', formattedCoat(coat), titleCase(status))}/>
           </div>
 
           <div className={details.content}>
 
             <div className={details.secondary} >
-              {contact.phone && <SectionBody className={details.secondary__subtitle} text={`${formattedPhoneNumbers(contact.phone)}`} />}
-              {contact.email && <SectionBody 
+              {contact.phone && <H4 className={details.secondary__subtitle} text={`${formattedPhoneNumbers(contact.phone)}`} />}
+              {contact.email && <H4 
                 className={details.secondary__subtitle} 
                 text={<a href={`mailto:${contact.email}`} className={details.secondary__email} >{contact.email}</a>} 
               />}

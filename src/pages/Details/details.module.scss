@@ -40,23 +40,25 @@ html {
   border-bottom: 1px $gray-light solid;
 
   &__title {
-    margin-bottom: 0.8rem;
+    margin: 0 0 1.25rem 0;
+
+    &__reduced_margin {
+      margin: 0 0 0.8rem 0;
+    }
   }
 
   &__subtitle {
-    padding-left: 0.1rem;
-    margin-top: -0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
 
   &__content {
-    padding: 1rem 0;
+    padding: 1.25rem 0;
     border-top: 1px $gray-light solid;
   }
 }
 
 .content {
-  margin-top: 1rem;
+  margin-top: 1.56rem;
 }
 
 //primary
@@ -64,7 +66,7 @@ html {
   margin-bottom: 1rem;
 
   &__subtitle {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
 }
 
@@ -76,7 +78,7 @@ html {
   }
 
   &__subtitle {
-    margin-bottom: 0.2rem;
+    margin-bottom: 1rem
   }
 
   &__email {
