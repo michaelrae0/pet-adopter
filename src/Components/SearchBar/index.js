@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import * as bar from './searchBar.module.scss'
 import { breedsTrieClient, typesTrieClient } from '../../utils/tries'
 import { addSearchParams, removeParentheses, encodeURI } from '../../utils/strings'
-import { H3, H4, H6 } from '../Typography'
+import { H3, H5, H6 } from '../Typography'
 
 export default class SearchBar extends React.Component {
   constructor(props) {
@@ -151,7 +151,7 @@ export default class SearchBar extends React.Component {
               onMouseEnter={() => this.handleMouseOver(elem.breed)}
               onMouseLeave={() => this.handleMouseOver()}
             >
-              <H4 text={elem.breed}/>
+              <H5 text={elem.breed}/>
             </li>
           ))}
         </ul>

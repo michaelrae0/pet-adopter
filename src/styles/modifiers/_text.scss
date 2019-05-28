@@ -66,10 +66,10 @@ h4, .h4 { // Details Subtitles, Search Bar Selections
 
 h5, .h5 { // Thumbnail Subtitle,
   @include font_loader($primary-family, 5, 'n');
-  font-size: 1rem;
-  line-height: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.56rem;
   @media (#{$min_tablets}) {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 }
 

@@ -37,6 +37,7 @@ export default class LandingPage extends React.Component {
             <H1
               className={landing.title}
               text='Find Your Next Best Friend'
+              bold
             />
             <SearchBar isFullSized history={this.props.history} persistentZip={persistentZip} />
           </Row>
