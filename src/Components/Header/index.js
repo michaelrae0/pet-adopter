@@ -70,7 +70,7 @@ export default class Header extends React.Component {
     const { persistentZip } = this.props.location.state ? this.props.location.state : '';
 
     return (
-      <section className={classnames(header.site__header)} onClick={e => e.stopPropagation()} >
+      <header className={classnames(header.site__header)} onClick={e => e.stopPropagation()} >
         <Container className={header.container}>
           <Row className={header.row}>
             <Link to={{ pathname: '/', state: { persistentZip: persistentZip }}}>
@@ -86,7 +86,7 @@ export default class Header extends React.Component {
             </div>
           </Row>
         </Container>
-      </section>
+      </header>
     )
   }
 }

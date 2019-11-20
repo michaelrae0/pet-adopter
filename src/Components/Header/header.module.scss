@@ -18,7 +18,6 @@ $gutter-desktop: 32px;
   z-index: 10000;
   background-color: $white;
   padding: 0 $header-gutter;
-  height: $header-height-mobile;
   border-bottom: 1px solid $gray-lighter;
 
   &__transparent {
@@ -31,8 +30,11 @@ $gutter-desktop: 32px;
     top: 0;
     width: 100%;
     box-shadow: 3px 3px 1rem rgba(0,0,0, 0.15);
-    height: $header-height-mobile;
 
+    .container {
+      height: $header-height-mobile;
+    }
+    
     .logo {
       height: $image-diameter-mobile;
     }
@@ -40,12 +42,15 @@ $gutter-desktop: 32px;
 
   @media (#{$min-tablets}) {
     padding: 0 $gutter-desktop;
-    height: $header-height;
   }
 }
 
 .container {
-  height: 100%;
+  height: $header-height-mobile;
+
+  @media (#{$min-tablets}) {
+    height: $header-height;
+  }
 }
 
 .row {
