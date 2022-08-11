@@ -1,3 +1,5 @@
+`perfinder` api is no longer available.
+
 # Pet Adopter
 
 Feeling lonely? Need a friend? Adopt one!
