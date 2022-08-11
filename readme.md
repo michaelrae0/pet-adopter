@@ -1,4 +1,4 @@
-`perfinder` api is no longer available.
+`petfinder` api is no longer available.
 
 # Pet Adopter
 
